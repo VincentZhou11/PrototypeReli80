@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct DecodedWithManagedObject<E,F>: Identifiable {
+    var id: UUID
+    var decoded: E
+    var managedObject: F
+}
+
 struct LogographicLanguage: Identifiable, Codable {
     var id = UUID()
     var timestamp = Date()

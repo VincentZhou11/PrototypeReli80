@@ -11,8 +11,10 @@ import Combine
 import SwiftUI
 
 public class LanguageMenuViewModel: ObservableObject {
-    @Published var decodedLogoLanguages: [LogographicLanguage] = []
-    @Published var fetchedLogoLanguages: [JSONLogographicLanguageDB] = []
+    @Published var logoLanguages: [DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>] = []
+    
+//    @Published var decodedLogoLanguages: [LogographicLanguage] = []
+//    @Published var fetchedLogoLanguages: [LogographicLanguageDB] = []
     
     private var viewContext: NSManagedObjectContext
     
@@ -25,22 +27,32 @@ public class LanguageMenuViewModel: ObservableObject {
     }
     
     func refresh() {
+        // https://agiokas.medium.com/core-data-and-async-await-thread-safe-f96b6dbbb7c4
         Task {
             do {
-                let fetchRequest = JSONLogographicLanguageDB.fetchRequest()
-                fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \JSONLogographicLanguageDB.timestamp, ascending: true)]
+                let fetchRequest = LogographicLanguageDB.fetchRequest()
+                fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \LogographicLanguageDB.timestamp, ascending: true)]
                 
                 let fetchedLogoLanguages = try await viewContext.perform {
                     try self.viewContext.fetch(fetchRequest)
                 }
                 
+                
                 let decoder = JSONDecoder()
-                let convertedLogoLanguages = try fetchedLogoLanguages.compactMap { try decoder.decode(LogographicLanguage.self, from: $0.data!) }
+//                let convertedLogoLanguages = try fetchedLogoLanguages.compactMap { try decoder.decode(LogographicLanguage.self, from: $0.data!) }
+                
+                let structs: [DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>] = try fetchedLogoLanguages.compactMap {
+                    managedObjectLanguage in
+                    let decodedLanguage = try decoder.decode(LogographicLanguage.self, from: managedObjectLanguage.data!)
+                    return DecodedWithManagedObject(id: decodedLanguage.id, decoded: decodedLanguage, managedObject: managedObjectLanguage)
+                }
+                
                 
                 DispatchQueue.main.async {
                     withAnimation {
-                        self.fetchedLogoLanguages = fetchedLogoLanguages
-                        self.decodedLogoLanguages = convertedLogoLanguages
+//                        self.fetchedLogoLanguages = fetchedLogoLanguages
+//                        self.decodedLogoLanguages = convertedLogoLanguages
+                        self.logoLanguages = structs
                     }
                 }
                 
@@ -55,7 +67,7 @@ public class LanguageMenuViewModel: ObservableObject {
 //            createDummyLanguage()
             
             do {
-                let newLanguage = JSONLogographicLanguageDB(context: viewContext)
+                let newLanguage = LogographicLanguageDB(context: viewContext)
                 let newLanguageStruct = LogographicLanguage(name: "Test Language", logograms: [.example, .example, .example])
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
@@ -79,7 +91,7 @@ public class LanguageMenuViewModel: ObservableObject {
 
     public func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { fetchedLogoLanguages[$0] }.forEach(viewContext.delete)
+            offsets.map { logoLanguages[$0].managedObject }.forEach(viewContext.delete)
             do {
                 try viewContext.save()
             } catch {

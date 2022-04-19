@@ -18,12 +18,12 @@ struct LanguageMenuView: View {
         Form {
             Section("Logographic Languages") {
                 List {
-                    ForEach(vm.decodedLogoLanguages) {
-                        logographicLanguage in
+                    ForEach(vm.logoLanguages) {
+                        logoLanguage in
                         NavigationLink {
                             
                         } label: {
-                            Text(logographicLanguage.name)
+                            Text(logoLanguage.decoded.name)
                         }
                     }
                     .onDelete(perform: vm.deleteItems)

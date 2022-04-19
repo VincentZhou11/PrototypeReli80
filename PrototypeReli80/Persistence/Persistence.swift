@@ -15,7 +15,7 @@ struct PersistenceController {
         let viewContext = result.container.viewContext
         for i in 0..<10 {
             do {
-                let newLanguage = JSONLogographicLanguageDB(context: viewContext)
+                let newLanguage = LogographicLanguageDB(context: viewContext)
                 let newLanguageStruct = LogographicLanguage(name: "Test Language \(i)", logograms: [.example, .example, .example])
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
