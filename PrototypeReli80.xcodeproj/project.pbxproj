@@ -27,6 +27,10 @@
 		E1FE838D280E343E000AFAAD /* LanguageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838C280E343E000AFAAD /* LanguageEditorViewModel.swift */; };
 		E1FE8390280E35A3000AFAAD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838F280E35A3000AFAAD /* Persistence.swift */; };
 		E1FE8396280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8394280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld */; };
+		E1FE8398280F3D51000AFAAD /* LogogramEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8397280F3D51000AFAAD /* LogogramEditor.swift */; };
+		E1FE839A280F3D62000AFAAD /* LogogramEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8399280F3D62000AFAAD /* LogogramEditorViewModel.swift */; };
+		E1FE839C280F4330000AFAAD /* LanguageUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE839B280F4330000AFAAD /* LanguageUtils.swift */; };
+		E1FE839E280F4BB8000AFAAD /* ScaleableDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE839D280F4BB8000AFAAD /* ScaleableDrawingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +74,10 @@
 		E1FE838C280E343E000AFAAD /* LanguageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEditorViewModel.swift; sourceTree = "<group>"; };
 		E1FE838F280E35A3000AFAAD /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E1FE8395280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JSONLanguageDataModel.xcdatamodel; sourceTree = "<group>"; };
+		E1FE8397280F3D51000AFAAD /* LogogramEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogogramEditor.swift; sourceTree = "<group>"; };
+		E1FE8399280F3D62000AFAAD /* LogogramEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogogramEditorViewModel.swift; sourceTree = "<group>"; };
+		E1FE839B280F4330000AFAAD /* LanguageUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageUtils.swift; sourceTree = "<group>"; };
+		E1FE839D280F4BB8000AFAAD /* ScaleableDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleableDrawingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +173,7 @@
 				E18C0B8427FE4C200066F46A /* DrawingTestingView.swift */,
 				E1D67D69280263B400C90065 /* DrawingTestingSentenceView.swift */,
 				E1D67D66280260EB00C90065 /* ScaledDrawingView.swift */,
+				E1FE839D280F4BB8000AFAAD /* ScaleableDrawingView.swift */,
 			);
 			path = Drawing;
 			sourceTree = "<group>";
@@ -176,7 +185,10 @@
 				E1FE8386280E2839000AFAAD /* LanguageMenuViewModel.swift */,
 				E1FE838A280E3431000AFAAD /* LanguageEditorView.swift */,
 				E1FE838C280E343E000AFAAD /* LanguageEditorViewModel.swift */,
+				E1FE8397280F3D51000AFAAD /* LogogramEditor.swift */,
+				E1FE8399280F3D62000AFAAD /* LogogramEditorViewModel.swift */,
 				E1FE8388280E3154000AFAAD /* LanguageStruct.swift */,
+				E1FE839B280F4330000AFAAD /* LanguageUtils.swift */,
 			);
 			path = Languages;
 			sourceTree = "<group>";
@@ -323,6 +335,7 @@
 				E18C0B8127FDEB680066F46A /* DrawingStructs.swift in Sources */,
 				E1FE838B280E3431000AFAAD /* LanguageEditorView.swift in Sources */,
 				E1FE8387280E2839000AFAAD /* LanguageMenuViewModel.swift in Sources */,
+				E1FE839C280F4330000AFAAD /* LanguageUtils.swift in Sources */,
 				E1FE8390280E35A3000AFAAD /* Persistence.swift in Sources */,
 				E11454D627EFE96F0021CC32 /* ContentView.swift in Sources */,
 				E1D67D6A280263B400C90065 /* DrawingTestingSentenceView.swift in Sources */,
@@ -331,9 +344,12 @@
 				E1D67D67280260EB00C90065 /* ScaledDrawingView.swift in Sources */,
 				E18C0B8327FDF3350066F46A /* DrawingViewModel.swift in Sources */,
 				E11454D427EFE96F0021CC32 /* PrototypeReli80App.swift in Sources */,
+				E1FE839A280F3D62000AFAAD /* LogogramEditorViewModel.swift in Sources */,
 				E18C0B7F27FDEA010066F46A /* DrawingView.swift in Sources */,
 				E1FE8389280E3154000AFAAD /* LanguageStruct.swift in Sources */,
 				E1FE838D280E343E000AFAAD /* LanguageEditorViewModel.swift in Sources */,
+				E1FE839E280F4BB8000AFAAD /* ScaleableDrawingView.swift in Sources */,
+				E1FE8398280F3D51000AFAAD /* LogogramEditor.swift in Sources */,
 				E1FE8396280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

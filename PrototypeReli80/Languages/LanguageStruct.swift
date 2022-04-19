@@ -20,7 +20,9 @@ struct LogographicLanguage: Identifiable, Codable {
     var logograms: [Logogram]
 }
 extension LogographicLanguage {
-    static let example = LogographicLanguage(name: "Test Language", logograms: [.example, .example, .example])
+    static var example: LogographicLanguage {
+        LogographicLanguage(name: "Test Language", logograms: [.example, .example, .example])
+    }
 }
 
 struct Logogram: Identifiable, Codable {
@@ -29,5 +31,7 @@ struct Logogram: Identifiable, Codable {
     var meaning: String
 }
 extension Logogram {
-    static let example = Logogram(drawing: Drawing.example, meaning: "Test Drawing")
+    static var example: Logogram {
+        Logogram(drawing: Drawing.example, meaning: "Test Logogram")
+    }
 }

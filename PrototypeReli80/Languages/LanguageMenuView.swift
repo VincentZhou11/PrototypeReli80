@@ -10,8 +10,10 @@ import SwiftUI
 struct LanguageMenuView: View {
     @StateObject var vm: LanguageMenuViewModel
     
+    let preview: Bool
     init(preview: Bool = false) {
-        _vm = StateObject<LanguageMenuViewModel>(wrappedValue: LanguageMenuViewModel(preview: preview))
+        _vm = StateObject(wrappedValue: LanguageMenuViewModel(preview: preview))
+        self.preview = preview
     }
     
     var body: some View {
@@ -21,7 +23,7 @@ struct LanguageMenuView: View {
                     ForEach(vm.logoLanguages) {
                         logoLanguage in
                         NavigationLink {
-                            
+                            LanguageEditorView(logoLanguage: logoLanguage, preview: preview)
                         } label: {
                             Text(logoLanguage.decoded.name)
                         }
@@ -31,16 +33,28 @@ struct LanguageMenuView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
-            ToolbarItem {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button{
+                    vm.refresh()
+                } label: {
+                    Label("Refresh", systemImage: "arrow.clockwise")
+                }
                 Button{
                     vm.addItem()
                 } label: {
                     Label("Add Item", systemImage: "plus")
                 }
+                EditButton()
             }
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//
+//            }
+//            ToolbarItem {
+//
+//            }
+//            ToolbarItem {
+//
+//            }
         }
         .navigationBarTitleDisplayMode(.inline)
     }

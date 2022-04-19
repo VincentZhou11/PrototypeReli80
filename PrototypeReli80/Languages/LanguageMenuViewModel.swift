@@ -39,19 +39,13 @@ public class LanguageMenuViewModel: ObservableObject {
                 
                 
                 let decoder = JSONDecoder()
-//                let convertedLogoLanguages = try fetchedLogoLanguages.compactMap { try decoder.decode(LogographicLanguage.self, from: $0.data!) }
-                
                 let structs: [DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>] = try fetchedLogoLanguages.compactMap {
                     managedObjectLanguage in
                     let decodedLanguage = try decoder.decode(LogographicLanguage.self, from: managedObjectLanguage.data!)
                     return DecodedWithManagedObject(id: decodedLanguage.id, decoded: decodedLanguage, managedObject: managedObjectLanguage)
                 }
-                
-                
                 DispatchQueue.main.async {
                     withAnimation {
-//                        self.fetchedLogoLanguages = fetchedLogoLanguages
-//                        self.decodedLogoLanguages = convertedLogoLanguages
                         self.logoLanguages = structs
                     }
                 }
@@ -62,13 +56,26 @@ public class LanguageMenuViewModel: ObservableObject {
             }
         }
     }
-    public func addItem() {
+    func save() {
+        do {
+            try viewContext.save()
+        } catch {
+            let nsError = error as NSError
+            print("Language Menu save error \(nsError), \(nsError.userInfo)")
+        }
+    }
+    
+    func addItem() {
         withAnimation {
 //            createDummyLanguage()
             
             do {
                 let newLanguage = LogographicLanguageDB(context: viewContext)
-                let newLanguageStruct = LogographicLanguage(name: "Test Language", logograms: [.example, .example, .example])
+                let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
+                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
+                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
+                
+                let newLanguageStruct = LogographicLanguage(name: "Test Language", logograms: logograms)
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
                 newLanguage.id = newLanguageStruct.id
@@ -77,29 +84,15 @@ public class LanguageMenuViewModel: ObservableObject {
                 print("Failed to encode JSON \(error.localizedDescription)")
             }
 
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                print("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            save()
         }
         refresh()
     }
 
-    public func deleteItems(offsets: IndexSet) {
+    func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map { logoLanguages[$0].managedObject }.forEach(viewContext.delete)
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                print("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+            save()
         }
         refresh()
     }

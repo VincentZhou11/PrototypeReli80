@@ -21,9 +21,14 @@ struct DrawingView: View {
     init() {
         _vm = StateObject(wrappedValue: DrawingViewModel())
     }
-    
+    init(drawing: Drawing) {
+        _vm = StateObject(wrappedValue: DrawingViewModel(drawing: drawing))
+    }
     init(onSubmit: @escaping((Drawing) -> ())) {
         _vm = StateObject(wrappedValue: DrawingViewModel(onSubmit: onSubmit))
+    }
+    init(drawing: Drawing, onSubmit: @escaping((Drawing) -> ())) {
+        _vm = StateObject(wrappedValue: DrawingViewModel(drawing: drawing, onSubmit: onSubmit))
     }
     
     var body: some View {
@@ -31,6 +36,7 @@ struct DrawingView: View {
             DrawingPadView(vm: vm)
             DrawingControlsView(vm: vm)
         }
+        .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {

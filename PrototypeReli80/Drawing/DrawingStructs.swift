@@ -13,7 +13,7 @@ struct Stroke: Codable {
 //    let id = UUID()
     var points: [CGPoint]
 }
-private struct ColorData: Codable {
+struct ColorData: Codable {
     var r: Double
     var g: Double
     var b: Double
@@ -68,5 +68,7 @@ struct Drawing: Identifiable, Codable {
     }
 }
 extension Drawing {
-    static let example = Drawing(strokes: [Stroke(points: [CGPoint(x: 120, y: 120), CGPoint(x: 100, y: 100), CGPoint(x: 50, y: 50), CGPoint(x: 25, y: 25)])], color: .red, lineWidth: 3.0)
+    static var example: Drawing {
+        Drawing(strokes: [Stroke(points: [CGPoint(x: 120, y: 120), CGPoint(x: 80, y: 20), CGPoint(x: 20, y: 200), CGPoint(x: 25, y: 25)])], color: .red, lineWidth: 3.0)
+    }
 }

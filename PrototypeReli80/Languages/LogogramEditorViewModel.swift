@@ -1,30 +1,31 @@
 //
-//  LanguageEditorViewModel.swift
+//  LogogramEditorViewModel.swift
 //  PrototypeReli80
 //
-//  Created by Vincent Zhou on 4/18/22.
+//  Created by Vincent Zhou on 4/19/22.
 //
 
 import Foundation
 import CoreData
 import SwiftUI
 
-public class LanguageEditorViewModel: ObservableObject {
-    // Updating managed object
-    // https://stackoverflow.com/questions/28525962/how-to-update-existing-objects-in-core-data
+public class LogogramEditorViewModel: ObservableObject {
     
     private var viewContext: NSManagedObjectContext
     
     @Published var logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>
+    @Published var logogram: Logogram
+    @Published var idx: Int
     
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
         
+        let newLogogram = Logogram(drawing: .example, meaning: "Something")
         
-        let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
-                         Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
-                         Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
+        self.idx = 0
+        self.logogram = newLogogram
+        let logograms = [newLogogram]
         
         let decoded = LogographicLanguage(name: "New Language", logograms: logograms)
         let managedObject = LogographicLanguageDB(context: viewContext)
@@ -41,13 +42,20 @@ public class LanguageEditorViewModel: ObservableObject {
         
         save()
     }
-    init(logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
+    init(idx: Int, logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
         
+        self.logogram = logoLanguage.decoded.logograms[idx]
         self.logoLanguage = logoLanguage
+        self.idx = idx
     }
     
+    func onSubmit(newDrawing: Drawing) {
+        logoLanguage.decoded.logograms[idx].drawing = newDrawing
+        logogram = logoLanguage.decoded.logograms[idx]
+        save()
+    }
     func refresh() {
         do {
             logoLanguage.decoded = try JSONDecoder().decode(LogographicLanguage.self, from: logoLanguage.managedObject.data!)
@@ -56,34 +64,13 @@ public class LanguageEditorViewModel: ObservableObject {
             print(error.localizedDescription)
         }
     }
-    
     func save() {
         do {
-            // We change the decoded struct then propagate changes to managed object
             logoLanguage.managedObject.data = try JSONEncoder().encode(logoLanguage.decoded)
-            // Save
             try viewContext.save()
         } catch {
             let nsError = error as NSError
-            print("Language Editor save error \(nsError), \(nsError.userInfo)")
+            print("Logogram Editor save error \(nsError), \(nsError.userInfo)")
         }
-    }
-    
-    // Change the decoded struct
-    func addItem() {
-        withAnimation {
-            let newLogogram = Logogram(drawing: Drawing.example, meaning: "Test Logogram")
-            logoLanguage.decoded.logograms.append(newLogogram)
-            save()
-        }
-        refresh()
-    }
-
-    func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map{logoLanguage.decoded.logograms.remove(at: $0)}
-            save()
-        }
-        refresh()
     }
 }

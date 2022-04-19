@@ -16,7 +16,16 @@ struct PersistenceController {
         for i in 0..<10 {
             do {
                 let newLanguage = LogographicLanguageDB(context: viewContext)
-                let newLanguageStruct = LogographicLanguage(name: "Test Language \(i)", logograms: [.example, .example, .example])
+                
+                let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
+                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
+                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
+                
+                let newLanguageStruct = LogographicLanguage(
+                    name: "Test Language \(i)",
+                    logograms: logograms
+                )
+                
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
                 newLanguage.id = newLanguageStruct.id
