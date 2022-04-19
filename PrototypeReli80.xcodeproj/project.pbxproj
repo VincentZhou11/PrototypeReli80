@@ -26,7 +26,6 @@
 		E1FE838B280E3431000AFAAD /* LanguageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838A280E3431000AFAAD /* LanguageEditorView.swift */; };
 		E1FE838D280E343E000AFAAD /* LanguageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838C280E343E000AFAAD /* LanguageEditorViewModel.swift */; };
 		E1FE8390280E35A3000AFAAD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838F280E35A3000AFAAD /* Persistence.swift */; };
-		E1FE8393280E3680000AFAAD /* LanguageDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8391280E3680000AFAAD /* LanguageDataModel.xcdatamodeld */; };
 		E1FE8396280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8394280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +69,6 @@
 		E1FE838A280E3431000AFAAD /* LanguageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEditorView.swift; sourceTree = "<group>"; };
 		E1FE838C280E343E000AFAAD /* LanguageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEditorViewModel.swift; sourceTree = "<group>"; };
 		E1FE838F280E35A3000AFAAD /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		E1FE8392280E3680000AFAAD /* LanguageDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LanguageDataModel.xcdatamodel; sourceTree = "<group>"; };
 		E1FE8395280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JSONLanguageDataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -187,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				E1FE838F280E35A3000AFAAD /* Persistence.swift */,
-				E1FE8391280E3680000AFAAD /* LanguageDataModel.xcdatamodeld */,
 				E1FE8394280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld */,
 			);
 			path = Persistence;
@@ -324,7 +321,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E18C0B8127FDEB680066F46A /* DrawingStructs.swift in Sources */,
-				E1FE8393280E3680000AFAAD /* LanguageDataModel.xcdatamodeld in Sources */,
 				E1FE838B280E3431000AFAAD /* LanguageEditorView.swift in Sources */,
 				E1FE8387280E2839000AFAAD /* LanguageMenuViewModel.swift in Sources */,
 				E1FE8390280E35A3000AFAAD /* Persistence.swift in Sources */,
@@ -659,16 +655,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		E1FE8391280E3680000AFAAD /* LanguageDataModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				E1FE8392280E3680000AFAAD /* LanguageDataModel.xcdatamodel */,
-			);
-			currentVersion = E1FE8392280E3680000AFAAD /* LanguageDataModel.xcdatamodel */;
-			path = LanguageDataModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
 		E1FE8394280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

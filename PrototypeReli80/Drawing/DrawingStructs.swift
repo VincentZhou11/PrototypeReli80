@@ -14,16 +14,16 @@ struct Stroke: Codable {
     var points: [CGPoint]
 }
 private struct ColorData: Codable {
-    let r: Double
-    let g: Double
-    let b: Double
-    let a: Double
+    var r: Double
+    var g: Double
+    var b: Double
+    var a: Double
 }
 struct Drawing: Identifiable, Codable {
-    let id: UUID
-    let strokes: [Stroke]
-    let color: Color
-    let lineWidth: CGFloat
+    var id: UUID
+    var strokes: [Stroke]
+    var color: Color
+    var lineWidth: CGFloat
     
     enum CodingKeys: CodingKey {
         case id

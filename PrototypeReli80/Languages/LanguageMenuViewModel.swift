@@ -13,7 +13,6 @@ import SwiftUI
 public class LanguageMenuViewModel: ObservableObject {
     @Published var decodedLogoLanguages: [LogographicLanguage] = []
     @Published var fetchedLogoLanguages: [JSONLogographicLanguageDB] = []
-//    private var storage = LogographicLanguagesStorage()
     
     private var viewContext: NSManagedObjectContext
     

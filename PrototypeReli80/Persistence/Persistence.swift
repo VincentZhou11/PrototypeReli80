@@ -14,51 +14,9 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for i in 0..<10 {
-//            var logograms:[LogogramDB] = []
-//            for _ in 0..<10 {
-//
-//                var strokes: [StrokeDB] = []
-//                for stroke in Drawing.sample.strokes {
-//                    var points: [PointDB] = []
-//                    for point in stroke.points {
-//                        let newPoint = PointDB(context: viewContext)
-//                        newPoint.x = Float(point.x)
-//                        newPoint.y = Float(point.y)
-//                        points.append(newPoint)
-//                    }
-//                    let newStroke = StrokeDB(context: viewContext)
-//                    newStroke.id = UUID()
-//                    newStroke.points = NSOrderedSet(array: points)
-//                    strokes.append(newStroke)
-//                }
-//                let newColor = ColorDB(context: viewContext)
-//                newColor.a = 255.0
-//                newColor.r = 255.0
-//                newColor.g = 0.0
-//                newColor.b = 0.0
-//
-//                let newDrawing = DrawingDB(context: viewContext)
-//                newDrawing.id = UUID()
-//                newDrawing.strokes = NSSet(array: strokes)
-//                newDrawing.color = newColor
-//                newDrawing.lineWidth = 1.0
-//
-//
-//                let newLogogram = LogogramDB(context: viewContext)
-//                newLogogram.id = UUID()
-//                newLogogram.drawing = newDrawing
-//                newLogogram.meaning = "Test"
-//
-//                logograms.append(newLogogram)
-//            }
-//            let newLanguage = LogographicLanguageDB(context: viewContext)
-//            newLanguage.id = UUID()
-//            newLanguage.logograms = NSSet(array: logograms)
-//            newLanguage.timestamp = Date()
-//            newLanguage.name = "\(i)"
             do {
                 let newLanguage = JSONLogographicLanguageDB(context: viewContext)
-                let newLanguageStruct = LogographicLanguage(name: "Test Language", logograms: [.example, .example, .example])
+                let newLanguageStruct = LogographicLanguage(name: "Test Language \(i)", logograms: [.example, .example, .example])
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
                 newLanguage.id = newLanguageStruct.id
