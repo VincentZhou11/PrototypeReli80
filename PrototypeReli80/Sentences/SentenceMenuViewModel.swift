@@ -10,8 +10,8 @@ import CoreData
 import SwiftUI
 
 public class SentenceMenuViewModel:ObservableObject {
-    @Published var logoSentences: [DecodedWithManagedObject<LogographicSentence, LogographicSentenceDB>] = []
-    @Published var logoLanguages: [DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>] = []
+    @Published var logoSentences: [SyncObject<LogographicSentence, LogographicSentenceDB>] = []
+    @Published var logoLanguages: [SyncObject<LogographicLanguage, LogographicLanguageDB>] = []
     
     private var viewContext: NSManagedObjectContext
     
@@ -35,10 +35,10 @@ public class SentenceMenuViewModel:ObservableObject {
                 }
                 
                 let decoder = JSONDecoder()
-                let structs: [DecodedWithManagedObject<LogographicSentence, LogographicSentenceDB>] = try fetchedLogoSentences.compactMap {
+                let structs: [SyncObject<LogographicSentence, LogographicSentenceDB>] = try fetchedLogoSentences.compactMap {
                     managedObjectSentence in
                     let decodedSentence = try decoder.decode(LogographicSentence.self, from: managedObjectSentence.data!)
-                    return DecodedWithManagedObject(id: decodedSentence.id, decoded: decodedSentence, managedObject: managedObjectSentence)
+                    return SyncObject(decoded: decodedSentence, managedObject: managedObjectSentence, viewContext: viewContext)
                 }
                 DispatchQueue.main.async {
                     withAnimation {
@@ -62,10 +62,10 @@ public class SentenceMenuViewModel:ObservableObject {
                     try self.viewContext.fetch(fetchRequest)
                 }
                 
-                let structs: [DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>] = try fetchedLogoLanguages.compactMap {
+                let structs: [SyncObject<LogographicLanguage, LogographicLanguageDB>] = try fetchedLogoLanguages.compactMap {
                     managedObjectLanguage in
                     let decodedLanguage = try JSONDecoder().decode(LogographicLanguage.self, from: managedObjectLanguage.data!)
-                    return DecodedWithManagedObject(id: decodedLanguage.id, decoded: decodedLanguage, managedObject: managedObjectLanguage)
+                    return SyncObject(decoded: decodedLanguage, managedObject: managedObjectLanguage, viewContext: viewContext)
                 }
                 DispatchQueue.main.async {
                     withAnimation {

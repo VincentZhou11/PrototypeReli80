@@ -7,7 +7,9 @@
 
 import SwiftUI
 
-struct LogogramEditor: View {
+struct LogogramEditorView: View {
+    @Environment(\.dismiss) var dismiss
+    
     @StateObject var vm: LogogramEditorViewModel
     
     let preview: Bool
@@ -15,7 +17,7 @@ struct LogogramEditor: View {
         _vm = StateObject(wrappedValue: LogogramEditorViewModel(preview: preview))
         self.preview = preview
     }
-    init(idx: Int, logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
+    init(idx: Int, logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
         _vm = StateObject(wrappedValue: LogogramEditorViewModel(idx: idx, logoLanguage: logoLanguage, preview: preview))
         self.preview = preview
     }
@@ -31,22 +33,37 @@ struct LogogramEditor: View {
                 }
             }
             Section("Meaning") {
-                Text(vm.logogram.meaning)
+//                Text(vm.logogram.meaning)
                 TextField("Meaning", text: $vm.logogram.meaning)
             }
             Section("Semantic Class") {
                 
             }
         }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    vm.delete()
+                    dismiss()
+                } label: {
+                    Image(systemName: "trash").foregroundColor(.red)
+                }
+                Button {
+                    vm.save()
+                    dismiss()
+                } label: {
+                    Text("Save")
+                }
+            }
+        }
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear(perform: vm.refresh)
     }
 }
 
 struct LogogramEditor_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogogramEditor(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            LogogramEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
 }

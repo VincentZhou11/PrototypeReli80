@@ -15,7 +15,7 @@ struct LanguageEditorView: View {
         _vm = StateObject(wrappedValue: LanguageEditorViewModel(preview: preview))
         self.preview = preview
     }
-    init(logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
+    init(logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
         _vm = StateObject(wrappedValue: LanguageEditorViewModel(logoLanguage: logoLanguage, preview: preview))
         self.preview = preview
     }
@@ -27,7 +27,7 @@ struct LanguageEditorView: View {
                     ForEachWithIndex(vm.logoLanguage.decoded.logograms) {
                         idx, logogram in
                         NavigationLink {
-                            LogogramEditor(idx: idx, logoLanguage: vm.logoLanguage, preview: preview)
+                            LogogramEditorView(idx: idx, logoLanguage: vm.logoLanguage, preview: preview)
                         } label: {
                             Text("\(logogram.meaning)")
                         }

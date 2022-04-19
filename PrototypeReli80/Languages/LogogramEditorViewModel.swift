@@ -13,7 +13,7 @@ public class LogogramEditorViewModel: ObservableObject {
     
     private var viewContext: NSManagedObjectContext
     
-    @Published var logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>
+    @Published var logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>
     @Published var logogram: Logogram
     @Published var idx: Int
     
@@ -38,39 +38,30 @@ public class LogogramEditorViewModel: ObservableObject {
             print("Encoding new data into managed Object failed: \(error.localizedDescription)")
         }
         
-        self.logoLanguage = DecodedWithManagedObject(id: decoded.id, decoded: decoded, managedObject: managedObject)
+        self.logoLanguage = SyncObject(decoded: decoded, managedObject: managedObject, viewContext:viewContext)
         
         save()
     }
-    init(idx: Int, logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
+    init(idx: Int, logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
-        
+                
         self.logogram = logoLanguage.decoded.logograms[idx]
         self.logoLanguage = logoLanguage
         self.idx = idx
+        
+        
     }
     
     func onSubmit(newDrawing: Drawing) {
         logoLanguage.decoded.logograms[idx].drawing = newDrawing
         logogram = logoLanguage.decoded.logograms[idx]
-        save()
-    }
-    func refresh() {
-        do {
-            logoLanguage.decoded = try JSONDecoder().decode(LogographicLanguage.self, from: logoLanguage.managedObject.data!)
-        }
-        catch {
-            print(error.localizedDescription)
-        }
+//        save()
     }
     func save() {
-        do {
-            logoLanguage.managedObject.data = try JSONEncoder().encode(logoLanguage.decoded)
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            print("Logogram Editor save error \(nsError), \(nsError.userInfo)")
-        }
+        logoLanguage.saveManagedObject()
+    }
+    func delete() {
+        
     }
 }

@@ -46,15 +46,6 @@ struct LanguageMenuView: View {
                 }
                 EditButton()
             }
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//
-//            }
-//            ToolbarItem {
-//
-//            }
-//            ToolbarItem {
-//
-//            }
         }
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -15,7 +15,8 @@ public class LanguageEditorViewModel: ObservableObject {
     
     private var viewContext: NSManagedObjectContext
     
-    @Published var logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>
+    @Published var logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>
+
     
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
@@ -34,39 +35,27 @@ public class LanguageEditorViewModel: ObservableObject {
             managedObject.data = try JSONEncoder().encode(decoded)
         }
         catch {
-            print("Encoding new data into managed Object failed: \(error.localizedDescription)")
+            print("Failed to encode JSON: \(error.localizedDescription)")
         }
         
-        self.logoLanguage = DecodedWithManagedObject(id: decoded.id, decoded: decoded, managedObject: managedObject)
+        self.logoLanguage = SyncObject(decoded: decoded, managedObject: managedObject, viewContext: viewContext)
         
         save()
     }
-    init(logoLanguage: DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
+    init(logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
         
         self.logoLanguage = logoLanguage
     }
     
+    
     func refresh() {
-        do {
-            logoLanguage.decoded = try JSONDecoder().decode(LogographicLanguage.self, from: logoLanguage.managedObject.data!)
-        }
-        catch {
-            print(error.localizedDescription)
-        }
+        logoLanguage.updateDecoded()
     }
     
     func save() {
-        do {
-            // We change the decoded struct then propagate changes to managed object
-            logoLanguage.managedObject.data = try JSONEncoder().encode(logoLanguage.decoded)
-            // Save
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            print("Language Editor save error \(nsError), \(nsError.userInfo)")
-        }
+        logoLanguage.saveManagedObject()
     }
     
     // Change the decoded struct
@@ -76,7 +65,7 @@ public class LanguageEditorViewModel: ObservableObject {
             logoLanguage.decoded.logograms.append(newLogogram)
             save()
         }
-        refresh()
+//        refresh()
     }
 
     func deleteItems(offsets: IndexSet) {
@@ -84,6 +73,6 @@ public class LanguageEditorViewModel: ObservableObject {
             offsets.map{logoLanguage.decoded.logograms.remove(at: $0)}
             save()
         }
-        refresh()
+//        refresh()
     }
 }

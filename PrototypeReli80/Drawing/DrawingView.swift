@@ -49,7 +49,7 @@ struct DrawingView: View {
                     vm.submit()
                     dismiss()
                 } label: {
-                    Image(systemName: "square.and.pencil")
+                    Text("Save")
                 }
             }
         }
