@@ -1,0 +1,72 @@
+//
+//  Drawing.swift
+//  PrototypeReli80
+//
+//  Created by Vincent Zhou on 4/6/22.
+//
+
+import Foundation
+import CoreGraphics
+import SwiftUI
+
+struct Stroke: Codable {
+//    let id = UUID()
+    var points: [CGPoint]
+}
+private struct ColorData: Codable {
+    let r: Double
+    let g: Double
+    let b: Double
+    let a: Double
+}
+struct Drawing: Identifiable, Codable {
+    let id: UUID
+    let strokes: [Stroke]
+    let color: Color
+    let lineWidth: CGFloat
+    
+    enum CodingKeys: CodingKey {
+        case id
+        case strokes
+        case color
+        case lineWidth
+    }
+    init(strokes: [Stroke], color: Color, lineWidth: CGFloat) {
+        self.id = UUID()
+        self.strokes = strokes
+        self.color = color
+        self.lineWidth = lineWidth
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(UUID.self, forKey: .id)
+        strokes = try container.decode([Stroke].self, forKey: .strokes)
+        lineWidth = try container.decode(CGFloat.self, forKey: .lineWidth)
+        let colorData = try container.decode(ColorData.self, forKey: .color)
+        // Problem Child
+        color = Color(red: colorData.r, green: colorData.g, blue: colorData.b, opacity: colorData.a)
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(id, forKey: .id)
+        try container.encode(strokes, forKey: .strokes)
+        try container.encode(lineWidth, forKey: .lineWidth)
+        
+        // Problem Child
+        #if os(iOS)
+        let nativeColor = UIColor(color)
+        #elseif os(macOS)
+        let nativeColor = NSColor(color)
+        #endif
+        var (r, g, b, a) = (CGFloat.zero, CGFloat.zero, CGFloat.zero, CGFloat.zero)
+        nativeColor.getRed(&r, green: &g, blue: &b, alpha: &a)
+        
+        try container.encode(ColorData(r: r, g: g, b: b, a: a), forKey: .color)
+    }
+}
+extension Drawing {
+    static let example = Drawing(strokes: [Stroke(points: [CGPoint(x: 120, y: 120), CGPoint(x: 100, y: 100), CGPoint(x: 50, y: 50), CGPoint(x: 25, y: 25)])], color: .red, lineWidth: 3.0)
+}

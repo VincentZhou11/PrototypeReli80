@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="JSONLogographicLanguageDB" representedClassName="JSONLogographicLanguageDB" syncable="YES" codeGenerationType="class">
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <elements>
+        <element name="JSONLogographicLanguageDB" positionX="-9" positionY="36" width="128" height="74"/>
+    </elements>
+</model>
