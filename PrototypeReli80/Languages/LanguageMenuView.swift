@@ -8,13 +8,6 @@
 import SwiftUI
 
 struct LanguageMenuView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-    @FetchRequest(
-        entity: JSONLogographicLanguageDB.entity(),
-        sortDescriptors: [NSSortDescriptor(keyPath: \JSONLogographicLanguageDB.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<JSONLogographicLanguageDB>
-        
     @StateObject var vm: LanguageMenuViewModel
     
     init(preview: Bool = false) {
