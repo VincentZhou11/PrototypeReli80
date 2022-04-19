@@ -1,20 +1,17 @@
 //
-//  LanguageEditorViewModel.swift
+//  SentenceMenuViewModel.swift
 //  PrototypeReli80
 //
-//  Created by Vincent Zhou on 4/18/22.
+//  Created by Vincent Zhou on 4/19/22.
 //
 
 import Foundation
 import CoreData
-import Combine
 import SwiftUI
 
-public class LanguageMenuViewModel: ObservableObject {
+public class SentenceMenuViewModel:ObservableObject {
+    @Published var logoSentences: [DecodedWithManagedObject<LogographicSentence, LogographicSentenceDB>] = []
     @Published var logoLanguages: [DecodedWithManagedObject<LogographicLanguage, LogographicLanguageDB>] = []
-    
-//    @Published var decodedLogoLanguages: [LogographicLanguage] = []
-//    @Published var fetchedLogoLanguages: [LogographicLanguageDB] = []
     
     private var viewContext: NSManagedObjectContext
     
@@ -23,11 +20,39 @@ public class LanguageMenuViewModel: ObservableObject {
         else {viewContext = PersistenceController.shared.container.viewContext}
         
         
-        refresh()
+        refreshLanguages()
+        refreshSentences()
     }
-    
-    func refresh() {
+    func refreshSentences() {
         // https://agiokas.medium.com/core-data-and-async-await-thread-safe-f96b6dbbb7c4
+        Task {
+            do {
+                let fetchRequest = LogographicSentenceDB.fetchRequest()
+                fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \LogographicSentenceDB.timestamp, ascending: true)]
+                
+                let fetchedLogoSentences = try await viewContext.perform {
+                    try self.viewContext.fetch(fetchRequest)
+                }
+                
+                let decoder = JSONDecoder()
+                let structs: [DecodedWithManagedObject<LogographicSentence, LogographicSentenceDB>] = try fetchedLogoSentences.compactMap {
+                    managedObjectSentence in
+                    let decodedSentence = try decoder.decode(LogographicSentence.self, from: managedObjectSentence.data!)
+                    return DecodedWithManagedObject(id: decodedSentence.id, decoded: decodedSentence, managedObject: managedObjectSentence)
+                }
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.logoSentences = structs
+                    }
+                }
+                
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    func refreshLanguages() {
         Task {
             do {
                 let fetchRequest = LogographicLanguageDB.fetchRequest()
@@ -54,6 +79,7 @@ public class LanguageMenuViewModel: ObservableObject {
             }
         }
     }
+    
     func save() {
         do {
             try viewContext.save()
@@ -68,15 +94,15 @@ public class LanguageMenuViewModel: ObservableObject {
 //            createDummyLanguage()
             
             do {
-                let newLanguage = LogographicLanguageDB(context: viewContext)
+                let newSentence = LogographicSentenceDB(context: viewContext)
                 let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
                                  Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
                                  Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
                 
-                let newLanguageStruct = LogographicLanguage(name: "Test Language", logograms: logograms)
-                newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
-                newLanguage.timestamp = newLanguageStruct.timestamp
-                newLanguage.id = newLanguageStruct.id
+                let newSentenceStruct = LogographicSentence(sentence: logograms)
+                newSentence.data = try JSONEncoder().encode(newSentenceStruct)
+                newSentence.timestamp = newSentenceStruct.timestamp
+                newSentence.id = newSentenceStruct.id
             }
             catch {
                 print("Failed to encode JSON \(error.localizedDescription)")
@@ -84,15 +110,14 @@ public class LanguageMenuViewModel: ObservableObject {
 
             save()
         }
-        refresh()
+        refreshSentences()
     }
 
     func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map { logoLanguages[$0].managedObject }.forEach(viewContext.delete)
+            offsets.map { logoSentences[$0].managedObject }.forEach(viewContext.delete)
             save()
         }
-        refresh()
+        refreshSentences()
     }
 }
-

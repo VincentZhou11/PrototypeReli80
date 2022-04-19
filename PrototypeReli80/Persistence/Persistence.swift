@@ -13,6 +13,7 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
+        // Languages
         for i in 0..<10 {
             do {
                 let newLanguage = LogographicLanguageDB(context: viewContext)
@@ -33,8 +34,25 @@ struct PersistenceController {
             catch {
                 fatalError("Failed to encode JSON \(error.localizedDescription)")
             }
-            
         }
+        // Sentences
+        for i in 0..<10 {
+            do {
+                let newSentence = LogographicSentenceDB(context: viewContext)
+                let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
+                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
+                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
+                
+                let newSentenceStruct = LogographicSentence(sentence: logograms)
+                newSentence.data = try JSONEncoder().encode(newSentenceStruct)
+                newSentence.timestamp = newSentenceStruct.timestamp
+                newSentence.id = newSentenceStruct.id
+            }
+            catch {
+                fatalError("Failed to encode JSON \(error.localizedDescription)")
+            }
+        }
+        // Save
         do {
             try viewContext.save()
         } catch {
