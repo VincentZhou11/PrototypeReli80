@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import SwiftUI
 
-public class SentenceEditorViewModel: ObservableObject {
+public class LogoSentenceEditorViewModel: ObservableObject {
     var viewContext: NSManagedObjectContext
     
     @Published var sentence: SyncObject<LogographicSentence, LogographicSentenceDB>
@@ -21,19 +21,7 @@ public class SentenceEditorViewModel: ObservableObject {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
         
-        
-        let logograms = [
-            Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
-            Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
-            Logogram(drawing: Drawing.example, meaning: "Test Logogram 3"),
-            Logogram(drawing: Drawing.example, meaning: "Test Logogram 4"),
-            Logogram(drawing: Drawing.example, meaning: "Test Logogram 5"),
-            Logogram(drawing: Drawing.example, meaning: "Test Logogram 6"),
-            Logogram(drawing: Drawing.example, meaning: "Test Logogram 7"),
-            Logogram(drawing: Drawing.example, meaning: "Test Logogram 8")
-        ]
-        
-        let decoded = LogographicSentence(sentence: logograms, language: .example)
+        let decoded = LogographicSentence.example
         let managedObject = LogographicSentenceDB(context: viewContext)
         managedObject.timestamp = decoded.timestamp
         managedObject.id = decoded.id

@@ -8,17 +8,17 @@
 import SwiftUI
 import CoreData
 
-struct SentenceEditorView: View {
+struct LogoSentenceEditorView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var vm: SentenceEditorViewModel
+    @StateObject var vm: LogoSentenceEditorViewModel
     
     let preview: Bool
     init(preview: Bool = false) {
-        _vm = StateObject(wrappedValue: SentenceEditorViewModel(preview: preview))
+        _vm = StateObject(wrappedValue: LogoSentenceEditorViewModel(preview: preview))
         self.preview = preview
     }
     init(sentence: SyncObject<LogographicSentence, LogographicSentenceDB>, preview: Bool = false) {
-        _vm = StateObject(wrappedValue: SentenceEditorViewModel(sentence: sentence, preview: preview))
+        _vm = StateObject(wrappedValue: LogoSentenceEditorViewModel(sentence: sentence, preview: preview))
         self.preview = preview
     }
     
@@ -77,10 +77,10 @@ struct SentenceEditorView: View {
     }
 }
 
-struct SentenceEditorView_Previews: PreviewProvider {
+struct LogoSentenceEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            SentenceEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            LogoSentenceEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
 }

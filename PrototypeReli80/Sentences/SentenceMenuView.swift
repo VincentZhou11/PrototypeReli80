@@ -23,7 +23,7 @@ struct SentenceMenuView: View {
                     ForEach(vm.logoSentences) {
                         logoSentence in
                         NavigationLink {
-                            SentenceEditorView(sentence: logoSentence, preview: preview)
+                            LogoSentenceEditorView(sentence: logoSentence, preview: preview)
                         } label: {
                             LogographicSentenceMiniView(sentence: logoSentence)
                         }

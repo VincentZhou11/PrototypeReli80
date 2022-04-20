@@ -20,8 +20,8 @@
 		E18C0B8527FE4C200066F46A /* DrawingTestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C0B8427FE4C200066F46A /* DrawingTestingView.swift */; };
 		E1D67D67280260EB00C90065 /* ScaledDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D67D66280260EB00C90065 /* ScaledDrawingView.swift */; };
 		E1D67D6A280263B400C90065 /* DrawingTestingSentenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D67D69280263B400C90065 /* DrawingTestingSentenceView.swift */; };
-		E1E13B63280F97D200C91A04 /* SentenceEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B62280F97D200C91A04 /* SentenceEditorView.swift */; };
-		E1E13B65280F97DF00C91A04 /* SentenceEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B64280F97DF00C91A04 /* SentenceEditorViewModel.swift */; };
+		E1E13B63280F97D200C91A04 /* LogoSentenceEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B62280F97D200C91A04 /* LogoSentenceEditorView.swift */; };
+		E1E13B65280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B64280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift */; };
 		E1E13B67280FB49E00C91A04 /* SentenceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B66280FB49E00C91A04 /* SentenceUtils.swift */; };
 		E1E13B6B280FC9CD00C91A04 /* AlphaLanguageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B6A280FC9CD00C91A04 /* AlphaLanguageEditorView.swift */; };
 		E1E13B6D280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B6C280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift */; };
@@ -42,7 +42,7 @@
 		E1FE839E280F4BB8000AFAAD /* ScaleableDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE839D280F4BB8000AFAAD /* ScaleableDrawingView.swift */; };
 		E1FE83A1280F5735000AFAAD /* SentenceMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE83A0280F5735000AFAAD /* SentenceMenuView.swift */; };
 		E1FE83A3280F5745000AFAAD /* SentenceMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE83A2280F5745000AFAAD /* SentenceMenuViewModel.swift */; };
-		E1FE83A5280F5876000AFAAD /* SentenceStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE83A4280F5876000AFAAD /* SentenceStruct.swift */; };
+		E1FE83A5280F5876000AFAAD /* SentenceStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE83A4280F5876000AFAAD /* SentenceStructs.swift */; };
 		E1FE83A7280F6552000AFAAD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE83A6280F6552000AFAAD /* Utils.swift */; };
 /* End PBXBuildFile section */
 
@@ -80,8 +80,8 @@
 		E18C0B8427FE4C200066F46A /* DrawingTestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTestingView.swift; sourceTree = "<group>"; };
 		E1D67D66280260EB00C90065 /* ScaledDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledDrawingView.swift; sourceTree = "<group>"; };
 		E1D67D69280263B400C90065 /* DrawingTestingSentenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTestingSentenceView.swift; sourceTree = "<group>"; };
-		E1E13B62280F97D200C91A04 /* SentenceEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceEditorView.swift; sourceTree = "<group>"; };
-		E1E13B64280F97DF00C91A04 /* SentenceEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceEditorViewModel.swift; sourceTree = "<group>"; };
+		E1E13B62280F97D200C91A04 /* LogoSentenceEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoSentenceEditorView.swift; sourceTree = "<group>"; };
+		E1E13B64280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoSentenceEditorViewModel.swift; sourceTree = "<group>"; };
 		E1E13B66280FB49E00C91A04 /* SentenceUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceUtils.swift; sourceTree = "<group>"; };
 		E1E13B6A280FC9CD00C91A04 /* AlphaLanguageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaLanguageEditorView.swift; sourceTree = "<group>"; };
 		E1E13B6C280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaLanguageEditorViewModel.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		E1FE839D280F4BB8000AFAAD /* ScaleableDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaleableDrawingView.swift; sourceTree = "<group>"; };
 		E1FE83A0280F5735000AFAAD /* SentenceMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceMenuView.swift; sourceTree = "<group>"; };
 		E1FE83A2280F5745000AFAAD /* SentenceMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceMenuViewModel.swift; sourceTree = "<group>"; };
-		E1FE83A4280F5876000AFAAD /* SentenceStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceStruct.swift; sourceTree = "<group>"; };
+		E1FE83A4280F5876000AFAAD /* SentenceStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceStructs.swift; sourceTree = "<group>"; };
 		E1FE83A6280F6552000AFAAD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,9 +257,9 @@
 			children = (
 				E1FE83A0280F5735000AFAAD /* SentenceMenuView.swift */,
 				E1FE83A2280F5745000AFAAD /* SentenceMenuViewModel.swift */,
-				E1E13B62280F97D200C91A04 /* SentenceEditorView.swift */,
-				E1E13B64280F97DF00C91A04 /* SentenceEditorViewModel.swift */,
-				E1FE83A4280F5876000AFAAD /* SentenceStruct.swift */,
+				E1E13B62280F97D200C91A04 /* LogoSentenceEditorView.swift */,
+				E1E13B64280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift */,
+				E1FE83A4280F5876000AFAAD /* SentenceStructs.swift */,
 				E1E13B66280FB49E00C91A04 /* SentenceUtils.swift */,
 			);
 			path = Sentences;
@@ -404,7 +404,7 @@
 				E11454D627EFE96F0021CC32 /* ContentView.swift in Sources */,
 				E1FE83A1280F5735000AFAAD /* SentenceMenuView.swift in Sources */,
 				E1E13B6F280FCD5600C91A04 /* LetterEditorViewModel.swift in Sources */,
-				E1FE83A5280F5876000AFAAD /* SentenceStruct.swift in Sources */,
+				E1FE83A5280F5876000AFAAD /* SentenceStructs.swift in Sources */,
 				E1E13B67280FB49E00C91A04 /* SentenceUtils.swift in Sources */,
 				E1D67D6A280263B400C90065 /* DrawingTestingSentenceView.swift in Sources */,
 				E18C0B8527FE4C200066F46A /* DrawingTestingView.swift in Sources */,
@@ -413,13 +413,13 @@
 				E1E13B6B280FC9CD00C91A04 /* AlphaLanguageEditorView.swift in Sources */,
 				E1E13B73280FD25600C91A04 /* WordEditorView.swift in Sources */,
 				E18C0B8327FDF3350066F46A /* DrawingViewModel.swift in Sources */,
-				E1E13B65280F97DF00C91A04 /* SentenceEditorViewModel.swift in Sources */,
+				E1E13B65280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift in Sources */,
 				E11454D427EFE96F0021CC32 /* PrototypeReli80App.swift in Sources */,
 				E1FE839A280F3D62000AFAAD /* LogogramEditorViewModel.swift in Sources */,
 				E1FE83A7280F6552000AFAAD /* Utils.swift in Sources */,
 				E18C0B7F27FDEA010066F46A /* DrawingView.swift in Sources */,
 				E1FE8389280E3154000AFAAD /* LanguageStruct.swift in Sources */,
-				E1E13B63280F97D200C91A04 /* SentenceEditorView.swift in Sources */,
+				E1E13B63280F97D200C91A04 /* LogoSentenceEditorView.swift in Sources */,
 				E1FE838D280E343E000AFAAD /* LogoLanguageEditorViewModel.swift in Sources */,
 				E1FE839E280F4BB8000AFAAD /* ScaleableDrawingView.swift in Sources */,
 				E1E13B71280FCD6F00C91A04 /* LetterEditorView.swift in Sources */,
