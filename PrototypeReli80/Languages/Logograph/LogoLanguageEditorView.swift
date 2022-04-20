@@ -53,7 +53,7 @@ struct LogoLanguageEditorView: View {
                     dismiss()
                 } label: {
                     Text("Save")
-                }
+                }.disabled(vm.logoLanguage.synced)
             }
         }
         .navigationBarTitleDisplayMode(.inline)

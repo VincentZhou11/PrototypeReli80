@@ -44,7 +44,7 @@ struct SentenceEditorView: View {
                     } label: {
                         ScaleableDrawingView(drawing: logogram.drawing, border: true).scaledToFit()
                     }
-                    .sheet(isPresented: $vm.editSheet, onDismiss: vm.refresh) {
+                    .sheet(isPresented: $vm.editSheet) {
                         LogoSheetEditView(viewContext: vm.viewContext, sentence: $vm.sentence, choosenIdx: idx, binding: $vm.editSheet)
                     }
                 }
@@ -57,7 +57,7 @@ struct SentenceEditorView: View {
                     }
                 }
                 .buttonStyle(.plain)
-                .sheet(isPresented: $vm.newSheet, onDismiss: vm.refresh) {
+                .sheet(isPresented: $vm.newSheet) {
                     LogoSheetNewView(viewContext: vm.viewContext, sentence: $vm.sentence, binding: $vm.newSheet)
                 }
             }
@@ -69,7 +69,7 @@ struct SentenceEditorView: View {
                     dismiss()
                 } label: {
                     Text("Save")
-                }
+                }.disabled(vm.sentence.synced)
             }
         }
         .navigationBarTitleDisplayMode(.inline)

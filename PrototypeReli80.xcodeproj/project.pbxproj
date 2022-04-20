@@ -160,9 +160,9 @@
 				E18C0B7D27FDE9380066F46A /* Drawing */,
 				E11454D327EFE96F0021CC32 /* PrototypeReli80App.swift */,
 				E11454D527EFE96F0021CC32 /* ContentView.swift */,
+				E1FE83A6280F6552000AFAAD /* Utils.swift */,
 				E11454D727EFE9720021CC32 /* Assets.xcassets */,
 				E11454D927EFE9720021CC32 /* Preview Content */,
-				E1FE83A6280F6552000AFAAD /* Utils.swift */,
 			);
 			path = PrototypeReli80;
 			sourceTree = "<group>";

@@ -49,7 +49,7 @@ struct DrawingView: View {
                     vm.submit()
                     dismiss()
                 } label: {
-                    Text("Save")
+                    Text("Submit")
                 }
             }
         }

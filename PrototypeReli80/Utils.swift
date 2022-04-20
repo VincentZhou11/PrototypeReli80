@@ -12,20 +12,27 @@ import SwiftUI
 // Better attempt to synchronous struct with managed object
 struct SyncObject<E, F>: Identifiable where F: NSManagedObject, F:JSONData, E:Identifiable, E:Codable {
     var id: E.ID
-    var decoded: E
+    var decoded: E {
+        didSet {
+            synced = false
+        }
+    }
     var managedObject: F
     var viewContext: NSManagedObjectContext
+    var synced: Bool
     
     init(decoded: E, managedObject: F, viewContext: NSManagedObjectContext) {
         self.id = decoded.id
         self.decoded = decoded
         self.managedObject = managedObject
         self.viewContext = viewContext
+        self.synced = true
     }
     
     mutating func updateDecoded() {
         do {
             decoded = try JSONDecoder().decode(E.self, from: managedObject.jsonData)
+            synced = true
         }
         catch {
             print("Decoded update error \(error.localizedDescription)")
@@ -35,6 +42,7 @@ struct SyncObject<E, F>: Identifiable where F: NSManagedObject, F:JSONData, E:Id
         do {
             managedObject.jsonData = try JSONEncoder().encode(decoded)
             try viewContext.save()
+            synced = true
         } catch {
             print("Managed object update error \(error.localizedDescription)")
         }

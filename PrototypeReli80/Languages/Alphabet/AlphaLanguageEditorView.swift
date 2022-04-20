@@ -70,7 +70,7 @@ struct AlphaLanguageEditorView: View {
                     dismiss()
                 } label: {
                     Text("Save")
-                }
+                }.disabled(vm.alphaLanguage.synced)
             }
         }
         .navigationBarTitleDisplayMode(.inline)

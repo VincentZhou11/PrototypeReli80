@@ -51,7 +51,7 @@ struct LetterEditorView: View {
                     dismiss()
                 } label: {
                     Text("Save")
-                }
+                }.disabled(vm.alphaLanguage.synced)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
