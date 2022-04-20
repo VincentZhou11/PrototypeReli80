@@ -21,7 +21,7 @@ struct LanguageMenuView: View {
             Section("Logographic Languages") {
                 List {
                     Button{
-                        vm.addAlpha()
+                        vm.addLogo()
                     } label: {
                         Label("Add Logographic Language", systemImage: "plus")
                     }

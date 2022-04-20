@@ -117,7 +117,7 @@ struct WordSheetEditView: View {
     
     var body: some View {
         Form {
-            Section("Logograms") {
+            Section("Letters") {
                 List {
                     ForEachWithIndex(vm.alphaLanguage.decoded.letters) {
                         idx, letter in
@@ -152,7 +152,7 @@ struct WordSheetNewView: View {
         
     var body: some View {
         Form {
-            Section("Logograms") {
+            Section("Letters") {
                 List {
                     ForEachWithIndex(vm.alphaLanguage.decoded.letters) {
                         idx, letter in

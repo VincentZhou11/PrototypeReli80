@@ -9,22 +9,27 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            DrawingTestingView().tabItem {
-                Label("Drawing Test", systemImage: "pencil")
+        
+//        NavigationView {
+            TabView {
+                NavigationView {
+                    SentenceMenuView()
+                }
+                .tabItem {
+                    Label("Sentence Menu", systemImage: "doc.on.doc")
+                }
+                NavigationView {
+                    LanguageMenuView()
+                }
+                .tabItem {
+                    Label("Language Menu", systemImage: "gear")
+                }
+                DrawingTestingView().tabItem {
+                    Label("Drawing Test", systemImage: "pencil")
+                }
+                
             }
-            NavigationView {
-                SentenceMenuView()
-            }.tabItem {
-                Label("Sentence Menu", systemImage: "doc.on.doc")
-            }
-            NavigationView {
-                LanguageMenuView()
-            }.tabItem {
-                Label("Language Menu", systemImage: "gear")
-            }
-            
-        }
+//        }
     }
 }
 
