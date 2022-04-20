@@ -51,13 +51,16 @@ struct LogogramEditorView: View {
 //                }
                 Button {
                     vm.save()
-                    dismiss()
+//                    dismiss()
                 } label: {
                     Text("Save")
                 }.disabled(vm.logoLanguage.synced)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onReceive(vm.logoLanguage.publisher) { output in
+            vm.logoLanguage = output
+        }
     }
 }
 

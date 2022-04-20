@@ -67,14 +67,17 @@ struct AlphaLanguageEditorView: View {
                 EditButton()
                 Button {
                     vm.save()
-                    dismiss()
+//                    dismiss()
                 } label: {
                     Text("Save")
                 }.disabled(vm.alphaLanguage.synced)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear(perform: vm.refresh)
+//        .onAppear(perform: vm.refresh)
+        .onReceive(vm.alphaLanguage.publisher) { output in
+            vm.alphaLanguage = output
+        }
     }
 }
 

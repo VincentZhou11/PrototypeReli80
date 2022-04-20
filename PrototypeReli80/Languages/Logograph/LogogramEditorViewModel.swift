@@ -39,7 +39,7 @@ public class LogogramEditorViewModel: ObservableObject {
         }
         
         self.logoLanguage = SyncObject(decoded: decoded, managedObject: managedObject, viewContext:viewContext)
-        
+            
         save()
     }
     init(idx: Int, logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {

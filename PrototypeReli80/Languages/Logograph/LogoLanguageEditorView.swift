@@ -50,14 +50,17 @@ struct LogoLanguageEditorView: View {
                 EditButton()
                 Button {
                     vm.save()
-                    dismiss()
+//                    dismiss()
                 } label: {
                     Text("Save")
                 }.disabled(vm.logoLanguage.synced)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear(perform: vm.refresh)
+//        .onAppear(perform: vm.refresh)
+        .onReceive(vm.logoLanguage.publisher) { output in
+            vm.logoLanguage = output
+        }
     }
 }
 

@@ -77,13 +77,16 @@ struct WordEditorView: View {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button {
                     vm.save()
-                    dismiss()
+//                    dismiss()
                 } label: {
                     Text("Save")
                 }.disabled(vm.alphaLanguage.synced)
             }
         }
         .navigationBarTitleDisplayMode(.inline)
+        .onReceive(vm.alphaLanguage.publisher) { output in
+            vm.alphaLanguage = output
+        }
     }
 }
 

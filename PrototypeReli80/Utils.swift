@@ -8,6 +8,7 @@
 import Foundation
 import CoreData
 import SwiftUI
+import Combine
 
 // Better attempt to synchronous struct with managed object
 struct SyncObject<E, F>: Identifiable where F: NSManagedObject, F:JSONData, E:Identifiable, E:Codable {
@@ -15,11 +16,13 @@ struct SyncObject<E, F>: Identifiable where F: NSManagedObject, F:JSONData, E:Id
     var decoded: E {
         didSet {
             synced = false
+            publisher.send(self.copy())
         }
     }
     var managedObject: F
     var viewContext: NSManagedObjectContext
     var synced: Bool
+    var publisher: PassthroughSubject<SyncObject<E, F>, Never>
     
     init(decoded: E, managedObject: F, viewContext: NSManagedObjectContext) {
         self.id = decoded.id
@@ -27,6 +30,16 @@ struct SyncObject<E, F>: Identifiable where F: NSManagedObject, F:JSONData, E:Id
         self.managedObject = managedObject
         self.viewContext = viewContext
         self.synced = true
+        self.publisher = PassthroughSubject<SyncObject<E, F>, Never>()
+    }
+    
+    init(decoded: E, managedObject: F, viewContext: NSManagedObjectContext, synced: Bool, publisher: PassthroughSubject<SyncObject<E, F>, Never>) {
+        self.id = decoded.id
+        self.decoded = decoded
+        self.managedObject = managedObject
+        self.viewContext = viewContext
+        self.synced = synced
+        self.publisher = publisher
     }
     
     mutating func updateDecoded() {
@@ -43,9 +56,13 @@ struct SyncObject<E, F>: Identifiable where F: NSManagedObject, F:JSONData, E:Id
             managedObject.jsonData = try JSONEncoder().encode(decoded)
             try viewContext.save()
             synced = true
+            publisher.send(self.copy())
         } catch {
             print("Managed object update error \(error.localizedDescription)")
         }
+    }
+    func copy() -> SyncObject<E, F> {
+        return SyncObject<E, F>(decoded: decoded, managedObject: managedObject, viewContext: viewContext, synced: synced, publisher: publisher)
     }
 }
 protocol JSONData {
