@@ -20,12 +20,8 @@ public class LetterEditorViewModel: ObservableObject {
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
-        
-        let newLetter = Letter.example
-        
-        self.idx = 0
-//        self.logogram = newLogogram
-        let decoded = AlphabetLanguage(name: "Example", words: [], letters: [newLetter])
+                
+        let decoded = AlphabetLanguage.example
         let managedObject = AlphabetLanguageDB(context: viewContext)
         managedObject.id = decoded.id
         managedObject.timestamp = decoded.timestamp
@@ -36,6 +32,7 @@ public class LetterEditorViewModel: ObservableObject {
             print("Failed to encode JSON: \(error.localizedDescription)")
         }
         
+        self.idx = 0
         self.alphaLanguage = SyncObject(decoded: decoded, managedObject: managedObject, viewContext: viewContext)
         
         save()

@@ -20,14 +20,9 @@ public class LogogramEditorViewModel: ObservableObject {
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
+
         
-        let newLogogram = Logogram(drawing: .example, meaning: "Something")
-        
-        self.idx = 0
-//        self.logogram = newLogogram
-        let logograms = [newLogogram]
-        
-        let decoded = LogographicLanguage(name: "New Language", logograms: logograms)
+        let decoded = LogographicLanguage.example
         let managedObject = LogographicLanguageDB(context: viewContext)
         managedObject.id = decoded.id
         managedObject.timestamp = decoded.timestamp
@@ -38,6 +33,7 @@ public class LogogramEditorViewModel: ObservableObject {
             print("Encoding new data into managed Object failed: \(error.localizedDescription)")
         }
         
+        self.idx = 0
         self.logoLanguage = SyncObject(decoded: decoded, managedObject: managedObject, viewContext:viewContext)
             
         save()

@@ -21,13 +21,9 @@ public class LogoLanguageEditorViewModel: ObservableObject {
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
+
         
-        
-        let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
-                         Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
-                         Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
-        
-        let decoded = LogographicLanguage(name: "New Language", logograms: logograms)
+        let decoded = LogographicLanguage.example
         let managedObject = LogographicLanguageDB(context: viewContext)
         managedObject.id = decoded.id
         managedObject.timestamp = decoded.timestamp

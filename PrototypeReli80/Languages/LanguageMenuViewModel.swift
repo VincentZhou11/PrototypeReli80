@@ -103,12 +103,8 @@ public class LanguageMenuViewModel: ObservableObject {
     
     func createDummyLanguage() {
         do {
+            let newLanguageStruct = LogographicLanguage.example
             let newLanguage = LogographicLanguageDB(context: viewContext)
-            let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
-                             Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
-                             Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
-            
-            let newLanguageStruct = LogographicLanguage(name: "Test Language", logograms: logograms)
             newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
             newLanguage.timestamp = newLanguageStruct.timestamp
             newLanguage.id = newLanguageStruct.id
@@ -122,9 +118,9 @@ public class LanguageMenuViewModel: ObservableObject {
     
     func createAlphaLanguage() {
         do {
-            let newLanguage = AlphabetLanguageDB(context: viewContext)
             // Create empty language
-            let newLanguageStruct = AlphabetLanguage(name: "New Language", words: [], letters: [])
+            let newLanguageStruct = AlphabetLanguage.new
+            let newLanguage = AlphabetLanguageDB(context: viewContext)
             newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
             newLanguage.timestamp = newLanguageStruct.timestamp
             newLanguage.id = newLanguageStruct.id
@@ -153,9 +149,9 @@ public class LanguageMenuViewModel: ObservableObject {
     
     func createLogoLanguage() {
         do {
-            let newLanguage = LogographicLanguageDB(context: viewContext)
             // Create empty language
-            let newLanguageStruct = LogographicLanguage(name: "New Language", logograms: [])
+            let newLanguageStruct = LogographicLanguage.new
+            let newLanguage = LogographicLanguageDB(context: viewContext)
             newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
             newLanguage.timestamp = newLanguageStruct.timestamp
             newLanguage.id = newLanguageStruct.id

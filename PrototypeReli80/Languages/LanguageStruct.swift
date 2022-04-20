@@ -21,7 +21,10 @@ struct LogographicLanguage: Identifiable, Codable, Morphemes {
 }
 extension LogographicLanguage {
     static var example: LogographicLanguage {
-        LogographicLanguage(name: "Test Language", logograms: [.example, .example, .example])
+        LogographicLanguage(name: "Example Language", logograms: [.example, .example, .example])
+    }
+    static var new: LogographicLanguage {
+        LogographicLanguage(name: "New Language", logograms: [])
     }
 }
 struct Logogram: Identifiable, Codable, Morpheme {
@@ -38,7 +41,7 @@ struct Logogram: Identifiable, Codable, Morpheme {
 }
 extension Logogram {
     static var example: Logogram {
-        Logogram(drawing: Drawing.example, meaning: "Test Logogram")
+        Logogram(drawing: Drawing.example, meaning: "Example Logogram")
     }
     func copy() -> Logogram {
         Logogram(drawing: drawing, meaning: meaning)
@@ -58,7 +61,10 @@ struct AlphabetLanguage: Identifiable, Codable, Morphemes {
 }
 extension AlphabetLanguage {
     static var example:AlphabetLanguage {
-        AlphabetLanguage(name: "Example", words: [.example, .example, .example], letters: [.example])
+        AlphabetLanguage(name: "Example Language", words: [.example], letters: [.example, .example, .example])
+    }
+    static var new:AlphabetLanguage {
+        AlphabetLanguage(name: "New Language", words: [], letters: [])
     }
 }
 struct Word: Identifiable, Codable, Morpheme {
@@ -76,7 +82,7 @@ struct Word: Identifiable, Codable, Morpheme {
 }
 extension Word {
     static var example: Word {
-        Word(meaning: "Example", spelling: [.example, .example, .example])
+        Word(meaning: "Example Word", spelling: [.example, .example, .example])
     }
 }
 struct Letter: Identifiable, Codable {
@@ -86,7 +92,7 @@ struct Letter: Identifiable, Codable {
 }
 extension Letter {
     static var example: Letter {
-        Letter(drawing: .example, pronounciation: "Example")
+        Letter(drawing: .example, pronounciation: "Example Letter")
     }
     func copy() -> Letter {
         Letter(drawing: drawing, pronounciation: pronounciation)

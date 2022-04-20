@@ -22,12 +22,7 @@ public class WordEditorViewModel: ObservableObject {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
         
-        
-        let newWord = Word.example
-        
-        self.idx = 0
-//        self.logogram = newLogogram
-        let decoded = AlphabetLanguage(name: "Example", words: [newWord], letters: [.example, .example, .example])
+        let decoded = AlphabetLanguage.example
         let managedObject = AlphabetLanguageDB(context: viewContext)
         managedObject.id = decoded.id
         managedObject.timestamp = decoded.timestamp
@@ -38,6 +33,7 @@ public class WordEditorViewModel: ObservableObject {
             print("Failed to encode JSON: \(error.localizedDescription)")
         }
         
+        self.idx = 0
         self.alphaLanguage = SyncObject(decoded: decoded, managedObject: managedObject, viewContext: viewContext)
         
         save()
