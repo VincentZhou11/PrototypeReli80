@@ -16,6 +16,10 @@ struct SentenceEditorView: View {
         _vm = StateObject(wrappedValue: SentenceEditorViewModel(preview: preview))
         self.preview = preview
     }
+    init(sentence: SyncObject<LogographicSentence, LogographicSentenceDB>, preview: Bool = false) {
+        _vm = StateObject(wrappedValue: SentenceEditorViewModel(sentence: sentence, preview: preview))
+        self.preview = preview
+    }
     
     var body: some View {
         let columns = [
@@ -40,7 +44,7 @@ struct SentenceEditorView: View {
                         ScaleableDrawingView(drawing: logogram.drawing, border: true).scaledToFit()
                     }
                     .sheet(isPresented: $vm.editSheet, onDismiss: vm.refresh) {
-                        LogoSheetEditView(viewContext: vm.viewContext, sentence: vm.sentence, choosenIdx: idx, binding: $vm.newSheet)
+                        LogoSheetEditView(viewContext: vm.viewContext, sentence: vm.sentence, choosenIdx: idx, binding: $vm.editSheet)
                     }
                 }
                 
@@ -95,7 +99,7 @@ struct LogoSheetEditView: View {
                     ForEachWithIndex(vm.sentence.decoded.language.logograms) {
                         idx, logogram in
                         Button {
-                            vm.sentence.decoded.sentence[idx] = logogram
+                            vm.sentence.decoded.sentence[idx] = logogram.copy()
                             vm.sentence.saveManagedObject()
                             vm.binding = false
                         } label: {
@@ -130,7 +134,7 @@ struct LogoSheetNewView: View {
                     ForEachWithIndex(vm.sentence.decoded.language.logograms) {
                         idx, logogram in
                         Button {
-                            vm.sentence.decoded.sentence.append(logogram)
+                            vm.sentence.decoded.sentence.append(logogram.copy())
                             vm.sentence.saveManagedObject()
                             vm.binding = false
                         } label: {

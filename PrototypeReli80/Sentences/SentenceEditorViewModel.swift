@@ -46,6 +46,12 @@ public class SentenceEditorViewModel: ObservableObject {
         self.sentence = SyncObject<LogographicSentence, LogographicSentenceDB>(decoded: decoded, managedObject: managedObject, viewContext: viewContext)
         save()
     }
+    init(sentence: SyncObject<LogographicSentence, LogographicSentenceDB>, preview: Bool = false) {
+        if preview {viewContext = PersistenceController.preview.container.viewContext}
+        else {viewContext = PersistenceController.shared.container.viewContext}
+        
+        self.sentence = sentence
+    }
     func refresh() {
         withAnimation {
             sentence.updateDecoded()
@@ -55,9 +61,4 @@ public class SentenceEditorViewModel: ObservableObject {
         sentence.saveManagedObject()
     }
     
-    init(sentence: SyncObject<LogographicSentence, LogographicSentenceDB>, preview: Bool = false) {
-        if preview {viewContext = PersistenceController.preview.container.viewContext}
-        else {viewContext = PersistenceController.shared.container.viewContext}
-        self.sentence = sentence
-    }
 }

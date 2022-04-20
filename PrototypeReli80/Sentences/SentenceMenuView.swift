@@ -18,12 +18,12 @@ struct SentenceMenuView: View {
     
     var body: some View {
         Form {
-            Section("Logographic Languages") {
+            Section("Logographic Sentences") {
                 List {
                     ForEach(vm.logoSentences) {
                         logoSentence in
                         NavigationLink {
-
+                            SentenceEditorView(sentence: logoSentence, preview: preview)
                         } label: {
                             LogographicSentenceMiniView(sentence: logoSentence)
                         }

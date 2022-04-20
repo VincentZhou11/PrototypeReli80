@@ -38,5 +38,8 @@ extension Logogram {
     static var example: Logogram {
         Logogram(drawing: Drawing.example, meaning: "Test Logogram")
     }
+    func copy() -> Logogram {
+        return Logogram(drawing: drawing, meaning: meaning)
+    }
 }
 
