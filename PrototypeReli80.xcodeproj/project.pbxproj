@@ -23,11 +23,17 @@
 		E1E13B63280F97D200C91A04 /* SentenceEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B62280F97D200C91A04 /* SentenceEditorView.swift */; };
 		E1E13B65280F97DF00C91A04 /* SentenceEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B64280F97DF00C91A04 /* SentenceEditorViewModel.swift */; };
 		E1E13B67280FB49E00C91A04 /* SentenceUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B66280FB49E00C91A04 /* SentenceUtils.swift */; };
+		E1E13B6B280FC9CD00C91A04 /* AlphaLanguageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B6A280FC9CD00C91A04 /* AlphaLanguageEditorView.swift */; };
+		E1E13B6D280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B6C280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift */; };
+		E1E13B6F280FCD5600C91A04 /* LetterEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B6E280FCD5600C91A04 /* LetterEditorViewModel.swift */; };
+		E1E13B71280FCD6F00C91A04 /* LetterEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B70280FCD6F00C91A04 /* LetterEditorView.swift */; };
+		E1E13B73280FD25600C91A04 /* WordEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B72280FD25600C91A04 /* WordEditorView.swift */; };
+		E1E13B75280FD26200C91A04 /* WordEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B74280FD26200C91A04 /* WordEditorViewModel.swift */; };
 		E1FE8385280E2828000AFAAD /* LanguageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8384280E2828000AFAAD /* LanguageMenuView.swift */; };
 		E1FE8387280E2839000AFAAD /* LanguageMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8386280E2839000AFAAD /* LanguageMenuViewModel.swift */; };
 		E1FE8389280E3154000AFAAD /* LanguageStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8388280E3154000AFAAD /* LanguageStruct.swift */; };
-		E1FE838B280E3431000AFAAD /* LanguageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838A280E3431000AFAAD /* LanguageEditorView.swift */; };
-		E1FE838D280E343E000AFAAD /* LanguageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838C280E343E000AFAAD /* LanguageEditorViewModel.swift */; };
+		E1FE838B280E3431000AFAAD /* LogoLanguageEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838A280E3431000AFAAD /* LogoLanguageEditorView.swift */; };
+		E1FE838D280E343E000AFAAD /* LogoLanguageEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838C280E343E000AFAAD /* LogoLanguageEditorViewModel.swift */; };
 		E1FE8390280E35A3000AFAAD /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE838F280E35A3000AFAAD /* Persistence.swift */; };
 		E1FE8396280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8394280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld */; };
 		E1FE8398280F3D51000AFAAD /* LogogramEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FE8397280F3D51000AFAAD /* LogogramEditorView.swift */; };
@@ -77,11 +83,17 @@
 		E1E13B62280F97D200C91A04 /* SentenceEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceEditorView.swift; sourceTree = "<group>"; };
 		E1E13B64280F97DF00C91A04 /* SentenceEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceEditorViewModel.swift; sourceTree = "<group>"; };
 		E1E13B66280FB49E00C91A04 /* SentenceUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentenceUtils.swift; sourceTree = "<group>"; };
+		E1E13B6A280FC9CD00C91A04 /* AlphaLanguageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaLanguageEditorView.swift; sourceTree = "<group>"; };
+		E1E13B6C280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaLanguageEditorViewModel.swift; sourceTree = "<group>"; };
+		E1E13B6E280FCD5600C91A04 /* LetterEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEditorViewModel.swift; sourceTree = "<group>"; };
+		E1E13B70280FCD6F00C91A04 /* LetterEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEditorView.swift; sourceTree = "<group>"; };
+		E1E13B72280FD25600C91A04 /* WordEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordEditorView.swift; sourceTree = "<group>"; };
+		E1E13B74280FD26200C91A04 /* WordEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordEditorViewModel.swift; sourceTree = "<group>"; };
 		E1FE8384280E2828000AFAAD /* LanguageMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageMenuView.swift; sourceTree = "<group>"; };
 		E1FE8386280E2839000AFAAD /* LanguageMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageMenuViewModel.swift; sourceTree = "<group>"; };
 		E1FE8388280E3154000AFAAD /* LanguageStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageStruct.swift; sourceTree = "<group>"; };
-		E1FE838A280E3431000AFAAD /* LanguageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEditorView.swift; sourceTree = "<group>"; };
-		E1FE838C280E343E000AFAAD /* LanguageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageEditorViewModel.swift; sourceTree = "<group>"; };
+		E1FE838A280E3431000AFAAD /* LogoLanguageEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoLanguageEditorView.swift; sourceTree = "<group>"; };
+		E1FE838C280E343E000AFAAD /* LogoLanguageEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoLanguageEditorViewModel.swift; sourceTree = "<group>"; };
 		E1FE838F280E35A3000AFAAD /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		E1FE8395280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = JSONLanguageDataModel.xcdatamodel; sourceTree = "<group>"; };
 		E1FE8397280F3D51000AFAAD /* LogogramEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogogramEditorView.swift; sourceTree = "<group>"; };
@@ -194,15 +206,37 @@
 			path = Drawing;
 			sourceTree = "<group>";
 		};
+		E1E13B68280FC49200C91A04 /* Logograph */ = {
+			isa = PBXGroup;
+			children = (
+				E1FE838A280E3431000AFAAD /* LogoLanguageEditorView.swift */,
+				E1FE838C280E343E000AFAAD /* LogoLanguageEditorViewModel.swift */,
+				E1FE8397280F3D51000AFAAD /* LogogramEditorView.swift */,
+				E1FE8399280F3D62000AFAAD /* LogogramEditorViewModel.swift */,
+			);
+			path = Logograph;
+			sourceTree = "<group>";
+		};
+		E1E13B69280FC9B500C91A04 /* Alphabet */ = {
+			isa = PBXGroup;
+			children = (
+				E1E13B6A280FC9CD00C91A04 /* AlphaLanguageEditorView.swift */,
+				E1E13B6C280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift */,
+				E1E13B70280FCD6F00C91A04 /* LetterEditorView.swift */,
+				E1E13B6E280FCD5600C91A04 /* LetterEditorViewModel.swift */,
+				E1E13B72280FD25600C91A04 /* WordEditorView.swift */,
+				E1E13B74280FD26200C91A04 /* WordEditorViewModel.swift */,
+			);
+			path = Alphabet;
+			sourceTree = "<group>";
+		};
 		E1FE8383280E280C000AFAAD /* Languages */ = {
 			isa = PBXGroup;
 			children = (
 				E1FE8384280E2828000AFAAD /* LanguageMenuView.swift */,
 				E1FE8386280E2839000AFAAD /* LanguageMenuViewModel.swift */,
-				E1FE838A280E3431000AFAAD /* LanguageEditorView.swift */,
-				E1FE838C280E343E000AFAAD /* LanguageEditorViewModel.swift */,
-				E1FE8397280F3D51000AFAAD /* LogogramEditorView.swift */,
-				E1FE8399280F3D62000AFAAD /* LogogramEditorViewModel.swift */,
+				E1E13B68280FC49200C91A04 /* Logograph */,
+				E1E13B69280FC9B500C91A04 /* Alphabet */,
 				E1FE8388280E3154000AFAAD /* LanguageStruct.swift */,
 				E1FE839B280F4330000AFAAD /* LanguageUtils.swift */,
 			);
@@ -362,18 +396,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				E18C0B8127FDEB680066F46A /* DrawingStructs.swift in Sources */,
-				E1FE838B280E3431000AFAAD /* LanguageEditorView.swift in Sources */,
+				E1FE838B280E3431000AFAAD /* LogoLanguageEditorView.swift in Sources */,
 				E1FE8387280E2839000AFAAD /* LanguageMenuViewModel.swift in Sources */,
+				E1E13B75280FD26200C91A04 /* WordEditorViewModel.swift in Sources */,
 				E1FE839C280F4330000AFAAD /* LanguageUtils.swift in Sources */,
 				E1FE8390280E35A3000AFAAD /* Persistence.swift in Sources */,
 				E11454D627EFE96F0021CC32 /* ContentView.swift in Sources */,
 				E1FE83A1280F5735000AFAAD /* SentenceMenuView.swift in Sources */,
+				E1E13B6F280FCD5600C91A04 /* LetterEditorViewModel.swift in Sources */,
 				E1FE83A5280F5876000AFAAD /* SentenceStruct.swift in Sources */,
 				E1E13B67280FB49E00C91A04 /* SentenceUtils.swift in Sources */,
 				E1D67D6A280263B400C90065 /* DrawingTestingSentenceView.swift in Sources */,
 				E18C0B8527FE4C200066F46A /* DrawingTestingView.swift in Sources */,
 				E1FE8385280E2828000AFAAD /* LanguageMenuView.swift in Sources */,
 				E1D67D67280260EB00C90065 /* ScaledDrawingView.swift in Sources */,
+				E1E13B6B280FC9CD00C91A04 /* AlphaLanguageEditorView.swift in Sources */,
+				E1E13B73280FD25600C91A04 /* WordEditorView.swift in Sources */,
 				E18C0B8327FDF3350066F46A /* DrawingViewModel.swift in Sources */,
 				E1E13B65280F97DF00C91A04 /* SentenceEditorViewModel.swift in Sources */,
 				E11454D427EFE96F0021CC32 /* PrototypeReli80App.swift in Sources */,
@@ -382,10 +420,12 @@
 				E18C0B7F27FDEA010066F46A /* DrawingView.swift in Sources */,
 				E1FE8389280E3154000AFAAD /* LanguageStruct.swift in Sources */,
 				E1E13B63280F97D200C91A04 /* SentenceEditorView.swift in Sources */,
-				E1FE838D280E343E000AFAAD /* LanguageEditorViewModel.swift in Sources */,
+				E1FE838D280E343E000AFAAD /* LogoLanguageEditorViewModel.swift in Sources */,
 				E1FE839E280F4BB8000AFAAD /* ScaleableDrawingView.swift in Sources */,
+				E1E13B71280FCD6F00C91A04 /* LetterEditorView.swift in Sources */,
 				E1FE8398280F3D51000AFAAD /* LogogramEditorView.swift in Sources */,
 				E1FE83A3280F5745000AFAAD /* SentenceMenuViewModel.swift in Sources */,
+				E1E13B6D280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift in Sources */,
 				E1FE8396280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

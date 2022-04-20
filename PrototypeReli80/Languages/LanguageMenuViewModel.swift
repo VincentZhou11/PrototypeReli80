@@ -15,20 +15,55 @@ public class LanguageMenuViewModel: ObservableObject {
     private var viewContext: NSManagedObjectContext
     
     @Published var logoLanguages: [SyncObject<LogographicLanguage, LogographicLanguageDB>] = []
+    @Published var alphaLanguages: [SyncObject<AlphabetLanguage, AlphabetLanguageDB>] = []
+
     
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
         
         
-        hardRefresh()
+        hardLogoRefresh()
+        hardAlphaRefresh()
     }
     func refresh() {
         for index in logoLanguages.indices {
             logoLanguages[index].updateDecoded()
         }
+        for index in alphaLanguages.indices {
+            alphaLanguages[index].updateDecoded()
+        }
     }
-    func hardRefresh() {
+    func hardAlphaRefresh() {
+        // https://agiokas.medium.com/core-data-and-async-await-thread-safe-f96b6dbbb7c4
+        Task {
+            do {
+                // Create Fetch request
+                let fetchRequest = AlphabetLanguageDB.fetchRequest()
+                fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \AlphabetLanguageDB.timestamp, ascending: true)]
+                // Fetch
+                let fetchedLogoLanguages = try await viewContext.perform {
+                    try self.viewContext.fetch(fetchRequest)
+                }
+                // Create the necessary structs
+                let structs: [SyncObject<AlphabetLanguage, AlphabetLanguageDB>] = try fetchedLogoLanguages.compactMap {
+                    managedObjectLanguage in
+                    let decodedLanguage = try JSONDecoder().decode(AlphabetLanguage.self, from: managedObjectLanguage.data!)
+                    return SyncObject(decoded: decodedLanguage, managedObject: managedObjectLanguage, viewContext: viewContext)
+                }
+                // Update view
+                DispatchQueue.main.async {
+                    withAnimation {
+                        self.alphaLanguages = structs
+                    }
+                }
+            }
+            catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    func hardLogoRefresh() {
         // https://agiokas.medium.com/core-data-and-async-await-thread-safe-f96b6dbbb7c4
         Task {
             do {
@@ -51,7 +86,6 @@ public class LanguageMenuViewModel: ObservableObject {
                         self.logoLanguages = structs
                     }
                 }
-                
             }
             catch {
                 print(error.localizedDescription)
@@ -84,7 +118,40 @@ public class LanguageMenuViewModel: ObservableObject {
         }
     }
     
-    func createLanguage() {
+    
+    
+    func createAlphaLanguage() {
+        do {
+            let newLanguage = AlphabetLanguageDB(context: viewContext)
+            // Create empty language
+            let newLanguageStruct = AlphabetLanguage(name: "New Language", words: [], letters: [])
+            newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
+            newLanguage.timestamp = newLanguageStruct.timestamp
+            newLanguage.id = newLanguageStruct.id
+        }
+        catch {
+            print("Failed to encode JSON \(error.localizedDescription)")
+        }
+    }
+    
+    func addAlpha() {
+        withAnimation {
+//            createDummyLanguage()
+            createAlphaLanguage()
+            save()
+        }
+        hardAlphaRefresh()
+    }
+
+    func deleteAlphas(offsets: IndexSet) {
+        withAnimation {
+            offsets.map { alphaLanguages[$0].managedObject }.forEach(viewContext.delete)
+            save()
+        }
+        hardAlphaRefresh()
+    }
+    
+    func createLogoLanguage() {
         do {
             let newLanguage = LogographicLanguageDB(context: viewContext)
             // Create empty language
@@ -98,21 +165,21 @@ public class LanguageMenuViewModel: ObservableObject {
         }
     }
     
-    func addItem() {
+    func addLogo() {
         withAnimation {
 //            createDummyLanguage()
-            createLanguage()
+            createLogoLanguage()
             save()
         }
-        hardRefresh()
+        hardLogoRefresh()
     }
 
-    func deleteItems(offsets: IndexSet) {
+    func deleteLogos(offsets: IndexSet) {
         withAnimation {
             offsets.map { logoLanguages[$0].managedObject }.forEach(viewContext.delete)
             save()
         }
-        hardRefresh()
+        hardLogoRefresh()
     }
 }
 

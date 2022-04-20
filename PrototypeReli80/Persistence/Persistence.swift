@@ -34,6 +34,22 @@ struct PersistenceController {
             catch {
                 fatalError("Failed to encode JSON \(error.localizedDescription)")
             }
+            do {
+                let newLanguage = AlphabetLanguageDB(context: viewContext)
+                
+                let newLanguageStruct = AlphabetLanguage(
+                    name: "Test Language \(i)",
+                    words: [.example],
+                    letters: [.example]
+                )
+                
+                newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
+                newLanguage.timestamp = newLanguageStruct.timestamp
+                newLanguage.id = newLanguageStruct.id
+            }
+            catch {
+                fatalError("Failed to encode JSON \(error.localizedDescription)")
+            }
         }
         // Sentences
         for i in 0..<3 {

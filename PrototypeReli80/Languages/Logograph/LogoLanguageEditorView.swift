@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-struct LanguageEditorView: View {
+struct LogoLanguageEditorView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var vm: LanguageEditorViewModel
+    @StateObject var vm: LogoLanguageEditorViewModel
     
     let preview: Bool
     init(preview: Bool = false) {
-        _vm = StateObject(wrappedValue: LanguageEditorViewModel(preview: preview))
+        _vm = StateObject(wrappedValue: LogoLanguageEditorViewModel(preview: preview))
         self.preview = preview
     }
     init(logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
-        _vm = StateObject(wrappedValue: LanguageEditorViewModel(logoLanguage: logoLanguage, preview: preview))
+        _vm = StateObject(wrappedValue: LogoLanguageEditorViewModel(logoLanguage: logoLanguage, preview: preview))
         self.preview = preview
     }
     
@@ -61,10 +61,10 @@ struct LanguageEditorView: View {
     }
 }
 
-struct LanguageEditorView_Previews: PreviewProvider {
+struct LogoLanguageEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LanguageEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            LogoLanguageEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
 }

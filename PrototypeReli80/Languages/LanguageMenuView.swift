@@ -20,29 +20,48 @@ struct LanguageMenuView: View {
         Form {
             Section("Logographic Languages") {
                 List {
+                    Button{
+                        vm.addAlpha()
+                    } label: {
+                        Label("Add Logographic Language", systemImage: "plus")
+                    }
                     ForEach(vm.logoLanguages) {
                         logoLanguage in
                         NavigationLink {
-                            LanguageEditorView(logoLanguage: logoLanguage, preview: preview)
+                            LogoLanguageEditorView(logoLanguage: logoLanguage, preview: preview)
                         } label: {
                             Text(logoLanguage.decoded.name)
                         }
                     }
-                    .onDelete(perform: vm.deleteItems)
+                    .onDelete(perform: vm.deleteAlphas)
+                }
+            }
+            Section("Alphabet Languages") {
+                List {
+                    Button{
+                        vm.addAlpha()
+                    } label: {
+                        Label("Add Alphabet Language", systemImage: "plus")
+                    }
+                    ForEach(vm.alphaLanguages) {
+                        alphaLanguage in
+                        NavigationLink {
+                            AlphaLanguageEditorView(alphaLanguage: alphaLanguage, preview: preview)
+                        } label: {
+                            Text(alphaLanguage.decoded.name)
+                        }
+                    }
+                    .onDelete(perform: vm.deleteAlphas)
                 }
             }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button{
-                    vm.hardRefresh()
+                    vm.hardAlphaRefresh()
+                    vm.hardLogoRefresh()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
-                }
-                Button{
-                    vm.addItem()
-                } label: {
-                    Label("Add Item", systemImage: "plus")
                 }
                 EditButton()
             }

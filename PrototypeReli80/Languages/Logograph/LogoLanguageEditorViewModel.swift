@@ -9,7 +9,7 @@ import Foundation
 import CoreData
 import SwiftUI
 
-public class LanguageEditorViewModel: ObservableObject {
+public class LogoLanguageEditorViewModel: ObservableObject {
     // Updating managed object
     // https://stackoverflow.com/questions/28525962/how-to-update-existing-objects-in-core-data
     
@@ -76,7 +76,7 @@ public class LanguageEditorViewModel: ObservableObject {
 
     func deleteItems(offsets: IndexSet) {
         withAnimation {
-            offsets.map{logoLanguage.decoded.logograms.remove(at: $0)}
+            let _ = offsets.map{logoLanguage.decoded.logograms.remove(at: $0)}
 //            save()
         }
 //        refresh()

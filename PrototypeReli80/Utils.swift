@@ -54,6 +54,16 @@ extension LogographicLanguageDB: JSONData {
         }
     }
 }
+extension AlphabetLanguageDB: JSONData {
+    var jsonData: Data {
+        get {
+            self.data!
+        }
+        set {
+            self.data = newValue
+        }
+    }
+}
 extension LogographicSentenceDB: JSONData {
     var jsonData: Data {
         get {

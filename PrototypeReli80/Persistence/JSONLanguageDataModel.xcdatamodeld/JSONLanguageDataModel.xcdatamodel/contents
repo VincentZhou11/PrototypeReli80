@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="20086" systemVersion="21E258" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AlphabetLanguageDB" representedClassName="AlphabetLanguageDB" syncable="YES" codeGenerationType="class">
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <entity name="LogographicLanguageDB" representedClassName="LogographicLanguageDB" syncable="YES" codeGenerationType="class">
         <attribute name="data" attributeType="Binary"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
@@ -13,5 +18,6 @@
     <elements>
         <element name="LogographicLanguageDB" positionX="-9" positionY="36" width="128" height="74"/>
         <element name="LogographicSentenceDB" positionX="-9" positionY="63" width="128" height="74"/>
+        <element name="AlphabetLanguageDB" positionX="-9" positionY="72" width="128" height="74"/>
     </elements>
 </model>

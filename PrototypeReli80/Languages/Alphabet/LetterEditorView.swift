@@ -1,44 +1,41 @@
 //
-//  LogogramEditor.swift
+//  LetterEditorView.swift
 //  PrototypeReli80
 //
-//  Created by Vincent Zhou on 4/19/22.
+//  Created by Vincent Zhou on 4/20/22.
 //
 
 import SwiftUI
 
-struct LogogramEditorView: View {
+struct LetterEditorView: View {
     @Environment(\.dismiss) var dismiss
     
-    @StateObject var vm: LogogramEditorViewModel
+    @StateObject var vm: LetterEditorViewModel
     
     let preview: Bool
     init(preview: Bool = false) {
-        _vm = StateObject(wrappedValue: LogogramEditorViewModel(preview: preview))
+        _vm = StateObject(wrappedValue: LetterEditorViewModel(preview: preview))
         self.preview = preview
     }
-    init(idx: Int, logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>, preview: Bool = false) {
-        _vm = StateObject(wrappedValue: LogogramEditorViewModel(idx: idx, logoLanguage: logoLanguage, preview: preview))
+    init(idx: Int, alphaLanguage: SyncObject<AlphabetLanguage, AlphabetLanguageDB>, preview: Bool = false) {
+        _vm = StateObject(wrappedValue: LetterEditorViewModel(idx: idx, alphaLanguage: alphaLanguage, preview: preview))
         self.preview = preview
     }
     
     var body: some View {
-        let logogram = vm.logoLanguage.decoded.logograms[vm.idx]
+        let letter = vm.alphaLanguage.decoded.letters[vm.idx]
         
         Form {
             Section("Drawing") {
-                ScaleableDrawingView(drawing: logogram.drawing).scaledToFit()
+                ScaleableDrawingView(drawing: letter.drawing).scaledToFit()
                 NavigationLink {
-                    DrawingView(drawing: logogram.drawing, onSubmit: vm.onSubmit)
+                    DrawingView(drawing: letter.drawing, onSubmit: vm.onSubmit)
                 } label: {
                     Label("Edit drawing", systemImage: "paintbrush.pointed")
                 }
             }
             Section("Meaning") {
-                TextField("Meaning", text: $vm.logoLanguage.decoded.logograms[vm.idx].meaning)
-            }
-            Section("Semantic Class") {
-                
+                TextField("Meaning", text: $vm.alphaLanguage.decoded.letters[vm.idx].pronounciation)
             }
         }
         .toolbar {
@@ -61,10 +58,10 @@ struct LogogramEditorView: View {
     }
 }
 
-struct LogogramEditor_Previews: PreviewProvider {
+struct LetterEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogogramEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            LetterEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
         }
     }
 }

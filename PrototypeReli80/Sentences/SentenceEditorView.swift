@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct SentenceEditorView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var vm: SentenceEditorViewModel
     
     let preview: Bool
@@ -44,7 +45,7 @@ struct SentenceEditorView: View {
                         ScaleableDrawingView(drawing: logogram.drawing, border: true).scaledToFit()
                     }
                     .sheet(isPresented: $vm.editSheet, onDismiss: vm.refresh) {
-                        LogoSheetEditView(viewContext: vm.viewContext, sentence: vm.sentence, choosenIdx: idx, binding: $vm.editSheet)
+                        LogoSheetEditView(viewContext: vm.viewContext, sentence: $vm.sentence, choosenIdx: idx, binding: $vm.editSheet)
                     }
                 }
                 
@@ -57,10 +58,22 @@ struct SentenceEditorView: View {
                 }
                 .buttonStyle(.plain)
                 .sheet(isPresented: $vm.newSheet, onDismiss: vm.refresh) {
-                    LogoSheetNewView(viewContext: vm.viewContext, sentence: vm.sentence, binding: $vm.newSheet)
+                    LogoSheetNewView(viewContext: vm.viewContext, sentence: $vm.sentence, binding: $vm.newSheet)
                 }
             }
-        }.padding()
+        }
+        .toolbar {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Button {
+                    vm.save()
+                    dismiss()
+                } label: {
+                    Text("Save")
+                }
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .padding()
     }
 }
 
@@ -73,19 +86,19 @@ struct SentenceEditorView_Previews: PreviewProvider {
 }
 class LogoSheetViewModel: ObservableObject {
     @Published var viewContext: NSManagedObjectContext
-    @Published var sentence: SyncObject<LogographicSentence, LogographicSentenceDB>
+    @Binding var sentence: SyncObject<LogographicSentence, LogographicSentenceDB>
     @Binding var binding: Bool
     
-    init (viewContext: NSManagedObjectContext, sentence: SyncObject<LogographicSentence, LogographicSentenceDB>, binding: Binding<Bool>) {
+    init (viewContext: NSManagedObjectContext, sentence: Binding<SyncObject<LogographicSentence, LogographicSentenceDB>>, binding: Binding<Bool>) {
         self.viewContext = viewContext
-        self.sentence = sentence
+        self._sentence = sentence
         self._binding = binding
     }
 }
 struct LogoSheetEditView: View {
     @StateObject var vm: LogoSheetViewModel
     
-    init (viewContext: NSManagedObjectContext, sentence: SyncObject<LogographicSentence, LogographicSentenceDB>, choosenIdx: Int, binding: Binding<Bool>) {
+    init (viewContext: NSManagedObjectContext, sentence: Binding<SyncObject<LogographicSentence, LogographicSentenceDB>>, choosenIdx: Int, binding: Binding<Bool>) {
         _vm = StateObject(wrappedValue: LogoSheetViewModel(viewContext: viewContext, sentence: sentence, binding: binding))
         self.choosenIdx = choosenIdx
     }
@@ -100,7 +113,7 @@ struct LogoSheetEditView: View {
                         idx, logogram in
                         Button {
                             vm.sentence.decoded.sentence[idx] = logogram.copy()
-                            vm.sentence.saveManagedObject()
+//                            vm.sentence.saveManagedObject()
                             vm.binding = false
                         } label: {
                             Text("\(logogram.meaning)")
@@ -111,7 +124,7 @@ struct LogoSheetEditView: View {
             Section() {
                 Button {
                     vm.sentence.decoded.sentence.remove(at: choosenIdx)
-                    vm.sentence.saveManagedObject()
+//                    vm.sentence.saveManagedObject()
                     vm.binding = false
                 } label: {
                     Text("Delete").foregroundColor(.red)
@@ -123,7 +136,7 @@ struct LogoSheetEditView: View {
 struct LogoSheetNewView: View {
     @StateObject var vm: LogoSheetViewModel
 
-    init (viewContext: NSManagedObjectContext, sentence: SyncObject<LogographicSentence, LogographicSentenceDB>, binding: Binding<Bool>) {
+    init (viewContext: NSManagedObjectContext, sentence: Binding<SyncObject<LogographicSentence, LogographicSentenceDB>>, binding: Binding<Bool>) {
         _vm = StateObject(wrappedValue: LogoSheetViewModel(viewContext: viewContext, sentence: sentence, binding: binding))
     }
         
@@ -135,7 +148,7 @@ struct LogoSheetNewView: View {
                         idx, logogram in
                         Button {
                             vm.sentence.decoded.sentence.append(logogram.copy())
-                            vm.sentence.saveManagedObject()
+//                            vm.sentence.saveManagedObject()
                             vm.binding = false
                         } label: {
                             Text("\(logogram.meaning)")
