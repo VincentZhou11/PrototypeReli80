@@ -23,30 +23,41 @@ struct SentenceMenuView: View {
                     ForEach(vm.logoSentences) {
                         logoSentence in
                         NavigationLink {
-                            LogographicSentenceMiniView(sentence: logoSentence.decoded.sentence)
+
                         } label: {
-                            Text(logoSentence.decoded.id.uuidString)
+                            LogographicSentenceMiniView(sentence: logoSentence)
                         }
+//                        LogographicSentenceMiniView(sentence: logoSentence.decoded.sentence)
                     }
                     .onDelete(perform: vm.deleteItems)
                 }
             }
         }
+        .sheet(isPresented: $vm.sheetPresented) {
+            LanguageChooserView(logoLanguages: vm.logoLanguages, onSubmit: vm.onSubmit)
+        }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button{
-                    vm.refreshSentences()
+                    vm.hardRefreshSentences()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
                 Button{
                     vm.addItem()
                 } label: {
-                    Label("Add Item", systemImage: "plus")
+                    Label("Add Test Sentence", systemImage: "plus")
+                }
+                Button{
+                    vm.sheetPresented = true
+                } label: {
+                    Label("Add Sentence", systemImage: "plus.square")
                 }
                 EditButton()
+                
             }
         }
+        .onAppear(perform:vm.refresh)
         .navigationBarTitleDisplayMode(.inline)
     }
 }
@@ -60,10 +71,49 @@ struct SentenceMenuView_Previews: PreviewProvider {
 }
 
 struct LogographicSentenceMiniView: View {
-    
-    var sentence: [Logogram]
+    var sentence: SyncObject<LogographicSentence, LogographicSentenceDB>
     
     var body: some View {
-        Text("Test")
+        let columns = [
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible()),
+            GridItem(.flexible())
+        ]
+        
+        VStack(alignment: .leading) {
+            Text("Language: \(sentence.decoded.language.name)")
+            LazyVGrid(columns: columns, spacing: 5) {
+                ForEach(sentence.decoded.sentence) {
+                    logogram in
+                    ScaleableDrawingView(drawing: logogram.drawing, border: false).scaledToFit()
+                }
+            }
+        }
+    }
+}
+struct LanguageChooserView: View {
+    var logoLanguages: [SyncObject<LogographicLanguage, LogographicLanguageDB>] = []
+    var onSubmit: (LogographicLanguage) -> ()
+    
+    var body: some View {
+        Form {
+            Section("Logographic languages") {
+                List {
+                    ForEach(logoLanguages) {
+                        logoLanguage in
+                        Button {
+                            onSubmit(logoLanguage.decoded)
+                        } label: {
+                            Text(logoLanguage.decoded.name)
+                        }
+                    }
+                }
+            }
+        }
     }
 }

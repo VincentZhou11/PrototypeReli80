@@ -35,7 +35,7 @@ struct LanguageMenuView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button{
-                    vm.refresh()
+                    vm.hardRefresh()
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
@@ -47,6 +47,7 @@ struct LanguageMenuView: View {
                 EditButton()
             }
         }
+        .onAppear(perform: vm.refresh)
         .navigationBarTitleDisplayMode(.inline)
     }
 }

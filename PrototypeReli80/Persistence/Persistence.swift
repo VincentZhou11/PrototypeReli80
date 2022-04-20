@@ -14,7 +14,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         // Languages
-        for i in 0..<10 {
+        for i in 0..<3 {
             do {
                 let newLanguage = LogographicLanguageDB(context: viewContext)
                 
@@ -36,14 +36,21 @@ struct PersistenceController {
             }
         }
         // Sentences
-        for i in 0..<10 {
+        for i in 0..<3 {
             do {
                 let newSentence = LogographicSentenceDB(context: viewContext)
-                let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
-                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
-                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
+                let logograms = [
+                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
+                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
+                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 3"),
+                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 4"),
+                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 5"),
+                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 6"),
+                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 7"),
+                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 8")
+                ]
                 
-                let newSentenceStruct = LogographicSentence(sentence: logograms)
+                let newSentenceStruct = LogographicSentence(sentence: logograms, language: .example)
                 newSentence.data = try JSONEncoder().encode(newSentenceStruct)
                 newSentence.timestamp = newSentenceStruct.timestamp
                 newSentence.id = newSentenceStruct.id

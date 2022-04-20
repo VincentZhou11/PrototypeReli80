@@ -14,7 +14,7 @@ public class LogogramEditorViewModel: ObservableObject {
     private var viewContext: NSManagedObjectContext
     
     @Published var logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>
-    @Published var logogram: Logogram
+//    @Published var logogram: Logogram
     @Published var idx: Int
     
     init(preview: Bool = false) {
@@ -24,7 +24,7 @@ public class LogogramEditorViewModel: ObservableObject {
         let newLogogram = Logogram(drawing: .example, meaning: "Something")
         
         self.idx = 0
-        self.logogram = newLogogram
+//        self.logogram = newLogogram
         let logograms = [newLogogram]
         
         let decoded = LogographicLanguage(name: "New Language", logograms: logograms)
@@ -46,7 +46,7 @@ public class LogogramEditorViewModel: ObservableObject {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
                 
-        self.logogram = logoLanguage.decoded.logograms[idx]
+//        self.logogram = logoLanguage.decoded.logograms[idx]
         self.logoLanguage = logoLanguage
         self.idx = idx
         
@@ -55,13 +55,13 @@ public class LogogramEditorViewModel: ObservableObject {
     
     func onSubmit(newDrawing: Drawing) {
         logoLanguage.decoded.logograms[idx].drawing = newDrawing
-        logogram = logoLanguage.decoded.logograms[idx]
+//        logogram = logoLanguage.decoded.logograms[idx]
 //        save()
     }
     func save() {
         logoLanguage.saveManagedObject()
     }
-    func delete() {
-        
-    }
+//    func delete() {
+//        
+//    }
 }

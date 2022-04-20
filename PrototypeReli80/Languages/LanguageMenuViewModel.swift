@@ -21,10 +21,14 @@ public class LanguageMenuViewModel: ObservableObject {
         else {viewContext = PersistenceController.shared.container.viewContext}
         
         
-        refresh()
+        hardRefresh()
     }
-    
     func refresh() {
+        for index in logoLanguages.indices {
+            logoLanguages[index].updateDecoded()
+        }
+    }
+    func hardRefresh() {
         // https://agiokas.medium.com/core-data-and-async-await-thread-safe-f96b6dbbb7c4
         Task {
             do {
@@ -63,7 +67,7 @@ public class LanguageMenuViewModel: ObservableObject {
         }
     }
     
-    func createLanguage() {
+    func createDummyLanguage() {
         do {
             let newLanguage = LogographicLanguageDB(context: viewContext)
             let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
@@ -80,13 +84,27 @@ public class LanguageMenuViewModel: ObservableObject {
         }
     }
     
+    func createLanguage() {
+        do {
+            let newLanguage = LogographicLanguageDB(context: viewContext)
+            // Create empty language
+            let newLanguageStruct = LogographicLanguage(name: "New Language", logograms: [])
+            newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
+            newLanguage.timestamp = newLanguageStruct.timestamp
+            newLanguage.id = newLanguageStruct.id
+        }
+        catch {
+            print("Failed to encode JSON \(error.localizedDescription)")
+        }
+    }
+    
     func addItem() {
         withAnimation {
 //            createDummyLanguage()
             createLanguage()
             save()
         }
-        refresh()
+        hardRefresh()
     }
 
     func deleteItems(offsets: IndexSet) {
@@ -94,7 +112,7 @@ public class LanguageMenuViewModel: ObservableObject {
             offsets.map { logoLanguages[$0].managedObject }.forEach(viewContext.delete)
             save()
         }
-        refresh()
+        hardRefresh()
     }
 }
 

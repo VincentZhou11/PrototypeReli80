@@ -61,9 +61,15 @@ public class LanguageEditorViewModel: ObservableObject {
     // Change the decoded struct
     func addItem() {
         withAnimation {
-            let newLogogram = Logogram(drawing: Drawing.example, meaning: "Test Logogram")
+//            let newLogogram = Logogram(drawing: Drawing.example, meaning: "Test Logogram")
+//            logoLanguage.decoded.logograms.append(newLogogram)
+            var newDrawing = Drawing.empty
+            newDrawing.color = .red
+            
+            let newLogogram = Logogram(drawing: newDrawing, meaning: "New Logogram")
             logoLanguage.decoded.logograms.append(newLogogram)
-            save()
+            
+//            save()
         }
 //        refresh()
     }
@@ -71,7 +77,7 @@ public class LanguageEditorViewModel: ObservableObject {
     func deleteItems(offsets: IndexSet) {
         withAnimation {
             offsets.map{logoLanguage.decoded.logograms.remove(at: $0)}
-            save()
+//            save()
         }
 //        refresh()
     }

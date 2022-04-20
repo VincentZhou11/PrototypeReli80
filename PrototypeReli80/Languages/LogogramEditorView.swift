@@ -23,18 +23,19 @@ struct LogogramEditorView: View {
     }
     
     var body: some View {
+        let logogram = vm.logoLanguage.decoded.logograms[vm.idx]
+        
         Form {
             Section("Drawing") {
-                ScaleableDrawingView(drawing: vm.logogram.drawing).scaledToFit()
+                ScaleableDrawingView(drawing: logogram.drawing).scaledToFit()
                 NavigationLink {
-                    DrawingView(drawing: vm.logogram.drawing, onSubmit: vm.onSubmit)
+                    DrawingView(drawing: logogram.drawing, onSubmit: vm.onSubmit)
                 } label: {
                     Label("Edit drawing", systemImage: "paintbrush.pointed")
                 }
             }
             Section("Meaning") {
-//                Text(vm.logogram.meaning)
-                TextField("Meaning", text: $vm.logogram.meaning)
+                TextField("Meaning", text: $vm.logoLanguage.decoded.logograms[vm.idx].meaning)
             }
             Section("Semantic Class") {
                 
@@ -42,12 +43,12 @@ struct LogogramEditorView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    vm.delete()
-                    dismiss()
-                } label: {
-                    Image(systemName: "trash").foregroundColor(.red)
-                }
+//                Button {
+//                    vm.delete()
+//                    dismiss()
+//                } label: {
+//                    Image(systemName: "trash").foregroundColor(.red)
+//                }
                 Button {
                     vm.save()
                     dismiss()

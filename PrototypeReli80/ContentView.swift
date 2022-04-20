@@ -14,6 +14,11 @@ struct ContentView: View {
                 Label("Drawing Test", systemImage: "pencil")
             }
             NavigationView {
+                SentenceMenuView()
+            }.tabItem {
+                Label("Sentence Menu", systemImage: "doc.on.doc")
+            }
+            NavigationView {
                 LanguageMenuView()
             }.tabItem {
                 Label("Language Menu", systemImage: "gear")

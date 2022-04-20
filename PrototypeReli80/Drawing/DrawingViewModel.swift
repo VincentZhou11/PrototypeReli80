@@ -46,6 +46,6 @@ public class DrawingViewModel: ObservableObject {
         }
     }
     
-    func delete() {
-    }
+//    func delete() {
+//    }
 }

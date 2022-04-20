@@ -39,12 +39,12 @@ struct DrawingView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button {
-                    vm.delete()
-                    dismiss()
-                } label: {
-                    Image(systemName: "trash").foregroundColor(.red)
-                }
+//                Button {
+//                    vm.delete()
+//                    dismiss()
+//                } label: {
+//                    Image(systemName: "trash").foregroundColor(.red)
+//                }
                 Button {
                     vm.submit()
                     dismiss()

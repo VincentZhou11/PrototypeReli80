@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct LanguageEditorView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var vm: LanguageEditorViewModel
     
     let preview: Bool
@@ -22,7 +23,11 @@ struct LanguageEditorView: View {
     
     var body: some View {
         Form {
-            Section {
+            Section("Name") {
+                TextField("Language Name", text: $vm.logoLanguage.decoded.name)
+            }
+            
+            Section("Logograms") {
                 List {
                     ForEachWithIndex(vm.logoLanguage.decoded.logograms) {
                         idx, logogram in
@@ -36,14 +41,18 @@ struct LanguageEditorView: View {
             }
         }
         .toolbar {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                EditButton()
-            }
-            ToolbarItem {
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button{
                     vm.addItem()
                 } label: {
                     Label("Add Item", systemImage: "plus")
+                }
+                EditButton()
+                Button {
+                    vm.save()
+                    dismiss()
+                } label: {
+                    Text("Save")
                 }
             }
         }
