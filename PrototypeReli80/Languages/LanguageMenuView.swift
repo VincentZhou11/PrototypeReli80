@@ -33,7 +33,7 @@ struct LanguageMenuView: View {
                             Text(logoLanguage.decoded.name)
                         }
                     }
-                    .onDelete(perform: vm.deleteAlphas)
+                    .onDelete(perform: vm.deleteLogos)
                 }
             }
             Section("Alphabet Languages") {
