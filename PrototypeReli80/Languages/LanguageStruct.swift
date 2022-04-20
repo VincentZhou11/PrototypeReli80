@@ -8,20 +8,15 @@
 import Foundation
 import CoreData
 
-
-//struct DecodedWithManagedObject<E,F>: Identifiable {
-//    var id: UUID
-//    var decoded: E
-//    var managedObject: F
-//}
-
-
-
-struct LogographicLanguage: Identifiable, Codable {
+struct LogographicLanguage: Identifiable, Codable, Morphemes {
     var id = UUID()
     var timestamp = Date()
     var name: String
     var logograms: [Logogram]
+    
+    var morphemes: [Logogram] {
+        logograms
+    }
 }
 extension LogographicLanguage {
     static var example: LogographicLanguage {
@@ -29,10 +24,17 @@ extension LogographicLanguage {
     }
 }
 
-struct Logogram: Identifiable, Codable {
+struct Logogram: Identifiable, Codable, Morpheme {
     var id = UUID()
     var drawing: Drawing
     var meaning: String
+    
+    var morphemeMeaning: String {
+        meaning
+    }
+    var morpheneDrawing: [Drawing] {
+        [drawing]
+    }
 }
 extension Logogram {
     static var example: Logogram {
