@@ -35,5 +35,5 @@ protocol MorphemeSentence: Identifiable, Codable {
     
     
     var sentence: [MorphemeType] {get set}
-    var language: MorphemesType {get}
+    var language: MorphemesType {get set}
 }

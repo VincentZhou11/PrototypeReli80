@@ -118,7 +118,7 @@ struct GenericSentenceMiniView<GenericSentence: MorphemeSentence, GenericSentenc
             LazyVGrid(columns: columns, spacing: 5) {
                 ForEach(sentence.decoded.sentence) {
                     morpheme in
-                    MorphemeView(morpheme: morpheme, border: false)
+                    MorphemeView(morpheme: morpheme, border: false, height: 20)
                         .scaledToFill().padding(.bottom, 1).overlay(alignment: .bottom) {
                             Rectangle().frame(height: 1)
                         }

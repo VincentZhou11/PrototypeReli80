@@ -10,20 +10,21 @@ import SwiftUI
 struct MorphemeView<T: Morpheme>: View {
     var morpheme: T
     var border: Bool
+    var height: Double
     
-    init(morpheme: T, border: Bool) {
-        self.morpheme = morpheme
-        self.border = border
-    }
+//    init(morpheme: T, border: Bool) {
+//        self.morpheme = morpheme
+//        self.border = border
+//    }
     var body: some View {
         HStack(spacing: 0) {
             ForEach(morpheme.morpheneDrawing) {
                 drawing in
                 
                 ScaleableDrawingView(drawing: drawing, border: border)
-                    .scaledToFill()
+                    .scaledToFit()
             }
-        }
+        }.frame(height: height)
     }
 }
 
@@ -46,7 +47,7 @@ struct MorphemeView_Previews: PreviewProvider {
         LazyVGrid(columns: columns, spacing:5) {
                 ForEach(morphemes) {
                     morpheme in
-                    MorphemeView(morpheme: morpheme, border: false)
+                    MorphemeView(morpheme: morpheme, border: false, height: 20)
                         .scaledToFit()
                 }
 //            Spacer()

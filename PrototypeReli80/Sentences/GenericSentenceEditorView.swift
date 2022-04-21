@@ -37,24 +37,24 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
             Form {
                 Section("Language") {
                     Text("Type: \(String(describing: type(of: vm.sentence.decoded.language)))")
-                    Picker("Language", selection: $vm.languageIdx) {
-                        Text("Cached: \(vm.sentence.decoded.language.name)")
+                    Picker("Language", selection: $vm.idx) {
+                        Text("(Cached) \(vm.sentence.decoded.language.name)")
                             .tag(-1)
                         ForEachWithIndex(vm.languages) { idx, language in
-                            Text(language.name)
+                            Text("\((idx == vm.languageIdx) ? "(Matching)" : "") \(language.name)")
                                 .tag(idx)
                         }
                     }
                     Button {
-                        
+                        vm.setLanguage()
                     } label: {
                         Label("Refresh Language", systemImage: "arrow.clockwise")
-                    }
+                    }.disabled(!(vm.idx >= 0 && vm.languageIdx == vm.idx))
                     Button {
-                        
+                        vm.setLanguage()
                     } label: {
                         Label("Set Language", systemImage: "wrench")
-                    }
+                    }.disabled(!(vm.idx >= 0 && vm.languageIdx != vm.idx))
                 }
             }.tabItem {
                 Label("Configure Sentence", systemImage: "gear")
@@ -67,7 +67,7 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
                         Button {
                             vm.editSheet = true
                         } label: {
-                            MorphemeView(morpheme: morpheme, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
+                            MorphemeView(morpheme: morpheme, border: false, height: 20).scaledToFit().padding(2).overlay(alignment:.bottom) {
                                 Rectangle().frame(height: 1)
                             }
                         }

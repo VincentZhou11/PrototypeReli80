@@ -20,6 +20,7 @@ class GenericSentenceEditorViewModel<GenericSentence: MorphemeSentence, GenericS
     
     @Published var languages: [GenericSentence.MorphemesType] = []
     @Published var languageIdx = -1
+    @Published var idx = -1
     
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
@@ -37,21 +38,21 @@ class GenericSentenceEditorViewModel<GenericSentence: MorphemeSentence, GenericS
         }
         self.sentence = SyncObject<GenericSentence, GenericSentenceDB>(decoded: decoded as! GenericSentence, managedObject: managedObject, viewContext: viewContext)
         save()
-        hardRefreshLanguages()
+        getLanguages()
     }
     init(sentence: SyncObject<GenericSentence, GenericSentenceDB>, preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
         else {viewContext = PersistenceController.shared.container.viewContext}
         
         self.sentence = sentence
-        hardRefreshLanguages()
+        getLanguages()
     }
     func refresh() {
         withAnimation {
             sentence.updateDecoded()
         }
     }
-    func hardRefreshLanguages() {
+    func getLanguages() {
         Task {
             do {
                 let fetchRequest = LogographicLanguageDB.fetchRequest()
@@ -77,6 +78,7 @@ class GenericSentenceEditorViewModel<GenericSentence: MorphemeSentence, GenericS
                     // Use hash values b/c structs are different
                     if let idx = self.languages.firstIndex(where: { $0.id == self.sentence.decoded.language.id }) {
                         self.languageIdx = idx
+                        self.idx = idx
                     }
                 }
                 
@@ -110,6 +112,7 @@ class GenericSentenceEditorViewModel<GenericSentence: MorphemeSentence, GenericS
                     }
                     if let idx = self.languages.firstIndex(where: { $0.id == self.sentence.decoded.language.id }) {
                         self.languageIdx = idx
+                        self.idx = idx
                     }
                 }
                 
@@ -122,6 +125,10 @@ class GenericSentenceEditorViewModel<GenericSentence: MorphemeSentence, GenericS
     func save() {
         sentence.saveManagedObject()
     }
-    
+    func setLanguage() {
+        withAnimation {
+            sentence.decoded.language = languages[idx]
+        }
+    }
 }
 
