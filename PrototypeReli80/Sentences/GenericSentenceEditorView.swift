@@ -34,19 +34,19 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
 //            GridItem(.flexible())
         ]
         
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 5) {
             Text("Language: \(vm.sentence.decoded.language.name)")
-            LazyVGrid(columns: columns, spacing:5) {
+            LazyVGrid(columns: columns) {
                 ForEachWithIndex(vm.sentence.decoded.sentence) {
                     idx, morpheme in
                     Button {
                         vm.editSheet = true
                     } label: {
-                        MorphemeView(morpheme: morpheme, border: false)
-                            .scaledToFit().padding(2).overlay {
-                                Rectangle().scaledToFill().foregroundColor(.clear).border(.black, width: 1)
-                            }
+                        MorphemeView(morpheme: morpheme, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
+                            Rectangle().frame(height: 1)
+                        }
                     }
+                    .scaledToFit()
                     .sheet(isPresented: $vm.editSheet) {
                         GenericSheetEditView(viewContext: vm.viewContext, sentence: $vm.sentence, choosenIdx: idx, binding: $vm.editSheet)
                     }
@@ -55,15 +55,13 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
                 Button {
                     vm.newSheet = true
                 } label : {
-                    Rectangle().foregroundColor(.clear).scaledToFit().border(.blue, width: 2.0).overlay(alignment:.center) {
-                        Image(systemName: "plus").font(.largeTitle).foregroundColor(.blue)
-                    }
+                    Image(systemName: "plus.square").font(.title)
                 }
-                .buttonStyle(.plain)
                 .sheet(isPresented: $vm.newSheet) {
                     GenericSheetNewView(viewContext: vm.viewContext, sentence: $vm.sentence, binding: $vm.newSheet)
                 }
             }
+            Spacer()
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {

@@ -18,6 +18,12 @@ extension LogographicSentence {
         let logograms = [
             Logogram.example,
             Logogram.example,
+            Logogram.example,
+            Logogram.example,
+            Logogram.example,
+            Logogram.example,
+            Logogram.example,
+            Logogram.example,
             Logogram.example
         ]
         return LogographicSentence(sentence: logograms, language: .example)
@@ -32,6 +38,8 @@ struct AlphabetSentence: Identifiable, Codable, MorphemeSentence {
 extension AlphabetSentence {
     static var example: AlphabetSentence {
         let words = [
+            Word.example,
+            Word.example,
             Word.example,
             Word.example,
             Word.example

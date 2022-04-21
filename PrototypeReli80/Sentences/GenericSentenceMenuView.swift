@@ -119,7 +119,9 @@ struct GenericSentenceMiniView<GenericSentence: MorphemeSentence, GenericSentenc
                 ForEach(sentence.decoded.sentence) {
                     morpheme in
                     MorphemeView(morpheme: morpheme, border: false)
-                        .scaledToFit()
+                        .scaledToFill().padding(.bottom, 1).overlay(alignment: .bottom) {
+                            Rectangle().frame(height: 1)
+                        }
                 }
             }
         }

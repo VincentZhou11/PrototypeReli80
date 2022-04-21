@@ -49,8 +49,7 @@ struct PersistenceController {
                 fatalError("Failed to encode JSON \(error.localizedDescription)")
             }
             do {
-                var newLanguageStruct = AlphabetLanguage.example
-                var newSentenceStruct = AlphabetSentence(sentence: [newLanguageStruct.morphemes.first!], language: newLanguageStruct)
+                var newSentenceStruct = AlphabetSentence.example
                 let newSentence = AlphabetSentenceDB(context: viewContext)
                 newSentence.data = try JSONEncoder().encode(newSentenceStruct)
                 newSentence.timestamp = newSentenceStruct.timestamp
