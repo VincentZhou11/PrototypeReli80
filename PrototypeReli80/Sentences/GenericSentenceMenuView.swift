@@ -42,7 +42,7 @@ struct GenericSentenceMenuView: View {
                             GenericSentenceMiniView(sentence: alphaSentence, cols: 4)
                         }
                     }
-                    .onDelete(perform: vm.deleteLogos)
+                    .onDelete(perform: vm.deleteAlphas)
                 }
             }
         }
