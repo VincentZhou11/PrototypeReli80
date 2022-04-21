@@ -27,11 +27,13 @@ public class LanguageMenuViewModel: ObservableObject {
         hardAlphaRefresh()
     }
     func refresh() {
-        for index in logoLanguages.indices {
-            logoLanguages[index].updateDecoded()
-        }
-        for index in alphaLanguages.indices {
-            alphaLanguages[index].updateDecoded()
+        DispatchQueue.main.async {
+            for index in self.logoLanguages.indices {
+                self.logoLanguages[index].updateDecoded()
+            }
+            for index in self.alphaLanguages.indices {
+                self.alphaLanguages[index].updateDecoded()
+            }
         }
     }
     func hardAlphaRefresh() {
@@ -93,11 +95,13 @@ public class LanguageMenuViewModel: ObservableObject {
         }
     }
     func save() {
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            print("Language Menu save error \(nsError), \(nsError.userInfo)")
+        viewContext.perform {
+            do {
+                try self.viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                print("Language Menu save error \(nsError), \(nsError.userInfo)")
+            }
         }
     }
     

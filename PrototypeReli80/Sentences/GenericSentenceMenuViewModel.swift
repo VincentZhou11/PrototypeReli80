@@ -29,11 +29,13 @@ public class GenericSentenceMenuViewModel:ObservableObject {
         hardRefreshSentences()
     }
     func refresh() {
-        for index in logoSentences.indices {
-            logoSentences[index].updateDecoded()
-        }
-        for index in alphaSentences.indices {
-            alphaSentences[index].updateDecoded()
+        DispatchQueue.main.async {
+            for index in self.logoSentences.indices {
+                self.logoSentences[index].updateDecoded()
+            }
+            for index in self.alphaSentences.indices {
+                self.alphaSentences[index].updateDecoded()
+            }
         }
         hardRefreshLanguages()
     }
@@ -147,11 +149,13 @@ public class GenericSentenceMenuViewModel:ObservableObject {
     }
     
     func save() {
-        do {
-            try viewContext.save()
-        } catch {
-            let nsError = error as NSError
-            print("Language Menu save error \(nsError), \(nsError.userInfo)")
+        viewContext.perform {
+            do {
+                try self.viewContext.save()
+            } catch {
+                let nsError = error as NSError
+                print("Language Menu save error \(nsError), \(nsError.userInfo)")
+            }
         }
     }
     func onAlphaSubmit(choosenLanguage: AlphabetLanguage) {
