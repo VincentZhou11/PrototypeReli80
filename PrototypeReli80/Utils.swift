@@ -67,9 +67,29 @@ struct SyncObject<E, F>: Identifiable where F: NSManagedObject, F:JSONData, E:Id
 }
 protocol JSONData {
     var jsonData: Data {get set}
+    var jsonId: UUID {get set}
+    var jsonTimestamp: Date {get set}
 }
 
 extension LogographicLanguageDB: JSONData {
+    var jsonId: UUID {
+        get {
+            self.id!
+        }
+        set {
+            self.id = newValue
+        }
+    }
+    
+    var jsonTimestamp: Date {
+        get {
+            self.timestamp!
+        }
+        set {
+            self.timestamp = newValue
+        }
+    }
+    
     var jsonData: Data {
         get {
             self.data!
@@ -80,6 +100,23 @@ extension LogographicLanguageDB: JSONData {
     }
 }
 extension AlphabetLanguageDB: JSONData {
+    var jsonId: UUID {
+        get {
+            self.id!
+        }
+        set {
+            self.id = newValue
+        }
+    }
+    
+    var jsonTimestamp: Date {
+        get {
+            self.timestamp!
+        }
+        set {
+            self.timestamp = newValue
+        }
+    }
     var jsonData: Data {
         get {
             self.data!
@@ -90,6 +127,77 @@ extension AlphabetLanguageDB: JSONData {
     }
 }
 extension LogographicSentenceDB: JSONData {
+    var jsonId: UUID {
+        get {
+            self.id!
+        }
+        set {
+            self.id = newValue
+        }
+    }
+    
+    var jsonTimestamp: Date {
+        get {
+            self.timestamp!
+        }
+        set {
+            self.timestamp = newValue
+        }
+    }
+    var jsonData: Data {
+        get {
+            self.data!
+        }
+        set {
+            self.data = newValue
+        }
+    }
+}
+extension AlphabetSentenceDB: JSONData {
+    var jsonId: UUID {
+        get {
+            self.id!
+        }
+        set {
+            self.id = newValue
+        }
+    }
+    
+    var jsonTimestamp: Date {
+        get {
+            self.timestamp!
+        }
+        set {
+            self.timestamp = newValue
+        }
+    }
+    var jsonData: Data {
+        get {
+            self.data!
+        }
+        set {
+            self.data = newValue
+        }
+    }
+}
+extension TempGenericSentenceDB: JSONData {
+    var jsonId: UUID {
+        get {
+            self.id!
+        }
+        set {
+            self.id = newValue
+        }
+    }
+    
+    var jsonTimestamp: Date {
+        get {
+            self.timestamp!
+        }
+        set {
+            self.timestamp = newValue
+        }
+    }
     var jsonData: Data {
         get {
             self.data!

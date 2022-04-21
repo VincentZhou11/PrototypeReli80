@@ -29,7 +29,7 @@ struct LogoLanguageEditorView: View {
             
             Section("Logograms") {
                 List {
-                    ForEachWithIndex(vm.logoLanguage.decoded.logograms) {
+                    ForEachWithIndex(vm.logoLanguage.decoded.morphemes) {
                         idx, logogram in
                         NavigationLink {
                             LogogramEditorView(idx: idx, logoLanguage: vm.logoLanguage, preview: preview)

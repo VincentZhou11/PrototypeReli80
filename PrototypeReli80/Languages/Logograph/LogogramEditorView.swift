@@ -23,7 +23,7 @@ struct LogogramEditorView: View {
     }
     
     var body: some View {
-        let logogram = vm.logoLanguage.decoded.logograms[vm.idx]
+        let logogram = vm.logoLanguage.decoded.morphemes[vm.idx]
         
         Form {
             Section("Drawing") {
@@ -35,7 +35,7 @@ struct LogogramEditorView: View {
                 }
             }
             Section("Meaning") {
-                TextField("Meaning", text: $vm.logoLanguage.decoded.logograms[vm.idx].meaning)
+                TextField("Meaning", text: $vm.logoLanguage.decoded.morphemes[vm.idx].meaning)
             }
             Section("Semantic Class") {
                 

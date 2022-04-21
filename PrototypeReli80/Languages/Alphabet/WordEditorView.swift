@@ -39,13 +39,13 @@ struct WordEditorView: View {
         TabView {
             Form {
                 Section("Meaning") {
-                    TextField("Meaning", text: $vm.alphaLanguage.decoded.words[vm.idx].meaning)
+                    TextField("Meaning", text: $vm.alphaLanguage.decoded.morphemes[vm.idx].meaning)
                 }
             }.tabItem {
                 Label("Configure", systemImage: "gear")
             }
             LazyVGrid(columns: columns, spacing: 5) {
-                ForEachWithIndex(vm.alphaLanguage.decoded.words[vm.idx].spelling) {
+                ForEachWithIndex(vm.alphaLanguage.decoded.morphemes[vm.idx].spelling) {
                     idx, letter in
                     Button {
                         vm.editSheet = true
@@ -125,7 +125,7 @@ struct WordSheetEditView: View {
                     ForEachWithIndex(vm.alphaLanguage.decoded.letters) {
                         idx, letter in
                         Button {
-                            vm.alphaLanguage.decoded.words[vm.wordIdx].spelling[choosenIdx] = letter.copy()
+                            vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling[choosenIdx] = letter.copy()
 //                            vm.alphaLanguage.saveManagedObject()
                             vm.binding = false
                         } label: {
@@ -136,7 +136,7 @@ struct WordSheetEditView: View {
             }
             Section() {
                 Button {
-                    vm.alphaLanguage.decoded.words[vm.wordIdx].spelling.remove(at: choosenIdx)
+                    vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling.remove(at: choosenIdx)
 //                    vm.alphaLanguage.saveManagedObject()
                     vm.binding = false
                 } label: {
@@ -160,7 +160,7 @@ struct WordSheetNewView: View {
                     ForEachWithIndex(vm.alphaLanguage.decoded.letters) {
                         idx, letter in
                         Button {
-                            vm.alphaLanguage.decoded.words[vm.wordIdx].spelling.append(letter.copy())
+                            vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling.append(letter.copy())
 //                            vm.alphaLanguage.saveManagedObject()
                             vm.binding = false
                         } label: {

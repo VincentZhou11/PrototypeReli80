@@ -13,18 +13,14 @@ struct LogographicLanguage: Identifiable, Codable, Morphemes {
     var id = UUID()
     var timestamp = Date()
     var name: String
-    var logograms: [Logogram]
-    
-    var morphemes: [Logogram] {
-        logograms
-    }
+    var morphemes: [Logogram]
 }
 extension LogographicLanguage {
     static var example: LogographicLanguage {
-        LogographicLanguage(name: "Example Language", logograms: [.example, .example, .example])
+        LogographicLanguage(name: "Example Language", morphemes: [.example, .example, .example])
     }
     static var new: LogographicLanguage {
-        LogographicLanguage(name: "New Language", logograms: [])
+        LogographicLanguage(name: "New Language", morphemes: [])
     }
 }
 struct Logogram: Identifiable, Codable, Morpheme {
@@ -38,36 +34,35 @@ struct Logogram: Identifiable, Codable, Morpheme {
     var morpheneDrawing: [Drawing] {
         [drawing]
     }
+    func copy() -> Logogram {
+        Logogram(drawing: drawing, meaning: meaning)
+    }
 }
 extension Logogram {
     static var example: Logogram {
         Logogram(drawing: Drawing.example, meaning: "Example Logogram")
     }
-    func copy() -> Logogram {
-        Logogram(drawing: drawing, meaning: meaning)
-    }
 }
 // Alphabet
 struct AlphabetLanguage: Identifiable, Codable, Morphemes {
+    
     var id = UUID()
     var timestamp = Date()
     var name: String
-    var words: [Word]
+    var morphemes: [Word]
     var letters: [Letter]
-    
-    var morphemes: [Word] {
-        words
-    }
 }
 extension AlphabetLanguage {
     static var example:AlphabetLanguage {
-        AlphabetLanguage(name: "Example Language", words: [.example], letters: [.example, .example, .example])
+        AlphabetLanguage(name: "Example Language", morphemes: [.example], letters: [.example, .example, .example])
     }
     static var new:AlphabetLanguage {
-        AlphabetLanguage(name: "New Language", words: [], letters: [])
+        AlphabetLanguage(name: "New Language", morphemes: [], letters: [])
     }
 }
 struct Word: Identifiable, Codable, Morpheme {
+    
+    
     var id = UUID()
     var meaning: String
     var spelling: [Letter]
@@ -78,6 +73,9 @@ struct Word: Identifiable, Codable, Morpheme {
     var morpheneDrawing: [Drawing] {
         let drawings = spelling.map {$0.drawing}
         return drawings
+    }
+    func copy() -> Word {
+        Word(meaning: meaning, spelling: spelling)
     }
 }
 extension Word {

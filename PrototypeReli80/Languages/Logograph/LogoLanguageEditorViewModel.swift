@@ -63,7 +63,7 @@ public class LogoLanguageEditorViewModel: ObservableObject {
             newDrawing.color = .red
             
             let newLogogram = Logogram(drawing: newDrawing, meaning: "New Logogram")
-            logoLanguage.decoded.logograms.append(newLogogram)
+            logoLanguage.decoded.morphemes.append(newLogogram)
             
 //            save()
         }
@@ -72,7 +72,7 @@ public class LogoLanguageEditorViewModel: ObservableObject {
 
     func deleteItems(offsets: IndexSet) {
         withAnimation {
-            let _ = offsets.map{logoLanguage.decoded.logograms.remove(at: $0)}
+            let _ = offsets.map{logoLanguage.decoded.morphemes.remove(at: $0)}
 //            save()
         }
 //        refresh()

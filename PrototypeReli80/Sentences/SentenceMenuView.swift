@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct SentenceMenuView: View {
     @StateObject var vm: SentenceMenuViewModel

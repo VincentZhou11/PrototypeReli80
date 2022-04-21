@@ -5,6 +5,11 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
+    <entity name="AlphabetSentenceDB" representedClassName="AlphabetSentenceDB" syncable="YES" codeGenerationType="class">
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <entity name="LogographicLanguageDB" representedClassName="LogographicLanguageDB" syncable="YES" codeGenerationType="class">
         <attribute name="data" attributeType="Binary"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
@@ -15,9 +20,16 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
     </entity>
+    <entity name="TempGenericSentenceDB" representedClassName="TempGenericSentenceDB" syncable="YES" codeGenerationType="class">
+        <attribute name="data" attributeType="Binary"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
     <elements>
+        <element name="AlphabetLanguageDB" positionX="-9" positionY="72" width="128" height="74"/>
         <element name="LogographicLanguageDB" positionX="-9" positionY="36" width="128" height="74"/>
         <element name="LogographicSentenceDB" positionX="-9" positionY="63" width="128" height="74"/>
-        <element name="AlphabetLanguageDB" positionX="-9" positionY="72" width="128" height="74"/>
+        <element name="TempGenericSentenceDB" positionX="0" positionY="90" width="128" height="74"/>
+        <element name="AlphabetSentenceDB" positionX="18" positionY="108" width="128" height="74"/>
     </elements>
 </model>

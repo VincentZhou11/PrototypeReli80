@@ -59,7 +59,7 @@ public class LanguageMenuViewModel: ObservableObject {
                 }
             }
             catch {
-                print(error.localizedDescription)
+                print("Alpha refersh error: \(error.localizedDescription)")
             }
         }
     }
@@ -88,7 +88,7 @@ public class LanguageMenuViewModel: ObservableObject {
                 }
             }
             catch {
-                print(error.localizedDescription)
+                print("Logo refersh error: \(error.localizedDescription)")
             }
         }
     }
@@ -176,6 +176,22 @@ public class LanguageMenuViewModel: ObservableObject {
             save()
         }
         hardLogoRefresh()
+    }
+    
+    func destroyDB(preview: Bool) {
+        let persistentContainer = preview ? PersistenceController.preview.container : PersistenceController.shared.container
+        
+        guard let url = persistentContainer.persistentStoreDescriptions.first?.url else { return }
+            
+        let persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
+
+        do {
+            try persistentStoreCoordinator.destroyPersistentStore(at:url, ofType: NSSQLiteStoreType, options: nil)
+            try persistentStoreCoordinator.addPersistentStore(ofType: NSSQLiteStoreType, configurationName: nil, at: url, options: nil)
+        }
+        catch {
+            print("Attempted to clear persistent store: " + error.localizedDescription)
+        }
     }
 }
 

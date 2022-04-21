@@ -16,17 +16,8 @@ struct PersistenceController {
         // Languages
         for i in 0..<3 {
             do {
+                let newLanguageStruct = LogographicLanguage.example
                 let newLanguage = LogographicLanguageDB(context: viewContext)
-                
-                let logograms = [Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
-                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
-                                 Logogram(drawing: Drawing.example, meaning: "Test Logogram 3")]
-                
-                let newLanguageStruct = LogographicLanguage(
-                    name: "Test Language \(i)",
-                    logograms: logograms
-                )
-                
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
                 newLanguage.id = newLanguageStruct.id
@@ -35,14 +26,8 @@ struct PersistenceController {
                 fatalError("Failed to encode JSON \(error.localizedDescription)")
             }
             do {
+                let newLanguageStruct = AlphabetLanguage.example
                 let newLanguage = AlphabetLanguageDB(context: viewContext)
-                
-                let newLanguageStruct = AlphabetLanguage(
-                    name: "Test Language \(i)",
-                    words: [.example],
-                    letters: [.example]
-                )
-                
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
                 newLanguage.id = newLanguageStruct.id
@@ -54,19 +39,19 @@ struct PersistenceController {
         // Sentences
         for i in 0..<3 {
             do {
+                let newSentenceStruct = LogographicSentence.example
                 let newSentence = LogographicSentenceDB(context: viewContext)
-                let logograms = [
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 3"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 4"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 5"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 6"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 7"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 8")
-                ]
-                
-                let newSentenceStruct = LogographicSentence(sentence: logograms, language: .example)
+                newSentence.data = try JSONEncoder().encode(newSentenceStruct)
+                newSentence.timestamp = newSentenceStruct.timestamp
+                newSentence.id = newSentenceStruct.id
+            }
+            catch {
+                fatalError("Failed to encode JSON \(error.localizedDescription)")
+            }
+            do {
+                var newLanguageStruct = AlphabetLanguage.example
+                var newSentenceStruct = AlphabetSentence(sentence: [newLanguageStruct.morphemes.first!], language: newLanguageStruct)
+                let newSentence = AlphabetSentenceDB(context: viewContext)
                 newSentence.data = try JSONEncoder().encode(newSentenceStruct)
                 newSentence.timestamp = newSentenceStruct.timestamp
                 newSentence.id = newSentenceStruct.id

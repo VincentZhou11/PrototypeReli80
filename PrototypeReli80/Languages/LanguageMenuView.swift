@@ -58,6 +58,13 @@ struct LanguageMenuView: View {
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Button{
+                    vm.destroyDB(preview: preview)
+                    vm.hardAlphaRefresh()
+                    vm.hardLogoRefresh()
+                } label: {
+                    Label("Destroy", systemImage: "trash")
+                }
+                Button{
                     vm.hardAlphaRefresh()
                     vm.hardLogoRefresh()
                 } label: {

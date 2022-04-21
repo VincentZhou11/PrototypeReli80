@@ -13,6 +13,12 @@ struct ContentView: View {
 //        NavigationView {
             TabView {
                 NavigationView {
+                    GenericSentenceMenuView()
+                }
+                .tabItem {
+                    Label("Generic Sentence Menu", systemImage: "doc.on.doc")
+                }
+                NavigationView {
                     SentenceMenuView()
                 }
                 .tabItem {

@@ -69,7 +69,7 @@ struct Drawing: Identifiable, Codable {
 }
 extension Drawing {
     static var example: Drawing {
-        Drawing(strokes: [Stroke(points: [CGPoint(x: 300, y: 300), CGPoint(x: 80, y: 20), CGPoint(x: 20, y: 200), CGPoint(x: 25, y: 25)])], color: .red, lineWidth: 3.0)
+        Drawing(strokes: [Stroke(points: [CGPoint(x: 300, y: 300), CGPoint(x: 80, y: 20), CGPoint(x: 20, y: 200), CGPoint(x: 25, y: 25)])], color: .red, lineWidth: 10.0)
     }
     static var empty: Drawing {
         Drawing(strokes: [], color: .black, lineWidth: 3.0)

@@ -33,7 +33,7 @@ struct AlphaLanguageEditorView: View {
                     Label("Add Word", systemImage: "plus")
                 }
                 List {
-                    ForEachWithIndex(vm.alphaLanguage.decoded.words) {
+                    ForEachWithIndex(vm.alphaLanguage.decoded.morphemes) {
                         idx, word in
                         NavigationLink {
                             WordEditorView(idx: idx, alphaLanguage: vm.alphaLanguage)

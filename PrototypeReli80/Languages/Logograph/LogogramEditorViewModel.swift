@@ -50,7 +50,7 @@ public class LogogramEditorViewModel: ObservableObject {
     }
     
     func onSubmit(newDrawing: Drawing) {
-        logoLanguage.decoded.logograms[idx].drawing = newDrawing
+        logoLanguage.decoded.morphemes[idx].drawing = newDrawing
 //        logogram = logoLanguage.decoded.logograms[idx]
 //        save()
     }

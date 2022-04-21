@@ -60,7 +60,7 @@ public class AlphaLanguageEditorViewModel: ObservableObject {
     func addWord() {
         withAnimation {
             let newLogogram = Word(meaning: "New Word", spelling: [])
-            alphaLanguage.decoded.words.append(newLogogram)
+            alphaLanguage.decoded.morphemes.append(newLogogram)
             
 //            save()
         }
@@ -69,7 +69,7 @@ public class AlphaLanguageEditorViewModel: ObservableObject {
 
     func deleteWords(offsets: IndexSet) {
         withAnimation {
-            let _ = offsets.map{alphaLanguage.decoded.words.remove(at: $0)}
+            let _ = offsets.map{alphaLanguage.decoded.morphemes.remove(at: $0)}
 //            save()
         }
 //        refresh()
