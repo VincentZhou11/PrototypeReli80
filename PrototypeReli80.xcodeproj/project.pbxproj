@@ -240,6 +240,17 @@
 			path = Alphabet;
 			sourceTree = "<group>";
 		};
+		E1E13B822811269B00C91A04 /* DeprecatedSentenceCode */ = {
+			isa = PBXGroup;
+			children = (
+				E1FE83A0280F5735000AFAAD /* SentenceMenuView.swift */,
+				E1FE83A2280F5745000AFAAD /* SentenceMenuViewModel.swift */,
+				E1E13B62280F97D200C91A04 /* LogoSentenceEditorView.swift */,
+				E1E13B64280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift */,
+			);
+			path = DeprecatedSentenceCode;
+			sourceTree = "<group>";
+		};
 		E1FE8383280E280C000AFAAD /* Languages */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,13 +280,10 @@
 				E1E13B7D281101A400C91A04 /* GenericSentenceMenuViewModel.swift */,
 				E1E13B762810B98F00C91A04 /* GenericSentenceEditorView.swift */,
 				E1E13B782810B99E00C91A04 /* GenericSentenceEditorViewModel.swift */,
-				E1FE83A0280F5735000AFAAD /* SentenceMenuView.swift */,
-				E1FE83A2280F5745000AFAAD /* SentenceMenuViewModel.swift */,
-				E1E13B62280F97D200C91A04 /* LogoSentenceEditorView.swift */,
-				E1E13B64280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift */,
 				E1E13B7F2811152F00C91A04 /* MorphemeView.swift */,
 				E1FE83A4280F5876000AFAAD /* SentenceStructs.swift */,
 				E1E13B66280FB49E00C91A04 /* SentenceUtils.swift */,
+				E1E13B822811269B00C91A04 /* DeprecatedSentenceCode */,
 			);
 			path = Sentences;
 			sourceTree = "<group>";

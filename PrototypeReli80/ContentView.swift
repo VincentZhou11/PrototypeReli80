@@ -16,12 +16,6 @@ struct ContentView: View {
                     GenericSentenceMenuView()
                 }
                 .tabItem {
-                    Label("Generic Sentence Menu", systemImage: "doc.on.doc")
-                }
-                NavigationView {
-                    SentenceMenuView()
-                }
-                .tabItem {
                     Label("Sentence Menu", systemImage: "doc.on.doc")
                 }
                 NavigationView {
