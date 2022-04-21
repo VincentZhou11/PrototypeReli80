@@ -13,7 +13,7 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        // Languages
+        // Languages and Sentences preview examples
         for i in 0..<3 {
             do {
                 let newLanguageStruct = LogographicLanguage.example
@@ -21,6 +21,13 @@ struct PersistenceController {
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
                 newLanguage.id = newLanguageStruct.id
+                
+                var newSentenceStruct = LogographicSentence.example
+                newSentenceStruct.language = newLanguageStruct
+                let newSentence = LogographicSentenceDB(context: viewContext)
+                newSentence.data = try JSONEncoder().encode(newSentenceStruct)
+                newSentence.timestamp = newSentenceStruct.timestamp
+                newSentence.id = newSentenceStruct.id
             }
             catch {
                 fatalError("Failed to encode JSON \(error.localizedDescription)")
@@ -31,25 +38,9 @@ struct PersistenceController {
                 newLanguage.data = try JSONEncoder().encode(newLanguageStruct)
                 newLanguage.timestamp = newLanguageStruct.timestamp
                 newLanguage.id = newLanguageStruct.id
-            }
-            catch {
-                fatalError("Failed to encode JSON \(error.localizedDescription)")
-            }
-        }
-        // Sentences
-        for i in 0..<3 {
-            do {
-                let newSentenceStruct = LogographicSentence.example
-                let newSentence = LogographicSentenceDB(context: viewContext)
-                newSentence.data = try JSONEncoder().encode(newSentenceStruct)
-                newSentence.timestamp = newSentenceStruct.timestamp
-                newSentence.id = newSentenceStruct.id
-            }
-            catch {
-                fatalError("Failed to encode JSON \(error.localizedDescription)")
-            }
-            do {
+                
                 var newSentenceStruct = AlphabetSentence.example
+                newSentenceStruct.language = newLanguageStruct
                 let newSentence = AlphabetSentenceDB(context: viewContext)
                 newSentence.data = try JSONEncoder().encode(newSentenceStruct)
                 newSentence.timestamp = newSentenceStruct.timestamp

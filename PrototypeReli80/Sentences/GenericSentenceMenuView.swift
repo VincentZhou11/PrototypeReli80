@@ -137,9 +137,9 @@ struct GenericLanguageChooserView: View {
                     ForEach(vm.logoLanguages) {
                         logoLanguage in
                         Button {
-                            vm.onLogoSubmit(choosenLanguage: logoLanguage.decoded)
+                            vm.onLogoSubmit(choosenLanguage: logoLanguage)
                         } label: {
-                            Text(logoLanguage.decoded.name)
+                            Text(logoLanguage.name)
                         }
                     }
                 }
@@ -149,9 +149,9 @@ struct GenericLanguageChooserView: View {
                     ForEach(vm.alphaLanguages) {
                         alphaLanguage in
                         Button {
-                            vm.onAlphaSubmit(choosenLanguage: alphaLanguage.decoded)
+                            vm.onAlphaSubmit(choosenLanguage: alphaLanguage)
                         } label: {
-                            Text(alphaLanguage.decoded.name)
+                            Text(alphaLanguage.name)
                         }
                     }
                 }

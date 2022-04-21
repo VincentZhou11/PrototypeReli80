@@ -45,7 +45,6 @@ extension Logogram {
 }
 // Alphabet
 struct AlphabetLanguage: Identifiable, Codable, Morphemes {
-    
     var id = UUID()
     var timestamp = Date()
     var name: String

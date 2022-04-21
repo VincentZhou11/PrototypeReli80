@@ -33,35 +33,63 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
 //            GridItem(.flexible()),
 //            GridItem(.flexible())
         ]
-        
-        VStack(alignment: .leading, spacing: 5) {
-            Text("Language: \(vm.sentence.decoded.language.name)")
-            LazyVGrid(columns: columns) {
-                ForEachWithIndex(vm.sentence.decoded.sentence) {
-                    idx, morpheme in
-                    Button {
-                        vm.editSheet = true
-                    } label: {
-                        MorphemeView(morpheme: morpheme, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
-                            Rectangle().frame(height: 1)
+        TabView {
+            Form {
+                Section("Language") {
+                    Text("Type: \(String(describing: type(of: vm.sentence.decoded.language)))")
+                    Picker("Language", selection: $vm.languageIdx) {
+                        Text("Cached: \(vm.sentence.decoded.language.name)")
+                            .tag(-1)
+                        ForEachWithIndex(vm.languages) { idx, language in
+                            Text(language.name)
+                                .tag(idx)
                         }
                     }
-                    .scaledToFit()
-                    .sheet(isPresented: $vm.editSheet) {
-                        GenericSheetEditView(viewContext: vm.viewContext, sentence: $vm.sentence, choosenIdx: idx, binding: $vm.editSheet)
+                    Button {
+                        
+                    } label: {
+                        Label("Refresh Language", systemImage: "arrow.clockwise")
+                    }
+                    Button {
+                        
+                    } label: {
+                        Label("Set Language", systemImage: "wrench")
                     }
                 }
-                
-                Button {
-                    vm.newSheet = true
-                } label : {
-                    Image(systemName: "plus.square").font(.title)
-                }
-                .sheet(isPresented: $vm.newSheet) {
-                    GenericSheetNewView(viewContext: vm.viewContext, sentence: $vm.sentence, binding: $vm.newSheet)
-                }
+            }.tabItem {
+                Label("Configure Sentence", systemImage: "gear")
             }
-            Spacer()
+            VStack(alignment: .leading, spacing: 5) {
+                Text("Language: \(vm.sentence.decoded.language.name)")
+                LazyVGrid(columns: columns) {
+                    ForEachWithIndex(vm.sentence.decoded.sentence) {
+                        idx, morpheme in
+                        Button {
+                            vm.editSheet = true
+                        } label: {
+                            MorphemeView(morpheme: morpheme, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
+                                Rectangle().frame(height: 1)
+                            }
+                        }
+                        .scaledToFit()
+                        .sheet(isPresented: $vm.editSheet) {
+                            GenericSheetEditView(viewContext: vm.viewContext, sentence: $vm.sentence, choosenIdx: idx, binding: $vm.editSheet)
+                        }
+                    }
+                    
+                    Button {
+                        vm.newSheet = true
+                    } label : {
+                        Image(systemName: "plus.square").font(.title)
+                    }
+                    .sheet(isPresented: $vm.newSheet) {
+                        GenericSheetNewView(viewContext: vm.viewContext, sentence: $vm.sentence, binding: $vm.newSheet)
+                    }
+                }
+                Spacer()
+            }.tabItem {
+                Label("Assemble Sentence", systemImage: "doc.zipper")
+            }.padding()
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -74,7 +102,6 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
             }
         }
         .navigationBarTitleDisplayMode(.inline)
-        .padding()
     }
 }
 

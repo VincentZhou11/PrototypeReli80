@@ -11,10 +11,10 @@ import SwiftUI
 
 public class GenericSentenceMenuViewModel:ObservableObject {
     @Published var logoSentences: [SyncObject<LogographicSentence, LogographicSentenceDB>] = []
-    @Published var logoLanguages: [SyncObject<LogographicLanguage, LogographicLanguageDB>] = []
+    @Published var logoLanguages: [LogographicLanguage] = []
     
     @Published var alphaSentences: [SyncObject<AlphabetSentence, AlphabetSentenceDB>] = []
-    @Published var alphaLanguages: [SyncObject<AlphabetLanguage, AlphabetLanguageDB>] = []
+    @Published var alphaLanguages: [AlphabetLanguage] = []
     
     @Published var sheetPresented = false
     
@@ -105,10 +105,9 @@ public class GenericSentenceMenuViewModel:ObservableObject {
                     try self.viewContext.fetch(fetchRequest)
                 }
                 
-                let structs: [SyncObject<LogographicLanguage, LogographicLanguageDB>] = try fetchedLogoLanguages.compactMap {
+                let structs: [LogographicLanguage] = try fetchedLogoLanguages.compactMap {
                     managedObjectLanguage in
-                    let decodedLanguage = try JSONDecoder().decode(LogographicLanguage.self, from: managedObjectLanguage.data!)
-                    return SyncObject(decoded: decodedLanguage, managedObject: managedObjectLanguage, viewContext: viewContext)
+                    try JSONDecoder().decode(LogographicLanguage.self, from: managedObjectLanguage.data!)
                 }
                 DispatchQueue.main.async {
                     withAnimation {
@@ -130,10 +129,9 @@ public class GenericSentenceMenuViewModel:ObservableObject {
                     try self.viewContext.fetch(fetchRequest)
                 }
                 
-                let structs: [SyncObject<AlphabetLanguage, AlphabetLanguageDB>] = try fetchedLogoLanguages.compactMap {
+                let structs: [AlphabetLanguage] = try fetchedLogoLanguages.compactMap {
                     managedObjectLanguage in
-                    let decodedLanguage = try JSONDecoder().decode(AlphabetLanguage.self, from: managedObjectLanguage.data!)
-                    return SyncObject(decoded: decodedLanguage, managedObject: managedObjectLanguage, viewContext: viewContext)
+                    try JSONDecoder().decode(AlphabetLanguage.self, from: managedObjectLanguage.data!)
                 }
                 DispatchQueue.main.async {
                     withAnimation {
