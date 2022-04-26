@@ -71,7 +71,8 @@ struct GenericSentenceMenuView: View {
             }
         }
         .onAppear(perform:vm.refresh)
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Sentences")
+//        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -118,7 +119,7 @@ struct GenericSentenceMiniView<GenericSentence: MorphemeSentence, GenericSentenc
             LazyVGrid(columns: columns, spacing: 5) {
                 ForEach(sentence.decoded.sentence) {
                     morpheme in
-                    MorphemeView(morpheme: morpheme, border: false, height: 20)
+                    MorphemeView(morpheme: morpheme, border: false)
                         .scaledToFill().padding(.bottom, 1).overlay(alignment: .bottom) {
                             Rectangle().frame(height: 1)
                         }

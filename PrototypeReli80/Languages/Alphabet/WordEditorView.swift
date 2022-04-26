@@ -50,7 +50,9 @@ struct WordEditorView: View {
                     Button {
                         vm.editSheet = true
                     } label: {
-                        ScaleableDrawingView(drawing: letter.drawing, border: true).scaledToFit()
+                        ScaleableDrawingView(drawing: letter.drawing, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
+                            Rectangle().frame(height: 1)
+                        }
                     }
                     .sheet(isPresented: $vm.editSheet) {
                         WordSheetEditView(wordIdx: vm.idx, choosenIdx: idx, alphaLanguage: $vm.alphaLanguage, binding: $vm.editSheet)
@@ -60,11 +62,12 @@ struct WordEditorView: View {
                 Button {
                     vm.newSheet = true
                 } label : {
-                    Rectangle().foregroundColor(.clear).scaledToFit().border(.blue, width: 2.0).overlay(alignment:.center) {
-                        Image(systemName: "plus").font(.largeTitle).foregroundColor(.blue)
-                    }
+//                    Rectangle().foregroundColor(.clear).scaledToFit().border(.blue, width: 2.0).overlay(alignment:.center) {
+//                        Image(systemName: "plus").font(.largeTitle).foregroundColor(.blue)
+//                    }
+                    Image(systemName: "plus.square").resizable().font(Font.title.weight(.ultraLight)).scaledToFit()
                 }
-                .buttonStyle(.plain)
+//                .buttonStyle(.plain)
                 .sheet(isPresented: $vm.newSheet) {
                     WordSheetNewView(wordIdx: vm.idx, alphaLanguage: $vm.alphaLanguage, binding: $vm.newSheet)
                 }
@@ -125,9 +128,11 @@ struct WordSheetEditView: View {
                     ForEachWithIndex(vm.alphaLanguage.decoded.letters) {
                         idx, letter in
                         Button {
-                            vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling[choosenIdx] = letter.copy()
-//                            vm.alphaLanguage.saveManagedObject()
-                            vm.binding = false
+                            withAnimation {
+                                vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling[choosenIdx] = letter.copy()
+    //                            vm.alphaLanguage.saveManagedObject()
+                                vm.binding = false
+                            }
                         } label: {
                             Text("\(letter.pronounciation)")
                         }
@@ -136,9 +141,11 @@ struct WordSheetEditView: View {
             }
             Section() {
                 Button {
-                    vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling.remove(at: choosenIdx)
-//                    vm.alphaLanguage.saveManagedObject()
-                    vm.binding = false
+                    withAnimation {
+                        vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling.remove(at: choosenIdx)
+    //                    vm.alphaLanguage.saveManagedObject()
+                        vm.binding = false
+                    }
                 } label: {
                     Text("Delete").foregroundColor(.red)
                 }
@@ -160,9 +167,11 @@ struct WordSheetNewView: View {
                     ForEachWithIndex(vm.alphaLanguage.decoded.letters) {
                         idx, letter in
                         Button {
-                            vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling.append(letter.copy())
-//                            vm.alphaLanguage.saveManagedObject()
-                            vm.binding = false
+                            withAnimation {
+                                vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling.append(letter.copy())
+    //                            vm.alphaLanguage.saveManagedObject()
+                                vm.binding = false
+                            }
                         } label: {
                             Text("\(letter.pronounciation)")
                         }

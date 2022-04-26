@@ -21,6 +21,7 @@ class GenericSentenceEditorViewModel<GenericSentence: MorphemeSentence, GenericS
     @Published var languages: [GenericSentence.MorphemesType] = []
     @Published var languageIdx = -1
     @Published var idx = -1
+    @Published var morphemeIdx = -1
     
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}

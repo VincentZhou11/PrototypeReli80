@@ -74,7 +74,8 @@ struct LanguageMenuView: View {
             }
         }
         .onAppear(perform: vm.refresh)
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Languages")
+//        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

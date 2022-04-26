@@ -66,15 +66,19 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
                         idx, morpheme in
                         Button {
                             vm.editSheet = true
+                            vm.morphemeIdx = idx
                         } label: {
-                            MorphemeView(morpheme: morpheme, border: false, height: 20).scaledToFit().padding(2).overlay(alignment:.bottom) {
-                                Rectangle().frame(height: 1)
+                            MorphemeView(morpheme: morpheme, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
+                                VStack {
+                                    Rectangle().frame(height: 1)
+                                    Text("\(idx)")
+                                }
                             }
                         }
                         .scaledToFit()
-                        .sheet(isPresented: $vm.editSheet) {
-                            GenericSheetEditView(viewContext: vm.viewContext, sentence: $vm.sentence, choosenIdx: idx, binding: $vm.editSheet)
-                        }
+                    }
+                    .sheet(isPresented: $vm.editSheet) {
+                        GenericSheetEditView(viewContext: vm.viewContext, sentence: $vm.sentence, choosenIdx: vm.morphemeIdx, binding: $vm.editSheet)
                     }
                     
                     Button {
@@ -135,14 +139,17 @@ struct GenericSheetEditView<GenericSentence: MorphemeSentence, GenericSentenceDB
     
     var body: some View {
         Form {
+            Text("\(choosenIdx)")
             Section("Morphemes") {
                 List {
-                    ForEachWithIndex(vm.sentence.decoded.language.morphemes) {
-                        idx, morpheme in
+                    ForEach(vm.sentence.decoded.language.morphemes) {
+                        morpheme in
                         Button {
-                            vm.sentence.decoded.sentence[idx] = morpheme.copy() as! GenericSentence.MorphemeType
-//                            vm.sentence.saveManagedObject()
-                            vm.binding = false
+                            withAnimation {
+                                vm.sentence.decoded.sentence[choosenIdx] = morpheme.copy() as! GenericSentence.MorphemeType
+    //                            vm.sentence.saveManagedObject()
+                                vm.binding = false
+                            }
                         } label: {
                             Text("\(morpheme.morphemeMeaning)")
                         }
@@ -151,9 +158,11 @@ struct GenericSheetEditView<GenericSentence: MorphemeSentence, GenericSentenceDB
             }
             Section() {
                 Button {
-                    vm.sentence.decoded.sentence.remove(at: choosenIdx)
-//                    vm.sentence.saveManagedObject()
-                    vm.binding = false
+                    withAnimation {
+                        vm.sentence.decoded.sentence.remove(at: choosenIdx)
+    //                    vm.sentence.saveManagedObject()
+                        vm.binding = false
+                    }
                 } label: {
                     Text("Delete").foregroundColor(.red)
                 }
@@ -172,12 +181,14 @@ struct GenericSheetNewView<GenericSentence: MorphemeSentence, GenericSentenceDB:
         Form {
             Section("Morphemes") {
                 List {
-                    ForEachWithIndex(vm.sentence.decoded.language.morphemes) {
-                        idx, morpheme in
+                    ForEach(vm.sentence.decoded.language.morphemes) {
+                        morpheme in
                         Button {
-                            vm.sentence.decoded.sentence.append(morpheme.copy() as! GenericSentence.MorphemeType)
-//                            vm.sentence.saveManagedObject()
-                            vm.binding = false
+                            withAnimation {
+                                vm.sentence.decoded.sentence.append(morpheme.copy() as! GenericSentence.MorphemeType)
+    //                            vm.sentence.saveManagedObject()
+                                vm.binding = false
+                            }
                         } label: {
                             Text("\(morpheme.morphemeMeaning)")
                         }
