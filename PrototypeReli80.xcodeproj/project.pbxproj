@@ -18,6 +18,8 @@
 		E18C0B8127FDEB680066F46A /* DrawingStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C0B8027FDEB680066F46A /* DrawingStructs.swift */; };
 		E18C0B8327FDF3350066F46A /* DrawingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C0B8227FDF3350066F46A /* DrawingViewModel.swift */; };
 		E18C0B8527FE4C200066F46A /* DrawingTestingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C0B8427FE4C200066F46A /* DrawingTestingView.swift */; };
+		E19D95A728188DC000079824 /* PhonemeChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19D95A528188DBF00079824 /* PhonemeChooserView.swift */; };
+		E19D95A828188DC000079824 /* PhonemeChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E19D95A628188DC000079824 /* PhonemeChooserViewModel.swift */; };
 		E1D67D67280260EB00C90065 /* ScaledDrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D67D66280260EB00C90065 /* ScaledDrawingView.swift */; };
 		E1D67D6A280263B400C90065 /* DrawingTestingSentenceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D67D69280263B400C90065 /* DrawingTestingSentenceView.swift */; };
 		E1E13B63280F97D200C91A04 /* LogoSentenceEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E13B62280F97D200C91A04 /* LogoSentenceEditorView.swift */; };
@@ -83,6 +85,8 @@
 		E18C0B8027FDEB680066F46A /* DrawingStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingStructs.swift; sourceTree = "<group>"; };
 		E18C0B8227FDF3350066F46A /* DrawingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModel.swift; sourceTree = "<group>"; };
 		E18C0B8427FE4C200066F46A /* DrawingTestingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTestingView.swift; sourceTree = "<group>"; };
+		E19D95A528188DBF00079824 /* PhonemeChooserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonemeChooserView.swift; sourceTree = "<group>"; };
+		E19D95A628188DC000079824 /* PhonemeChooserViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhonemeChooserViewModel.swift; sourceTree = "<group>"; };
 		E1D67D66280260EB00C90065 /* ScaledDrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScaledDrawingView.swift; sourceTree = "<group>"; };
 		E1D67D69280263B400C90065 /* DrawingTestingSentenceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingTestingSentenceView.swift; sourceTree = "<group>"; };
 		E1E13B62280F97D200C91A04 /* LogoSentenceEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoSentenceEditorView.swift; sourceTree = "<group>"; };
@@ -254,10 +258,12 @@
 		E1FE8383280E280C000AFAAD /* Languages */ = {
 			isa = PBXGroup;
 			children = (
-				E1FE8384280E2828000AFAAD /* LanguageMenuView.swift */,
-				E1FE8386280E2839000AFAAD /* LanguageMenuViewModel.swift */,
+				E19D95A528188DBF00079824 /* PhonemeChooserView.swift */,
+				E19D95A628188DC000079824 /* PhonemeChooserViewModel.swift */,
 				E1E13B68280FC49200C91A04 /* Logograph */,
 				E1E13B69280FC9B500C91A04 /* Alphabet */,
+				E1FE8384280E2828000AFAAD /* LanguageMenuView.swift */,
+				E1FE8386280E2839000AFAAD /* LanguageMenuViewModel.swift */,
 				E1FE8388280E3154000AFAAD /* LanguageStruct.swift */,
 				E1FE839B280F4330000AFAAD /* LanguageUtils.swift */,
 			);
@@ -439,6 +445,7 @@
 				E1E13B792810B99E00C91A04 /* GenericSentenceEditorViewModel.swift in Sources */,
 				E18C0B8327FDF3350066F46A /* DrawingViewModel.swift in Sources */,
 				E1E13B7E281101A400C91A04 /* GenericSentenceMenuViewModel.swift in Sources */,
+				E19D95A828188DC000079824 /* PhonemeChooserViewModel.swift in Sources */,
 				E1E13B802811152F00C91A04 /* MorphemeView.swift in Sources */,
 				E1E13B65280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift in Sources */,
 				E11454D427EFE96F0021CC32 /* PrototypeReli80App.swift in Sources */,
@@ -453,6 +460,7 @@
 				E1E13B71280FCD6F00C91A04 /* LetterEditorView.swift in Sources */,
 				E1FE8398280F3D51000AFAAD /* LogogramEditorView.swift in Sources */,
 				E1FE83A3280F5745000AFAAD /* SentenceMenuViewModel.swift in Sources */,
+				E19D95A728188DC000079824 /* PhonemeChooserView.swift in Sources */,
 				E1E13B6D280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift in Sources */,
 				E1FE8396280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld in Sources */,
 			);
