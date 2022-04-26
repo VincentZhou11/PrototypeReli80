@@ -34,12 +34,12 @@ struct LogogramEditorView: View {
                     Label("Edit drawing", systemImage: "paintbrush.pointed")
                 }
             }
-            Section("Meaning") {
+            Section("Properties") {
                 TextField("Meaning", text: $vm.logoLanguage.decoded.morphemes[vm.idx].meaning)
             }
-            Section("Semantic Class") {
-                
-            }
+//            Section("Semantic Class") {
+//                
+//            }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {

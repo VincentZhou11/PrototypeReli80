@@ -34,8 +34,8 @@ struct LetterEditorView: View {
                     Label("Edit drawing", systemImage: "paintbrush.pointed")
                 }
             }
-            Section("Meaning") {
-                TextField("Meaning", text: $vm.alphaLanguage.decoded.letters[vm.idx].pronounciation)
+            Section("Properties") {
+                TextField("Phoneme", text: $vm.alphaLanguage.decoded.letters[vm.idx].pronounciation)
             }
         }
         .toolbar {

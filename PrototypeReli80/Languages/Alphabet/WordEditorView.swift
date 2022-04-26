@@ -38,7 +38,7 @@ struct WordEditorView: View {
 
         TabView {
             Form {
-                Section("Meaning") {
+                Section("Properties") {
                     TextField("Meaning", text: $vm.alphaLanguage.decoded.morphemes[vm.idx].meaning)
                 }
             }.tabItem {
@@ -49,14 +49,16 @@ struct WordEditorView: View {
                     idx, letter in
                     Button {
                         vm.editSheet = true
+                        vm.wordIdx = idx
                     } label: {
                         ScaleableDrawingView(drawing: letter.drawing, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
                             Rectangle().frame(height: 1)
                         }
                     }
-                    .sheet(isPresented: $vm.editSheet) {
-                        WordSheetEditView(wordIdx: vm.idx, choosenIdx: idx, alphaLanguage: $vm.alphaLanguage, binding: $vm.editSheet)
-                    }
+                    
+                }
+                .sheet(isPresented: $vm.editSheet) {
+                    WordSheetEditView(wordIdx: vm.idx, choosenIdx: vm.wordIdx, alphaLanguage: $vm.alphaLanguage, binding: $vm.editSheet)
                 }
                 
                 Button {
@@ -65,7 +67,7 @@ struct WordEditorView: View {
 //                    Rectangle().foregroundColor(.clear).scaledToFit().border(.blue, width: 2.0).overlay(alignment:.center) {
 //                        Image(systemName: "plus").font(.largeTitle).foregroundColor(.blue)
 //                    }
-                    Image(systemName: "plus.square").resizable().font(Font.title.weight(.ultraLight)).scaledToFit()
+                    Image(systemName: "plus.square").font(Font.title.weight(.light))
                 }
 //                .buttonStyle(.plain)
                 .sheet(isPresented: $vm.newSheet) {
@@ -125,8 +127,8 @@ struct WordSheetEditView: View {
         Form {
             Section("Letters") {
                 List {
-                    ForEachWithIndex(vm.alphaLanguage.decoded.letters) {
-                        idx, letter in
+                    ForEach(vm.alphaLanguage.decoded.letters) {
+                        letter in
                         Button {
                             withAnimation {
                                 vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling[choosenIdx] = letter.copy()
@@ -164,8 +166,8 @@ struct WordSheetNewView: View {
         Form {
             Section("Letters") {
                 List {
-                    ForEachWithIndex(vm.alphaLanguage.decoded.letters) {
-                        idx, letter in
+                    ForEach(vm.alphaLanguage.decoded.letters) {
+                        letter in
                         Button {
                             withAnimation {
                                 vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling.append(letter.copy())

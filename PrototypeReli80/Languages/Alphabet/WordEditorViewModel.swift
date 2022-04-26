@@ -17,6 +17,7 @@ public class WordEditorViewModel: ObservableObject {
     @Published var newSheet = false
     
     @Published var idx: Int
+    @Published var wordIdx = -1
     
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}

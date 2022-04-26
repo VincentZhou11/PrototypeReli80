@@ -71,7 +71,7 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
                             MorphemeView(morpheme: morpheme, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
                                 VStack {
                                     Rectangle().frame(height: 1)
-                                    Text("\(idx)")
+//                                    Text("\(idx)")
                                 }
                             }
                         }
@@ -84,7 +84,7 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
                     Button {
                         vm.newSheet = true
                     } label : {
-                        Image(systemName: "plus.square").font(.title)
+                        Image(systemName: "plus.square").font(Font.title.weight(.light))
                     }
                     .sheet(isPresented: $vm.newSheet) {
                         GenericSheetNewView(viewContext: vm.viewContext, sentence: $vm.sentence, binding: $vm.newSheet)
@@ -139,7 +139,7 @@ struct GenericSheetEditView<GenericSentence: MorphemeSentence, GenericSentenceDB
     
     var body: some View {
         Form {
-            Text("\(choosenIdx)")
+//            Text("\(choosenIdx)")
             Section("Morphemes") {
                 List {
                     ForEach(vm.sentence.decoded.language.morphemes) {
