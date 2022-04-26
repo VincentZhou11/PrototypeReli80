@@ -35,7 +35,22 @@ struct LetterEditorView: View {
                 }
             }
             Section("Properties") {
-                TextField("Phoneme", text: $vm.alphaLanguage.decoded.letters[vm.idx].pronounciation)
+                HStack {
+                    Text("Phoneme")
+                    Divider()
+                    TextField("Phoneme", text: $vm.alphaLanguage.decoded.letters[vm.idx].pronounciation)
+                        .toolbar {
+                            ToolbarItemGroup(placement: .keyboard) {
+                                Button {
+                                    vm.phonemeSheet = true
+                                } label: {
+                                    Text("IPA")
+                                }
+                            }
+                        }
+                }.sheet(isPresented: $vm.phonemeSheet) {
+                    PhonemeChooserView()
+                }
             }
         }
         .toolbar {

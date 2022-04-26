@@ -16,6 +16,7 @@ public class LetterEditorViewModel: ObservableObject {
     @Published var alphaLanguage: SyncObject<AlphabetLanguage, AlphabetLanguageDB>
 //    @Published var logogram: Logogram
     @Published var idx: Int
+    @Published var phonemeSheet = false
     
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
