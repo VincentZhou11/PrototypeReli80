@@ -22,8 +22,22 @@ struct AlphaLanguageEditorView: View {
     
     var body: some View {
         Form {
-            Section("Name") {
-                TextField("Language Name", text: $vm.alphaLanguage.decoded.name)
+            GroupBox {
+                Text("Words: \(vm.alphaLanguage.decoded.morphemes.count)")
+                Text("Letters: \(vm.alphaLanguage.decoded.letters.count)")
+            } label: {
+                HStack {
+                    Image(systemName: "sum")
+                    Text("Stats")
+                }
+            }.groupBoxStyle(NoMarginGroupBox())
+            
+            Section("Properties") {
+                HStack {
+                    Text("Name")
+                    Divider()
+                    TextField("Script Name", text: $vm.alphaLanguage.decoded.name)
+                }
             }
             
             Section("Words") {
@@ -38,7 +52,13 @@ struct AlphaLanguageEditorView: View {
                         NavigationLink {
                             WordEditorView(idx: idx, alphaLanguage: vm.alphaLanguage)
                         } label: {
-                            Text("\(word.meaning)")
+                            HStack {
+                                Text("\(word.meaning): ")
+                                MorphemeView(morpheme: word, border: false)
+                                    .scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                                        Rectangle().frame(height: 1)
+                                    }.frame(height:20)
+                            }
                         }
                     }.onDelete(perform: vm.deleteWords)
                 }
@@ -56,7 +76,12 @@ struct AlphaLanguageEditorView: View {
                             LetterEditorView(idx: idx, alphaLanguage: vm.alphaLanguage, preview: preview)
 
                         } label: {
-                            Text("\(letter.pronounciation)")
+                            HStack {
+                                Text("\(letter.pronunciation): ")
+                                ScaleableDrawingView(drawing: letter.drawing, border: false).scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                                    Rectangle().frame(height: 1)
+                                }.frame(height:20)
+                            }
                         }
                     }.onDelete(perform: vm.deleteLetters)
                 }
@@ -73,7 +98,8 @@ struct AlphaLanguageEditorView: View {
                 }.disabled(vm.alphaLanguage.synced)
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Script Editor")
+//        .navigationBarTitleDisplayMode(.inline)
 //        .onAppear(perform: vm.refresh)
         .onReceive(vm.alphaLanguage.publisher) { output in
             vm.alphaLanguage = output
@@ -84,7 +110,7 @@ struct AlphaLanguageEditorView: View {
 struct AlphaLanguageEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            AlphaLanguageEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            AlphaLanguageEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).preferredColorScheme(.dark)
         }
     }
 }

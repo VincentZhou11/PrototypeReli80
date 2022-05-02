@@ -95,3 +95,14 @@ public struct LanguageUtils {
         "/ɪ̃/" : [["Port.": "linguiça"]],
     ]
 }
+struct NoMarginGroupBox: GroupBoxStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment:.leading) {
+            configuration.content
+        }
+        .padding([.bottom])
+        .padding(.top, 40)
+//        .background(RoundedRectangle(cornerRadius: 8))
+        .overlay(configuration.label.padding(.top, 5).font(.headline), alignment: .topLeading)
+    }
+}

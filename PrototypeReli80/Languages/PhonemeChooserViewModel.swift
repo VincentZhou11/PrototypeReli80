@@ -11,4 +11,16 @@ class PhonemeChooserViewModel: ObservableObject {
     @Published var text = ""
     @Published var popOver = false
     @Published var selectedInfoPhoneme = ""
+    
+    var submit: ((String) -> ())?
+    
+    init() {
+        submit = {
+            phoneme in
+            self.text += phoneme
+        }
+    }
+    init(onSubmit: @escaping (String) -> ()) {
+        submit = onSubmit
+    }
 }

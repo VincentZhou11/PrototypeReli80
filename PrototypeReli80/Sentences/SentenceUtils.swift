@@ -14,6 +14,7 @@ protocol Morpheme: Identifiable, Codable {
     
     var morphemeMeaning: String {get}
     var morpheneDrawing: [Drawing] {get}
+    var morphemePronunciation: String {get}
     
     func copy() -> Self
 }

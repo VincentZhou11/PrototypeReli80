@@ -11,7 +11,7 @@ import SwiftUI
 public class DrawingViewModel: ObservableObject {
     @Published var currentStroke: Stroke = Stroke(points: [])
     @Published var strokes: [Stroke] = []
-    @Published var color: Color = Color.black
+    @Published var color: Color = .primary
     @Published var lineWidth: CGFloat = 3.0
          
     var submitDelegate: ((Drawing) -> ())?

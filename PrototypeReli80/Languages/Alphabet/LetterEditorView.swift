@@ -38,7 +38,7 @@ struct LetterEditorView: View {
                 HStack {
                     Text("Phoneme")
                     Divider()
-                    TextField("Phoneme", text: $vm.alphaLanguage.decoded.letters[vm.idx].pronounciation)
+                    TextField("Phoneme", text: $vm.alphaLanguage.decoded.letters[vm.idx].pronunciation)
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
                                 Button {
@@ -49,7 +49,7 @@ struct LetterEditorView: View {
                             }
                         }
                 }.sheet(isPresented: $vm.phonemeSheet) {
-                    PhonemeChooserView()
+                    PhonemeChooserView(onSubmit: vm.phonemeOnSubmit)
                 }
             }
         }
@@ -69,7 +69,7 @@ struct LetterEditorView: View {
                 }.disabled(vm.alphaLanguage.synced)
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Letter Editor")
         .onReceive(vm.alphaLanguage.publisher) { output in
             vm.alphaLanguage = output
         }
@@ -79,7 +79,7 @@ struct LetterEditorView: View {
 struct LetterEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LetterEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            LetterEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).preferredColorScheme(.dark)
         }
     }
 }

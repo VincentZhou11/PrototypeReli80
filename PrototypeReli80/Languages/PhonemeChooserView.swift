@@ -15,6 +15,9 @@ struct PhonemeChooserView: View {
     init() {
         _vm = StateObject(wrappedValue: PhonemeChooserViewModel())
     }
+    init(onSubmit: @escaping (String) -> ()){
+        _vm = StateObject(wrappedValue: PhonemeChooserViewModel(onSubmit: onSubmit))
+    }
     
     var body: some View {
         ScrollView {
@@ -74,22 +77,19 @@ struct ConsonantView: View {
             ForEach(Array(LanguageUtils.consonants.keys), id: \.self) {
                 consonantKey in
                 Button {
-                    
+                    vm.submit?(consonantKey)
                 } label: {
                     Text(consonantKey).fontWeight(.light)
                 }
                 .modifier(PhonemeButtonStyle())
-                .highPriorityGesture(LongPressGesture(minimumDuration: 2).onEnded({ action in
+                //https://stackoverflow.com/questions/58284994/swiftui-how-to-handle-both-tap-long-press-of-button
+                .highPriorityGesture(TapGesture().onEnded({ () in
+                    vm.submit?(consonantKey)
+                }))
+                .simultaneousGesture(LongPressGesture().onEnded({ _ in
                     vm.popOver = true
                     vm.selectedInfoPhoneme = consonantKey
                 }))
-//                .buttonStyle(.plain).frame(width:45, height:25).background(.thickMaterial).cornerRadius(5)
-//                HStack {
-//                    ForEach(LanguageUtils.consonants[consonantKey]!, id: \.self) {
-//                        word in
-//                        Text(word)
-//                    }
-//                }
             }
         }
     }
@@ -103,12 +103,15 @@ struct VowelView: View {
             ForEach(Array(LanguageUtils.vowels.keys), id: \.self) {
                 vowelKey in
                 Button {
-
+                    vm.submit?(vowelKey)
                 } label: {
                     Text(vowelKey).fontWeight(.light)
                 }
                 .modifier(PhonemeButtonStyle())
-                .highPriorityGesture(LongPressGesture(minimumDuration: 2).onEnded({ action in
+                .highPriorityGesture(TapGesture().onEnded({ () in
+                    vm.submit?(vowelKey)
+                }))
+                .simultaneousGesture(LongPressGesture().onEnded({ _ in
                     vm.popOver = true
                     vm.selectedInfoPhoneme = vowelKey
                 }))
@@ -125,12 +128,15 @@ struct ForeignView: View {
             ForEach(Array(LanguageUtils.foreign.keys), id: \.self) {
                 foreignKey in
                 Button {
-
+                    vm.submit?(foreignKey)
                 } label: {
                     Text(foreignKey).fontWeight(.light)
                 }
                 .modifier(PhonemeButtonStyle())
-                .highPriorityGesture(LongPressGesture(minimumDuration: 2).onEnded({ action in
+                .highPriorityGesture(TapGesture().onEnded({ () in
+                    vm.submit?(foreignKey)
+                }))
+                .simultaneousGesture(LongPressGesture().onEnded({ _ in
                     vm.popOver = true
                     vm.selectedInfoPhoneme = foreignKey
                 }))
@@ -147,12 +153,15 @@ struct NasalView: View {
             ForEach(Array(LanguageUtils.nasalizedVowels.keys), id: \.self) {
                 nasalKey in
                 Button {
-
+                    vm.submit?(nasalKey)
                 } label: {
                     Text(nasalKey).fontWeight(.light)
                 }
                 .modifier(PhonemeButtonStyle())
-                .highPriorityGesture(LongPressGesture(minimumDuration: 2).onEnded({ action in
+                .highPriorityGesture(TapGesture().onEnded({ () in
+                    vm.submit?(nasalKey)
+                }))
+                .simultaneousGesture(LongPressGesture().onEnded({ _ in
                     vm.popOver = true
                     vm.selectedInfoPhoneme = nasalKey
                 }))

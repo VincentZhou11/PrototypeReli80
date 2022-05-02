@@ -24,9 +24,9 @@ struct ContentView: View {
                 .tabItem {
                     Label("Language Menu", systemImage: "gear")
                 }
-                DrawingTestingView().tabItem {
-                    Label("Drawing Test", systemImage: "pencil")
-                }
+//                DrawingTestingView().tabItem {
+//                    Label("Drawing Test", systemImage: "pencil")
+//                }
                 
             }
 //        }

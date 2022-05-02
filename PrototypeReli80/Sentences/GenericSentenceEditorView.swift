@@ -34,33 +34,9 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
 //            GridItem(.flexible())
         ]
         TabView {
-            Form {
-                Section("Language") {
-                    Text("Type: \(String(describing: type(of: vm.sentence.decoded.language)))")
-                    Picker("Language", selection: $vm.idx) {
-                        Text("(Cached) \(vm.sentence.decoded.language.name)")
-                            .tag(-1)
-                        ForEachWithIndex(vm.languages) { idx, language in
-                            Text("\((idx == vm.languageIdx) ? "(Matching)" : "") \(language.name)")
-                                .tag(idx)
-                        }
-                    }
-                    Button {
-                        vm.setLanguage()
-                    } label: {
-                        Label("Refresh Language", systemImage: "arrow.clockwise")
-                    }.disabled(!(vm.idx >= 0 && vm.languageIdx == vm.idx))
-                    Button {
-                        vm.setLanguage()
-                    } label: {
-                        Label("Set Language", systemImage: "wrench")
-                    }.disabled(!(vm.idx >= 0 && vm.languageIdx != vm.idx))
-                }
-            }.tabItem {
-                Label("Configure Sentence", systemImage: "gear")
-            }
+            
             VStack(alignment: .leading, spacing: 5) {
-                Text("Language: \(vm.sentence.decoded.language.name)")
+                Text("  \(vm.sentence.decoded.language.name)").font(.title).padding(.bottom)
                 LazyVGrid(columns: columns) {
                     ForEachWithIndex(vm.sentence.decoded.sentence) {
                         idx, morpheme in
@@ -68,10 +44,25 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
                             vm.editSheet = true
                             vm.morphemeIdx = idx
                         } label: {
-                            MorphemeView(morpheme: morpheme, border: false).scaledToFit().padding(2).overlay(alignment:.bottom) {
+                            GeometryReader { geometry in
                                 VStack {
-                                    Rectangle().frame(height: 1)
-//                                    Text("\(idx)")
+                                    MorphemeView(morpheme: morpheme, border: false)
+                                        .scaledToFit()
+                                        .padding(.bottom, 1)
+                                        .overlay(alignment:.bottom) {
+                                        VStack {
+                                            Rectangle().frame(height: 1)
+        //                                    Text("\(idx)")
+                                        }
+                                    }
+                                    Text("\(morpheme.morphemeMeaning)")
+                                        .font(.caption)
+//                                        .scaledToFit()
+                                        .frame(width:geometry.size.width)
+                                    Text("\(morpheme.morphemePronunciation)")
+//                                        .scaledToFit()
+                                        .font(.caption)
+                                        .frame(width:geometry.size.width)
                                 }
                             }
                         }
@@ -94,6 +85,31 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
             }.tabItem {
                 Label("Assemble Sentence", systemImage: "doc.zipper")
             }.padding()
+            Form {
+                Section("Script") {
+                    Text("Type: \(String(describing: type(of: vm.sentence.decoded.language)))")
+                    Picker("Script", selection: $vm.idx) {
+                        Text("(Cached) \(vm.sentence.decoded.language.name)")
+                            .tag(-1)
+                        ForEachWithIndex(vm.languages) { idx, language in
+                            Text("\((idx == vm.languageIdx) ? "(Matching)" : "") \(language.name)")
+                                .tag(idx)
+                        }
+                    }
+                    Button {
+                        vm.setLanguage()
+                    } label: {
+                        Label("Refresh Script", systemImage: "arrow.clockwise")
+                    }.disabled(!(vm.idx >= 0 && vm.languageIdx == vm.idx))
+                    Button {
+                        vm.setLanguage()
+                    } label: {
+                        Label("Set Script", systemImage: "wrench")
+                    }.disabled(!(vm.idx >= 0 && vm.languageIdx != vm.idx))
+                }
+            }.tabItem {
+                Label("Configure Sentence", systemImage: "gear")
+            }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -105,14 +121,14 @@ struct GenericSentenceEditorView<GenericSentence: MorphemeSentence, GenericSente
                 }.disabled(vm.sentence.synced)
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Sentence Editor")
     }
 }
 
 struct GenericSentenceEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            GenericSentenceEditorView<AlphabetSentence, AlphabetSentenceDB>(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            GenericSentenceEditorView<AlphabetSentence, AlphabetSentenceDB>(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).preferredColorScheme(.dark)
         }
     }
 }
@@ -140,7 +156,26 @@ struct GenericSheetEditView<GenericSentence: MorphemeSentence, GenericSentenceDB
     var body: some View {
         Form {
 //            Text("\(choosenIdx)")
-            Section("Morphemes") {
+            Section() {
+                MorphemeView(morpheme: vm.sentence.decoded.sentence[choosenIdx], border: false).scaledToFit()
+                    .padding(.bottom, 1).overlay(alignment: .bottom) {
+                    Rectangle().frame(height: 1)
+                }
+            }
+            Section("Properties") {
+                HStack {
+                    Text("Meaning")
+                    Divider()
+                    Text("\( vm.sentence.decoded.sentence[choosenIdx].morphemeMeaning)")
+                }
+                HStack {
+                    Text("Pronunciation")
+                    Divider()
+                    Text("\( vm.sentence.decoded.sentence[choosenIdx].morphemePronunciation)")
+                }
+                
+            }
+            Section("Replace With") {
                 List {
                     ForEach(vm.sentence.decoded.language.morphemes) {
                         morpheme in
@@ -151,7 +186,14 @@ struct GenericSheetEditView<GenericSentence: MorphemeSentence, GenericSentenceDB
                                 vm.binding = false
                             }
                         } label: {
-                            Text("\(morpheme.morphemeMeaning)")
+                            HStack {
+                                Text("\(morpheme.morphemeMeaning)")
+                                Divider()
+                                MorphemeView(morpheme: morpheme, border: false)
+                                    .scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                                        Rectangle().frame(height: 1)
+                                    }.frame(height:20)
+                            }
                         }
                     }
                 }
@@ -190,7 +232,14 @@ struct GenericSheetNewView<GenericSentence: MorphemeSentence, GenericSentenceDB:
                                 vm.binding = false
                             }
                         } label: {
-                            Text("\(morpheme.morphemeMeaning)")
+                            HStack {
+                                Text("\(morpheme.morphemeMeaning)")
+                                Divider()
+                                MorphemeView(morpheme: morpheme, border: false)
+                                    .scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                                        Rectangle().frame(height: 1)
+                                    }.frame(height:20)
+                            }
                         }
                     }
                 }

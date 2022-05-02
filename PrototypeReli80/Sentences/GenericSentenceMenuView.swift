@@ -56,11 +56,11 @@ struct GenericSentenceMenuView: View {
                 } label: {
                     Label("Refresh", systemImage: "arrow.clockwise")
                 }
-                Button{
-                    vm.addItem()
-                } label: {
-                    Label("Add Test Sentence", systemImage: "plus")
-                }
+//                Button{
+//                    vm.addItem()
+//                } label: {
+//                    Label("Add Test Sentence", systemImage: "plus")
+//                }
                 Button{
                     vm.sheetPresented = true
                 } label: {
@@ -79,7 +79,7 @@ struct GenericSentenceMenuView: View {
 struct GenericSentenceMenuView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            GenericSentenceMenuView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            GenericSentenceMenuView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).preferredColorScheme(.dark)
         }
     }
 }
@@ -115,14 +115,16 @@ struct GenericSentenceMiniView<GenericSentence: MorphemeSentence, GenericSentenc
         
         
         VStack(alignment: .leading) {
-            Text("Language: \(sentence.decoded.language.name)")
+            Text("\(sentence.decoded.language.name)").font(.headline)
             LazyVGrid(columns: columns, spacing: 5) {
                 ForEach(sentence.decoded.sentence) {
                     morpheme in
-                    MorphemeView(morpheme: morpheme, border: false)
-                        .scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
-                            Rectangle().frame(height: 1)
+                    VStack {
+                        MorphemeView(morpheme: morpheme, border: false)
+                            .scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                                Rectangle().frame(height: 1)
                         }
+                    }
                 }
             }
         }
@@ -133,7 +135,7 @@ struct GenericLanguageChooserView: View {
     
     var body: some View {
         Form {
-            Section("Logographic Languages") {
+            Section("Logographic Scripts") {
                 List {
                     ForEach(vm.logoLanguages) {
                         logoLanguage in
@@ -145,7 +147,7 @@ struct GenericLanguageChooserView: View {
                     }
                 }
             }
-            Section("Alphabet Languages") {
+            Section("Alphabetic Scripts") {
                 List {
                     ForEach(vm.alphaLanguages) {
                         alphaLanguage in

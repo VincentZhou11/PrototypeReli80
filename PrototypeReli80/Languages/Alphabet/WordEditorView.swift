@@ -37,13 +37,7 @@ struct WordEditorView: View {
         ]
 
         TabView {
-            Form {
-                Section("Properties") {
-                    TextField("Meaning", text: $vm.alphaLanguage.decoded.morphemes[vm.idx].meaning)
-                }
-            }.tabItem {
-                Label("Configure", systemImage: "gear")
-            }
+            
             LazyVGrid(columns: columns, spacing: 5) {
                 ForEachWithIndex(vm.alphaLanguage.decoded.morphemes[vm.idx].spelling) {
                     idx, letter in
@@ -77,6 +71,33 @@ struct WordEditorView: View {
                 Label("Assemble Letters", systemImage: "doc.zipper")
             }
             .padding()
+            Form {
+                Section("Properties") {
+                    HStack {
+                        Text("Meaning")
+                        Divider()
+                        TextField("Meaning", text: $vm.alphaLanguage.decoded.morphemes[vm.idx].meaning)
+                    }
+                    HStack {
+                        Text("Pronunciation")
+                        Divider()
+//                        HStack {
+//                            ForEach(vm.alphaLanguage.decoded.morphemes[vm.idx]) {
+//                                letter in
+//                                Text(letter.pronunciation)
+//                            }
+//                        }
+                        Text(vm.alphaLanguage.decoded.morphemes[vm.idx].morphemePronunciation)
+                    }
+                }
+                Section("Preview") {
+                    MorphemeView(morpheme: vm.alphaLanguage.decoded.morphemes[vm.idx], border: false).scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                        Rectangle().frame(height: 1)
+                    }
+                }
+            }.tabItem {
+                Label("Configure Word", systemImage: "gear")
+            }
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
@@ -88,7 +109,7 @@ struct WordEditorView: View {
                 }.disabled(vm.alphaLanguage.synced)
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarTitle("Word Editor")
         .onReceive(vm.alphaLanguage.publisher) { output in
             vm.alphaLanguage = output
         }
@@ -98,7 +119,7 @@ struct WordEditorView: View {
 struct WordEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            WordEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            WordEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).preferredColorScheme(.dark)
         }
     }
 }
@@ -125,7 +146,19 @@ struct WordSheetEditView: View {
     
     var body: some View {
         Form {
-            Section("Letters") {
+            Section() {
+                ScaleableDrawingView(drawing: vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling[choosenIdx].drawing, border: false).scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                    Rectangle().frame(height: 1)
+                }
+            }
+            Section("Properties") {
+                HStack {
+                    Text("Pronunciation")
+                    Divider()
+                    Text("\(vm.alphaLanguage.decoded.morphemes[vm.wordIdx].spelling[choosenIdx].pronunciation)")
+                }
+            }
+            Section("Replace With") {
                 List {
                     ForEach(vm.alphaLanguage.decoded.letters) {
                         letter in
@@ -136,7 +169,13 @@ struct WordSheetEditView: View {
                                 vm.binding = false
                             }
                         } label: {
-                            Text("\(letter.pronounciation)")
+                            HStack {
+                                Text("\(letter.pronunciation)")
+                                Divider()
+                                ScaleableDrawingView(drawing: letter.drawing, border: false).scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                                    Rectangle().frame(height: 1)
+                                }.frame(height:20)
+                            }
                         }
                     }
                 }
@@ -175,7 +214,13 @@ struct WordSheetNewView: View {
                                 vm.binding = false
                             }
                         } label: {
-                            Text("\(letter.pronounciation)")
+                            HStack {
+                                Text("\(letter.pronunciation)")
+                                Divider()
+                                ScaleableDrawingView(drawing: letter.drawing, border: false).scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                                    Rectangle().frame(height: 1)
+                                }.frame(height:20)
+                            }
                         }
                     }
                 }

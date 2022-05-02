@@ -17,17 +17,21 @@ struct LogographicLanguage: Identifiable, Codable, Morphemes {
 }
 extension LogographicLanguage {
     static var example: LogographicLanguage {
-        LogographicLanguage(name: "Example Language", morphemes: [.example, .example, .example])
+        LogographicLanguage(name: "Example Logographic Script", morphemes: [.example, .example, .example])
     }
     static var new: LogographicLanguage {
-        LogographicLanguage(name: "New Language", morphemes: [])
+        LogographicLanguage(name: "New Logographic Script", morphemes: [])
     }
 }
 struct Logogram: Identifiable, Codable, Morpheme {
     var id = UUID()
     var drawing: Drawing
     var meaning: String
+    var pronunciation: String
     
+    var morphemePronunciation: String {
+        pronunciation
+    }
     var morphemeMeaning: String {
         meaning
     }
@@ -35,12 +39,15 @@ struct Logogram: Identifiable, Codable, Morpheme {
         [drawing]
     }
     func copy() -> Logogram {
-        Logogram(drawing: drawing, meaning: meaning)
+        Logogram(drawing: drawing, meaning: meaning, pronunciation: pronunciation)
     }
 }
 extension Logogram {
     static var example: Logogram {
-        Logogram(drawing: Drawing.example, meaning: "Example Logogram")
+        Logogram(drawing: .example, meaning: "Example Logogram", pronunciation: "Example pronunciation")
+    }
+    static var new: Logogram {
+        Logogram(drawing: .empty, meaning: "New Logogram", pronunciation: "")
     }
 }
 // Alphabet
@@ -53,19 +60,23 @@ struct AlphabetLanguage: Identifiable, Codable, Morphemes {
 }
 extension AlphabetLanguage {
     static var example:AlphabetLanguage {
-        AlphabetLanguage(name: "Example Language", morphemes: [.example], letters: [.example, .example, .example])
+        AlphabetLanguage(name: "Example Alphabetic Script", morphemes: [.example], letters: [.example, .example, .example])
     }
     static var new:AlphabetLanguage {
-        AlphabetLanguage(name: "New Language", morphemes: [], letters: [])
+        AlphabetLanguage(name: "New Alphabetic Script", morphemes: [], letters: [])
     }
 }
 struct Word: Identifiable, Codable, Morpheme {
-    
-    
     var id = UUID()
     var meaning: String
     var spelling: [Letter]
     
+    var morphemePronunciation: String {
+        return spelling.reduce ("",{
+            x, y in
+            x + y.pronunciation + " "
+        }).trimmingCharacters(in: .whitespaces)
+    }
     var morphemeMeaning: String {
         meaning
     }
@@ -81,18 +92,25 @@ extension Word {
     static var example: Word {
         Word(meaning: "Example Word", spelling: [.example, .example, .example])
     }
+    static var new: Word {
+        Word(meaning: "New Word", spelling: [])
+    }
 }
 struct Letter: Identifiable, Codable {
     var id = UUID()
     var drawing: Drawing
-    var pronounciation: String
+    var pronunciation: String
+    
+    func copy() -> Letter {
+        Letter(drawing: drawing, pronunciation: pronunciation)
+    }
 }
 extension Letter {
     static var example: Letter {
-        Letter(drawing: .example, pronounciation: "Example Letter")
+        Letter(drawing: .example, pronunciation: "/e/")
     }
-    func copy() -> Letter {
-        Letter(drawing: drawing, pronounciation: pronounciation)
+    static var new: Letter {
+        Letter(drawing: .empty, pronunciation: "//")
     }
 }
 

@@ -36,7 +36,7 @@ struct DrawingView: View {
             DrawingPadView(vm: vm)
             DrawingControlsView(vm: vm)
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Drawing Pad")
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
 //                Button {
@@ -59,7 +59,7 @@ struct DrawingView: View {
 struct DrawingView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            DrawingView()
+            DrawingView().preferredColorScheme(.dark)
         }
     }
 }
@@ -83,7 +83,7 @@ struct DrawingPadView: View {
                                    CGPoint(x:geometry.size.width, y:0),
                                    CGPoint(x:0, y:0)])
                 }
-                .stroke(.black, lineWidth: 2.0)
+                .stroke(Color(UIColor.label), lineWidth: 2.0)
 
                 Path { path in
                     
@@ -105,7 +105,7 @@ struct DrawingPadView: View {
             .gesture(
                 DragGesture(minimumDistance: 0.1)
                 .onChanged({ (value) in
-                    print(value)
+//                    print(value)
                     let currentPoint = value.location
                     if currentPoint.y >= 0 && currentPoint.y < geometry.size.height && currentPoint.x >= 0 && currentPoint.x < geometry.size.width
                     {

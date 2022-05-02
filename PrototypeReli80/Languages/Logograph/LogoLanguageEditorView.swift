@@ -23,18 +23,42 @@ struct LogoLanguageEditorView: View {
     
     var body: some View {
         Form {
-            Section("Name") {
-                TextField("Language Name", text: $vm.logoLanguage.decoded.name)
+            GroupBox {
+                Divider()
+                Text("Logograms: \(vm.logoLanguage.decoded.morphemes.count)")
+            } label: {
+                HStack {
+                    Image(systemName: "sum")
+                    Text("Stats")
+                }
+            }.groupBoxStyle(NoMarginGroupBox())
+            
+            Section("Properties") {
+                HStack {
+                    Text("Name")
+                    Divider()
+                    TextField("Script Name", text: $vm.logoLanguage.decoded.name)
+                }
             }
             
             Section("Logograms") {
                 List {
+                    Button{
+                        vm.addItem()
+                    } label: {
+                        Label("Add Logogram", systemImage: "plus")
+                    }
                     ForEachWithIndex(vm.logoLanguage.decoded.morphemes) {
                         idx, logogram in
                         NavigationLink {
                             LogogramEditorView(idx: idx, logoLanguage: vm.logoLanguage, preview: preview)
                         } label: {
-                            Text("\(logogram.meaning)")
+                            HStack {
+                                Text("\(logogram.meaning): ")
+                                ScaleableDrawingView(drawing: logogram.drawing, border: false).scaledToFit().padding(.bottom, 1).overlay(alignment: .bottom) {
+                                    Rectangle().frame(height: 1)
+                                }.frame(height:20)
+                            }
                         }
                     }.onDelete(perform: vm.deleteItems)
                 }
@@ -42,11 +66,11 @@ struct LogoLanguageEditorView: View {
         }
         .toolbar {
             ToolbarItemGroup(placement: .navigationBarTrailing) {
-                Button{
-                    vm.addItem()
-                } label: {
-                    Label("Add Item", systemImage: "plus")
-                }
+//                Button{
+//                    vm.addItem()
+//                } label: {
+//                    Label("Add Item", systemImage: "plus")
+//                }
                 EditButton()
                 Button {
                     vm.save()
@@ -56,7 +80,8 @@ struct LogoLanguageEditorView: View {
                 }.disabled(vm.logoLanguage.synced)
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Script Editor")
+//        .navigationBarTitleDisplayMode(.inline)
 //        .onAppear(perform: vm.refresh)
         .onReceive(vm.logoLanguage.publisher) { output in
             vm.logoLanguage = output
@@ -64,10 +89,11 @@ struct LogoLanguageEditorView: View {
     }
 }
 
+
 struct LogoLanguageEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogoLanguageEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            LogoLanguageEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).preferredColorScheme(.dark)
         }
     }
 }

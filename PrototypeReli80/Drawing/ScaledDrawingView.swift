@@ -24,7 +24,7 @@ struct ScaledDrawingView: View {
                                    CGPoint(x:geometry.size.width, y:0),
                                    CGPoint(x:0, y:0)])
                 }
-                .stroke(.black, lineWidth: 2.0)
+                .stroke(Color(UIColor.label), lineWidth: 2.0)
                 if let drawing = drawing {
                     Path {
                         path in

@@ -48,6 +48,10 @@ public class LetterEditorViewModel: ObservableObject {
         
         
     }
+    func phonemeOnSubmit(phoneme: String) {
+        alphaLanguage.decoded.letters[idx].pronunciation += phoneme
+        phonemeSheet = false
+    }
     
     func onSubmit(newDrawing: Drawing) {
         alphaLanguage.decoded.letters[idx].drawing = newDrawing

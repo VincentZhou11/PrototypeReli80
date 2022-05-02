@@ -59,7 +59,7 @@ public class AlphaLanguageEditorViewModel: ObservableObject {
     
     func addWord() {
         withAnimation {
-            let newLogogram = Word(meaning: "New Word", spelling: [])
+            let newLogogram = Word.new
             alphaLanguage.decoded.morphemes.append(newLogogram)
             
 //            save()
@@ -77,10 +77,7 @@ public class AlphaLanguageEditorViewModel: ObservableObject {
     
     func addLetter() {
         withAnimation {
-            var newDrawing = Drawing.empty
-            newDrawing.color = .red
-            
-            let newLogogram = Letter(drawing: newDrawing, pronounciation: "New Letter")
+            let newLogogram = Letter.new
             alphaLanguage.decoded.letters.append(newLogogram)
             
 //            save()

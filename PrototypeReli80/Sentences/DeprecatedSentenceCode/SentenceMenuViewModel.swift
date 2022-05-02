@@ -123,15 +123,11 @@ public class SentenceMenuViewModel:ObservableObject {
             
             do {
                 let newSentence = LogographicSentenceDB(context: viewContext)
-                let logograms = [
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 1"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 2"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 3"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 4"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 5"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 6"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 7"),
-                    Logogram(drawing: Drawing.example, meaning: "Test Logogram 8")
+                let logograms: [Logogram] = [
+                    .example,
+                    .example,
+                    .example,
+                    .example
                 ]
                 
                 let newSentenceStruct = LogographicSentence(sentence: logograms, language: .example)

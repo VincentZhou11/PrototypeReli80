@@ -35,7 +35,27 @@ struct LogogramEditorView: View {
                 }
             }
             Section("Properties") {
-                TextField("Meaning", text: $vm.logoLanguage.decoded.morphemes[vm.idx].meaning)
+                HStack {
+                    Text("Meaning")
+                    Divider()
+                    TextField("Meaning", text: $vm.logoLanguage.decoded.morphemes[vm.idx].meaning)
+                }
+                HStack {
+                    Text("Pronunciation")
+                    Divider()
+                    TextField("Pronunciation", text: $vm.logoLanguage.decoded.morphemes[vm.idx].pronunciation)
+                        .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Button {
+                                vm.phonemeSheet = true
+                            } label: {
+                                Text("IPA")
+                            }
+                        }
+                    }
+                }.sheet(isPresented: $vm.phonemeSheet) {
+                    PhonemeChooserView(onSubmit: vm.phonemeOnSubmit)
+                }
             }
 //            Section("Semantic Class") {
 //                
@@ -57,7 +77,7 @@ struct LogogramEditorView: View {
                 }.disabled(vm.logoLanguage.synced)
             }
         }
-        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("Logogram Editor")
         .onReceive(vm.logoLanguage.publisher) { output in
             vm.logoLanguage = output
         }
@@ -67,7 +87,7 @@ struct LogogramEditorView: View {
 struct LogogramEditorView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogogramEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+            LogogramEditorView(preview: true).environment(\.managedObjectContext, PersistenceController.preview.container.viewContext).preferredColorScheme(.dark)
         }
     }
 }

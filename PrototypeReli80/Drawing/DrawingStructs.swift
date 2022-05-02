@@ -37,7 +37,7 @@ struct Drawing: Identifiable, Codable {
         self.color = color
         self.lineWidth = lineWidth
     }
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(UUID.self, forKey: .id)
@@ -50,11 +50,11 @@ struct Drawing: Identifiable, Codable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
-        
+
         try container.encode(id, forKey: .id)
         try container.encode(strokes, forKey: .strokes)
         try container.encode(lineWidth, forKey: .lineWidth)
-        
+
         // Problem Child
         #if os(iOS)
         let nativeColor = UIColor(color)
@@ -63,7 +63,9 @@ struct Drawing: Identifiable, Codable {
         #endif
         var (r, g, b, a) = (CGFloat.zero, CGFloat.zero, CGFloat.zero, CGFloat.zero)
         nativeColor.getRed(&r, green: &g, blue: &b, alpha: &a)
-        
+
+        print("\(r), \(g), \(b), \(a)")
+
         try container.encode(ColorData(r: r, g: g, b: b, a: a), forKey: .color)
     }
 }
@@ -72,6 +74,7 @@ extension Drawing {
         Drawing(strokes: [Stroke(points: [CGPoint(x: 300, y: 300), CGPoint(x: 80, y: 20), CGPoint(x: 20, y: 200), CGPoint(x: 25, y: 25)])], color: .red, lineWidth: 10.0)
     }
     static var empty: Drawing {
-        Drawing(strokes: [], color: .black, lineWidth: 3.0)
+        Drawing(strokes: [], color: .red, lineWidth: 10.0)
     }
 }
+

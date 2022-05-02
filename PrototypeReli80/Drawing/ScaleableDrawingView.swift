@@ -24,7 +24,7 @@ struct ScaleableDrawingView: View {
                                        CGPoint(x:geometry.size.width, y:0),
                                        CGPoint(x:0, y:0)])
                     }
-                    .stroke(.black, lineWidth: 2.0 * geometry.size.height/350)
+                    .stroke(Color(UIColor.label), lineWidth: 2.0 * geometry.size.height/350)
                 }
                 Path {
                     path in

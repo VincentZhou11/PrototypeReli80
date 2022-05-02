@@ -16,6 +16,7 @@ public class LogogramEditorViewModel: ObservableObject {
     @Published var logoLanguage: SyncObject<LogographicLanguage, LogographicLanguageDB>
 //    @Published var logogram: Logogram
     @Published var idx: Int
+    @Published var phonemeSheet = false
     
     init(preview: Bool = false) {
         if preview {viewContext = PersistenceController.preview.container.viewContext}
@@ -48,7 +49,10 @@ public class LogogramEditorViewModel: ObservableObject {
         
         
     }
-    
+    func phonemeOnSubmit(phoneme: String) {
+        logoLanguage.decoded.morphemes[idx].pronunciation += phoneme
+        phonemeSheet = false
+    }
     func onSubmit(newDrawing: Drawing) {
         logoLanguage.decoded.morphemes[idx].drawing = newDrawing
 //        logogram = logoLanguage.decoded.logograms[idx]

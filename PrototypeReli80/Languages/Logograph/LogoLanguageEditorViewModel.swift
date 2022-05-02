@@ -59,10 +59,7 @@ public class LogoLanguageEditorViewModel: ObservableObject {
         withAnimation {
 //            let newLogogram = Logogram(drawing: Drawing.example, meaning: "Test Logogram")
 //            logoLanguage.decoded.logograms.append(newLogogram)
-            var newDrawing = Drawing.empty
-            newDrawing.color = .red
-            
-            let newLogogram = Logogram(drawing: newDrawing, meaning: "New Logogram")
+            let newLogogram = Logogram.new
             logoLanguage.decoded.morphemes.append(newLogogram)
             
 //            save()

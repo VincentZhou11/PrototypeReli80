@@ -18,12 +18,12 @@ struct LanguageMenuView: View {
     
     var body: some View {
         Form {
-            Section("Logographic Languages") {
+            Section("Logographic Scripts") {
                 List {
                     Button{
                         vm.addLogo()
                     } label: {
-                        Label("Add Logographic Language", systemImage: "plus")
+                        Label("Add Logographic Script", systemImage: "plus")
                     }
                     ForEach(vm.logoLanguages) {
                         logoLanguage in
@@ -36,12 +36,12 @@ struct LanguageMenuView: View {
                     .onDelete(perform: vm.deleteLogos)
                 }
             }
-            Section("Alphabet Languages") {
+            Section("Alphabet Scripts") {
                 List {
                     Button{
                         vm.addAlpha()
                     } label: {
-                        Label("Add Alphabet Language", systemImage: "plus")
+                        Label("Add Alphabet Script", systemImage: "plus")
                     }
                     ForEach(vm.alphaLanguages) {
                         alphaLanguage in
@@ -74,7 +74,7 @@ struct LanguageMenuView: View {
             }
         }
         .onAppear(perform: vm.refresh)
-        .navigationBarTitle("Languages")
+        .navigationBarTitle("Scripts")
 //        .navigationBarTitleDisplayMode(.inline)
     }
 }
