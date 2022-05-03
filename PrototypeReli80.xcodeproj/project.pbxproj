@@ -14,6 +14,11 @@
 		E11454E527EFE9720021CC32 /* PrototypeReli80Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11454E427EFE9720021CC32 /* PrototypeReli80Tests.swift */; };
 		E11454EF27EFE9720021CC32 /* PrototypeReli80UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11454EE27EFE9720021CC32 /* PrototypeReli80UITests.swift */; };
 		E11454F127EFE9720021CC32 /* PrototypeReli80UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11454F027EFE9720021CC32 /* PrototypeReli80UITestsLaunchTests.swift */; };
+		E179FEAE2820895C00E8E2EC /* RealityKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179FEAD2820895C00E8E2EC /* RealityKitView.swift */; };
+		E179FEB128208D2100E8E2EC /* FocusEntity in Frameworks */ = {isa = PBXBuildFile; productRef = E179FEB028208D2100E8E2EC /* FocusEntity */; };
+		E179FEB32820948C00E8E2EC /* RKSentenceChooserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179FEB22820948C00E8E2EC /* RKSentenceChooserView.swift */; };
+		E179FEB5282094A400E8E2EC /* RKSentenceChooserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E179FEB4282094A400E8E2EC /* RKSentenceChooserViewModel.swift */; };
+		E179FEB82820CD7A00E8E2EC /* RealityFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E179FEB72820CD7A00E8E2EC /* RealityFoundation.framework */; };
 		E18C0B7F27FDEA010066F46A /* DrawingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C0B7E27FDEA010066F46A /* DrawingView.swift */; };
 		E18C0B8127FDEB680066F46A /* DrawingStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C0B8027FDEB680066F46A /* DrawingStructs.swift */; };
 		E18C0B8327FDF3350066F46A /* DrawingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18C0B8227FDF3350066F46A /* DrawingViewModel.swift */; };
@@ -81,6 +86,10 @@
 		E11454EA27EFE9720021CC32 /* PrototypeReli80UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototypeReli80UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11454EE27EFE9720021CC32 /* PrototypeReli80UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeReli80UITests.swift; sourceTree = "<group>"; };
 		E11454F027EFE9720021CC32 /* PrototypeReli80UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeReli80UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E179FEAD2820895C00E8E2EC /* RealityKitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealityKitView.swift; sourceTree = "<group>"; };
+		E179FEB22820948C00E8E2EC /* RKSentenceChooserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKSentenceChooserView.swift; sourceTree = "<group>"; };
+		E179FEB4282094A400E8E2EC /* RKSentenceChooserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RKSentenceChooserViewModel.swift; sourceTree = "<group>"; };
+		E179FEB72820CD7A00E8E2EC /* RealityFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealityFoundation.framework; path = System/Library/Frameworks/RealityFoundation.framework; sourceTree = SDKROOT; };
 		E18C0B7E27FDEA010066F46A /* DrawingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingView.swift; sourceTree = "<group>"; };
 		E18C0B8027FDEB680066F46A /* DrawingStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingStructs.swift; sourceTree = "<group>"; };
 		E18C0B8227FDF3350066F46A /* DrawingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModel.swift; sourceTree = "<group>"; };
@@ -125,6 +134,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E179FEB82820CD7A00E8E2EC /* RealityFoundation.framework in Frameworks */,
+				E179FEB128208D2100E8E2EC /* FocusEntity in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +163,7 @@
 				E11454E327EFE9720021CC32 /* PrototypeReli80Tests */,
 				E11454ED27EFE9720021CC32 /* PrototypeReli80UITests */,
 				E11454D127EFE96F0021CC32 /* Products */,
+				E179FEB62820CD7A00E8E2EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,6 +180,7 @@
 		E11454D227EFE96F0021CC32 /* PrototypeReli80 */ = {
 			isa = PBXGroup;
 			children = (
+				E179FEAC2820893700E8E2EC /* AR */,
 				E1FE838E280E3599000AFAAD /* Persistence */,
 				E1FE839F280F5712000AFAAD /* Sentences */,
 				E1FE8383280E280C000AFAAD /* Languages */,
@@ -204,6 +217,24 @@
 				E11454F027EFE9720021CC32 /* PrototypeReli80UITestsLaunchTests.swift */,
 			);
 			path = PrototypeReli80UITests;
+			sourceTree = "<group>";
+		};
+		E179FEAC2820893700E8E2EC /* AR */ = {
+			isa = PBXGroup;
+			children = (
+				E179FEAD2820895C00E8E2EC /* RealityKitView.swift */,
+				E179FEB22820948C00E8E2EC /* RKSentenceChooserView.swift */,
+				E179FEB4282094A400E8E2EC /* RKSentenceChooserViewModel.swift */,
+			);
+			path = AR;
+			sourceTree = "<group>";
+		};
+		E179FEB62820CD7A00E8E2EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E179FEB72820CD7A00E8E2EC /* RealityFoundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E18C0B7D27FDE9380066F46A /* Drawing */ = {
@@ -310,6 +341,9 @@
 			dependencies = (
 			);
 			name = PrototypeReli80;
+			packageProductDependencies = (
+				E179FEB028208D2100E8E2EC /* FocusEntity */,
+			);
 			productName = PrototypeReli80;
 			productReference = E11454D027EFE96F0021CC32 /* PrototypeReli80.app */;
 			productType = "com.apple.product-type.application";
@@ -382,6 +416,9 @@
 				Base,
 			);
 			mainGroup = E11454C727EFE96F0021CC32;
+			packageReferences = (
+				E179FEAF28208D2100E8E2EC /* XCRemoteSwiftPackageReference "FocusEntity" */,
+			);
 			productRefGroup = E11454D127EFE96F0021CC32 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -446,6 +483,7 @@
 				E18C0B8327FDF3350066F46A /* DrawingViewModel.swift in Sources */,
 				E1E13B7E281101A400C91A04 /* GenericSentenceMenuViewModel.swift in Sources */,
 				E19D95A828188DC000079824 /* PhonemeChooserViewModel.swift in Sources */,
+				E179FEB5282094A400E8E2EC /* RKSentenceChooserViewModel.swift in Sources */,
 				E1E13B802811152F00C91A04 /* MorphemeView.swift in Sources */,
 				E1E13B65280F97DF00C91A04 /* LogoSentenceEditorViewModel.swift in Sources */,
 				E11454D427EFE96F0021CC32 /* PrototypeReli80App.swift in Sources */,
@@ -460,9 +498,11 @@
 				E1E13B71280FCD6F00C91A04 /* LetterEditorView.swift in Sources */,
 				E1FE8398280F3D51000AFAAD /* LogogramEditorView.swift in Sources */,
 				E1FE83A3280F5745000AFAAD /* SentenceMenuViewModel.swift in Sources */,
+				E179FEAE2820895C00E8E2EC /* RealityKitView.swift in Sources */,
 				E19D95A728188DC000079824 /* PhonemeChooserView.swift in Sources */,
 				E1E13B6D280FC9E500C91A04 /* AlphaLanguageEditorViewModel.swift in Sources */,
 				E1FE8396280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld in Sources */,
+				E179FEB32820948C00E8E2EC /* RKSentenceChooserView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +664,7 @@
 				DEVELOPMENT_TEAM = KL63MENCE6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera needed for AR";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -653,6 +694,7 @@
 				DEVELOPMENT_TEAM = KL63MENCE6;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Camera needed for AR";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -787,6 +829,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E179FEAF28208D2100E8E2EC /* XCRemoteSwiftPackageReference "FocusEntity" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/maxxfrazer/FocusEntity";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E179FEB028208D2100E8E2EC /* FocusEntity */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E179FEAF28208D2100E8E2EC /* XCRemoteSwiftPackageReference "FocusEntity" */;
+			productName = FocusEntity;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		E1FE8394280E696C000AFAAD /* JSONLanguageDataModel.xcdatamodeld */ = {

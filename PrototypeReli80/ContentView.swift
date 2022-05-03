@@ -27,7 +27,14 @@ struct ContentView: View {
 //                DrawingTestingView().tabItem {
 //                    Label("Drawing Test", systemImage: "pencil")
 //                }
-                
+//                RealityKitView(sentence: LogographicSentence.example).tabItem {
+//                    Label("AR", systemImage: "iphone")
+//                }.ignoresSafeArea()
+                NavigationView {
+                    RKSentenceChooserView()
+                }.tabItem {
+                    Label("AR", systemImage: "iphone")
+                }
             }
 //        }
     }
